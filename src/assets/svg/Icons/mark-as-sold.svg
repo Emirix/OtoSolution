@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="151" height="44" viewBox="0 0 151 44">
+  <g id="Group_523" data-name="Group 523" transform="translate(-206 -609)" opacity="0.996">
+    <path id="Path_2056" data-name="Path 2056" d="M8,0H143a8,8,0,0,1,8,8V36a8,8,0,0,1-8,8H8a8,8,0,0,1-8-8V8A8,8,0,0,1,8,0Z" transform="translate(206 609)" fill="#7075f6"/>
+    <g id="Group_440" data-name="Group 440" transform="translate(18.267)">
+      <text id="Mark_as_Sold" data-name="Mark as Sold" transform="translate(276 636)" fill="#fff" font-size="15" font-family="Poppins-Regular, Poppins"><tspan x="-47.295" y="0">Mark as Sold</tspan></text>
+      <path id="check-circle-solid" d="M24,16a8,8,0,1,1-8-8A8,8,0,0,1,24,16Zm-8.925,4.236L21.01,14.3a.516.516,0,0,0,0-.73l-.73-.73a.516.516,0,0,0-.73,0L14.71,17.681l-2.26-2.26a.516.516,0,0,0-.73,0l-.73.73a.516.516,0,0,0,0,.73l3.355,3.355a.516.516,0,0,0,.73,0Z" transform="translate(196.733 616)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

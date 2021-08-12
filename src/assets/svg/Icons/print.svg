@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="136" height="44" viewBox="0 0 136 44">
+  <g id="Group_441" data-name="Group 441" transform="translate(-223 -610)">
+    <rect id="Rectangle_819" data-name="Rectangle 819" width="136" height="44" rx="8" transform="translate(223 610)" fill="#888c9f"/>
+    <g id="Group_446" data-name="Group 446" transform="translate(-3.96 0.5)">
+      <text id="Print" transform="translate(279 637)" fill="#f7f7ff" font-size="16" font-family="Poppins-Regular, Poppins"><tspan x="-17.616" y="0">Print</tspan></text>
+      <path id="print-2" data-name="print" d="M5.04,18.479H16.8V15.12H5.04Zm0-8.4H16.8V5.04H14.7a1.255,1.255,0,0,1-1.26-1.26V1.68H5.04v8.4Zm15.119.84a.852.852,0,1,0-.249.591.808.808,0,0,0,.249-.591Zm1.68,0v5.46a.427.427,0,0,1-.42.42h-2.94v2.1a1.255,1.255,0,0,1-1.26,1.26H4.62A1.255,1.255,0,0,1,3.36,18.9V16.8H.42a.4.4,0,0,1-.3-.125.4.4,0,0,1-.124-.3v-5.46A2.425,2.425,0,0,1,.741,9.141,2.428,2.428,0,0,1,2.52,8.4h.84V1.26A1.215,1.215,0,0,1,3.728.368,1.215,1.215,0,0,1,4.62,0h8.819a3.03,3.03,0,0,1,1.155.263,3.054,3.054,0,0,1,1,.63l1.995,1.995a3.049,3.049,0,0,1,.63,1,3.042,3.042,0,0,1,.263,1.155V8.4h.84a2.532,2.532,0,0,1,2.52,2.521Z" transform="translate(307.081 621.42)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

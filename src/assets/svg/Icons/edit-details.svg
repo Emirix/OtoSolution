@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="44" viewBox="0 0 128 44">
+  <g id="Group_430" data-name="Group 430" transform="translate(-231 -609)" opacity="0.996">
+    <g id="Rectangle_819" data-name="Rectangle 819" transform="translate(231 609)" fill="none" stroke="#7075f6" stroke-width="1">
+      <rect width="128" height="44" rx="8" stroke="none"/>
+      <rect x="0.5" y="0.5" width="127" height="43" rx="7.5" fill="none"/>
+    </g>
+    <text id="Edit_Details" data-name="Edit Details" transform="translate(295 637)" fill="#7075f6" font-size="16" font-family="Poppins-Regular, Poppins"><tspan x="-43.576" y="0">Edit Details</tspan></text>
+  </g>
+</svg>
