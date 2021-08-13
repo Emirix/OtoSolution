@@ -408,9 +408,13 @@ a {
 }
 
 .datatable-td {
-  padding: 0.4rem;
+  padding: 0.6rem;
   color: #44444A;
   font-size: 13px;
+}
+
+tr {
+  margin-bottom: 0.5rem;
 }
 
 .add-car-button {
