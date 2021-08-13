@@ -43,7 +43,7 @@ function Sidebar() {
           <li className="active">
             <a href="#">
               <img src="icons/dashboard-active.svg" alt="" />
-              Dashboard
+             <span>Dashboard</span>
             </a>
           </li>
 
@@ -56,7 +56,7 @@ function Sidebar() {
           >
             <a href="#">
               <img src="icons/car-settings-inactive.svg" alt="" />
-              Car Settings
+              <span>Car Settings</span>
               <div className="arrow">
                 <img src={DownArrow} alt="" />
               </div>
@@ -83,14 +83,14 @@ function Sidebar() {
           <li>
             <a href="#">
               <img src={CarIcon} alt="" />
-              Oto-Link
+              <span>Oto-Link</span>
             </a>
           </li>
 
           <li>
             <a href="#">
               <img src={CarIcon} alt="" />
-              General Settings
+              <span>General Settings</span>
             </a>
           </li>
         </ul>

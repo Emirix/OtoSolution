@@ -13,7 +13,48 @@ a{
     text-decoration: none;
 }
 
+.sidebar-kucuk{
+    width: 120px !important;
+    display: flex;
+    flex-direction: column;
+    transition: .2s;
+    nav a span{
+        display: none;
+    }
+
+    nav ul{
+        .active{
+            background-color: transparent !important;
+        }
+    }
+
+    nav ul li{
+        margin-left: 0 !important;
+    }
+
+    ul{    align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .side-dropdown{
+        display: none;
+    }
+
+    .arrow{
+        display: none;
+    }
+
+    .logo{
+        width: 89px;
+        img{
+            width: 100%;
+        }
+    }
+}
+
 .sidebar{
+    transition: .2s;
     position: fixed;
     background-color: $gri;
     width: 231px;
@@ -107,6 +148,7 @@ a{
 .header{
 background-color: $gri;
 height: 84px;
+padding-left: 1rem;
 display: flex;
 align-items: center;
 
@@ -123,6 +165,7 @@ img.ara{
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+    cursor: pointer;
     .line{
         height: 4px;
         background-color: #888C9F;
@@ -208,6 +251,7 @@ height: 266px;
     box-sizing: border-box;
     padding-left: 2rem;
     padding-top: 1rem;
+    transition: .2s;
     border-top-left-radius: 14px;
     padding-bottom: 1rem;
 }

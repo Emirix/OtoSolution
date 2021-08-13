@@ -5,11 +5,12 @@ function MotionCars({src,marka,model,since}) {
         const parent = e.target.parentElement.parentElement
         parent.style.backgroundImage = src[e.target.dataset.index]
 
-        for(var i = 0;i < document.querySelectorAll("slide").length; i++){
-            document.querySelectorAll("slide")[i].classList.remove("active")
+        for(var i = 0;i < document.querySelectorAll(".slide").length; i++){
+            document.querySelectorAll(".slide")[i].classList.remove("active")
             
         }
         e.target.classList.add("active")
+        console.log(e.target)
     }
     return (
         <div className="motion-car">

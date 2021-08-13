@@ -95,7 +95,7 @@ import ColumnFilter from './ColumnFilter'
        {
         Header: 'Serial ID', Filter : ColumnFilter,
         accessor: 'col3',
-        width:90
+        width:70
       },
 
       {
@@ -172,7 +172,7 @@ import ColumnFilter from './ColumnFilter'
       },
 
       {
-        Header: 'ACT1', Filter : ColumnFilter,
+        Header: '', Filter : "",
         accessor: 'col14',
         width:25,
         Cell: ({ cell }) => (
@@ -184,7 +184,7 @@ import ColumnFilter from './ColumnFilter'
       },
 
       {
-        Header: 'ACT3', Filter : ColumnFilter,
+        Header: '', Filter : "",
         accessor: 'col15',width:25,
         Cell: ({ cell }) => (
           <div className="edit-button" >

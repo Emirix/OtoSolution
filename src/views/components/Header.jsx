@@ -5,9 +5,24 @@ import PP from "../../assets/img/pp.jpg"
 import DownArrow from "../../assets/svg/down-arrow-icon2.svg"
 
 function Header() {
+    var i = 0;
+    function yanMenu(){
+        i++;
+        const sidebar = document.querySelector(".sidebar");
+        
+        if(i%2==0){
+            sidebar.classList.remove("sidebar-kucuk")
+            document.querySelector(".page").style.paddingLeft = "231px"
+
+        }else{
+            sidebar.classList.add("sidebar-kucuk")
+            document.querySelector(".page").style.paddingLeft = "124px"
+        }
+    }
+
     return (
         <div className="header">
-            <div className="burger">
+            <div className="burger" onClick={e=>{yanMenu()}}>
                 <div className="line"></div>
                 <div className="line"></div>
                 <div className="line"></div>
