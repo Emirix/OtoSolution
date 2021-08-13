@@ -165,7 +165,7 @@ import ColumnFilter from './ColumnFilter'
         width:90,
         status:"running",
         Cell: ({ cell }) => (
-            <span className={"row-status row-status-running"} value={cell.row.values.col14} >
+            <span className={"row-status row-status-running"}  >
               {cell.row.values.col13}
             </span>
           )
@@ -174,13 +174,23 @@ import ColumnFilter from './ColumnFilter'
       {
         Header: 'ACT1', Filter : ColumnFilter,
         accessor: 'col14',
-       
+        width:25,
+        Cell: ({ cell }) => (
+          <div className="refresh-button" >
+           
+          </div>
+        )
     
       },
 
       {
         Header: 'ACT3', Filter : ColumnFilter,
-        accessor: 'col15',
+        accessor: 'col15',width:25,
+        Cell: ({ cell }) => (
+          <div className="edit-button" >
+           
+          </div>
+        )
       },
      ],
      []

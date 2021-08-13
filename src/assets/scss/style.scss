@@ -571,3 +571,30 @@ img{
     border-radius: 0px;
     box-shadow: inset 0px 0px 0px 0px #F0F0F0;
     }
+
+.edit-button{
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: url("../svg/Icons/edit.svg");
+    background-size: 100% 100%;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 0.9;
+    }
+
+}
+.refresh-button{
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-image: url("../svg/refresh-bos.svg");
+    background-size: 100% 100%;
+
+    &:hover{
+        cursor: pointer;
+        background-image: url("../svg/Icons/refresh-all.svg");
+
+    }
+}
