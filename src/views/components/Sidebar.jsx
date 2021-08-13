@@ -3,12 +3,13 @@ import CarIcon from "../../assets/svg/car-icon.svg";
 import CarIconActive from "../../assets/svg/car-icon.svg";
 import DownArrow from "../../assets/svg/down-arrow-icon.svg";
 import Logo from "../../assets/svg/logo.svg";
-
+import {Link,useLocation} from "react-router-dom"
 function Sidebar() {
+  const location = useLocation();
 
   useEffect(()=>{
-    
-  },[])
+      console.log(location)
+  },[location])
   
 
   function dropdown(e,acikImg,kapaliImg) {
@@ -19,6 +20,8 @@ function Sidebar() {
     }
 
     if(e.currentTarget.dataset.dropdown == "kapali"){
+       document.querySelector(".sidebar").classList.remove("sidebar-kucuk")
+       document.querySelector(".page").style.paddingLeft = "231px"
         e.currentTarget.querySelector(".side-dropdown").style.maxHeight = "300px";
         e.currentTarget.querySelector("img").src = acikImg
         e.currentTarget.style.backgroundColor = "white"
@@ -40,11 +43,11 @@ function Sidebar() {
       </a>
       <nav>
         <ul>
-          <li className="active">
-            <a href="#">
+          <li className={location.pathname == "/" ? "active" : ""}>
+            <Link to="/">
               <img src="icons/dashboard-active.svg" alt="" />
              <span>Dashboard</span>
-            </a>
+            </Link>
           </li>
 
           <li
@@ -74,7 +77,7 @@ function Sidebar() {
                   <a href="">Oto-Link</a>
                 </li>
                 <li>
-                  <a href="">Vehicle Details</a>
+                  <Link to="/vehicle-details">Vehicle Details</Link>
                 </li>
               </ul>
             </div>

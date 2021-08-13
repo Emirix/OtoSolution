@@ -9,6 +9,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import VehicleDetails from "./views/pages/VehicleDetails"
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <Index />
           </Route>
           <Route exact path="/vehicle-details">
-              
+              <VehicleDetails/>
           </Route>
         
         </Switch>
