@@ -200,6 +200,7 @@ background-color: white;
 padding: 1rem;
 display: flex;
 flex-wrap: wrap;
+height: 266px;
 }
 
 .sayfa{
@@ -208,7 +209,7 @@ flex-wrap: wrap;
     padding-left: 2rem;
     padding-top: 1rem;
     border-top-left-radius: 14px;
-    height: 100vh;
+    padding-bottom: 1rem;
 }
 
 .mini-title{
@@ -237,3 +238,331 @@ flex-wrap: wrap;
         margin-left: 1rem;
     }
 }
+
+.semi-bar{
+   
+    position: relative;
+    &__option{
+        position: absolute;
+        text-align: center;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%,50%);
+        .bottom{
+            color: #888C9F;
+            font-size: 12px;
+            line-height: 3px;
+        }
+        .title{
+            font-weight: bold;
+        }
+
+        &:nth-child(2){
+            top: 10px;
+            .title{
+                color: #7075F6
+            }
+           
+        }
+
+        &:nth-child(3){
+            top: 50px;
+        }
+    }
+}
+
+.circu-bar{
+    width: 57px;
+    height: 68px;
+position: relative;
+top: 25%;
+transform: translate(0%, -25%);
+
+
+&__option{
+    position: absolute;
+    left: 70px;
+    width: 130px;
+    top: 40%;
+    transform: translate(0%,-50%);
+
+    .option-table{
+        font-size: 12px;
+        font-weight: bold;
+        &:nth-child(1){
+            color:#0BB783;
+            margin-bottom: 0.5rem;
+            span{
+                color: black;
+            }
+        }
+
+        &:nth-child(2){
+color: #F64E60;
+span{
+    color: #0BB783;
+}
+        }
+    }
+}
+}
+
+.CircularProgressbar-text{
+    font-weight: bold;
+}
+
+.ba{
+   width: 50%;
+    display: flex;
+    align-items: center;
+
+    img{
+        width: 44px;
+        height: 44px;
+    }
+
+    &__bottom{
+        font-size: 12px;
+    }
+    &__title{
+        color: #44444A;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 15px;
+    }
+}
+.pro-sari{
+    background-color: #FFA80033;
+    .cubuk{
+        background-color: #FFA800;
+    }
+}
+.outline-button{
+    border: 1px solid #3B3C41;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #44444A;
+    padding: 0.4rem;
+    text-align: center;
+    transition: .2s;
+user-select: none !important;
+font-weight: 500;
+    &:hover{
+        background-color: #3b3c41;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+.pro-yesil{
+    background-color: #1BC5BD33;
+    .cubuk{
+        background-color: #1BC5BD;
+    }
+}
+
+.motion-container{
+    display: flex;
+    overflow-x: auto;
+}
+
+.motion-car{
+    display: flex;
+    margin-right: 1rem;
+    width: 317px;
+    min-width: 317px;
+    box-shadow: inset -2px -1px 20px #D1D9E665;
+    padding-bottom: 0.5rem;
+    border-radius: 12px;
+
+    .sag{
+        width: 60%;
+        padding: 0.4rem 0.5rem;
+        .progress-title{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .title{
+                color: #888C9F;
+
+            }
+
+            .progress2{
+                width: 100px;
+                height: 6px;
+                border-radius: 3px;
+                
+                .cubuk{
+                 
+                    width: 30%;
+                    z-index: 100;
+    height: 6px;                    border-radius: 3px;
+
+                }
+            }
+        }
+    }
+
+    .sol{
+        width: 40%;
+
+        .car-info{
+            padding-left: 0.4rem;
+
+            color: #888C9F;
+            font-size: 16px;
+            .model{
+                font-size: 12px;
+            }
+
+            .since{
+                color: #0BB783;
+                font-size: 12px;
+                font-weight: 500;
+            }
+        }
+
+        .motion-car__slider{
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 100%;
+            height: 100px;
+            border-radius: 12px;
+            border: 0.1px solid #707070;
+            position: relative;
+
+            .slider{
+                display: flex;
+                flex-direction: column;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+
+                .slide{
+                    width: 8px;
+                    height: 8px;
+                    background: #D5D5D5;
+                    border-radius: 50%;
+                    margin-bottom: 0.2rem;
+                    cursor: pointer;
+                }
+
+                .active{
+                    border: 0.5px solid #707070;
+                    background:transparent;
+                }
+            }
+        }
+    }
+}
+
+.datatable-td{
+    padding:0.4rem;
+    color: #44444A;
+    font-size: 13px;
+}
+
+.add-car-button{
+    transition: .2s;
+    cursor: pointer;
+    &:hover{
+        transform: translate(0px,-2px);
+    }
+}
+.table-header-border{
+    background-color: #888c9f ;
+    opacity: 0.4;
+    width: 50%;
+    height: 0.5px;
+    margin: 0.3rem 0;
+
+}
+.table-header-buttons{
+    display: flex;
+    align-items: center;
+ 
+
+    .active{
+        font-weight: 600;
+        color: #7075F6;
+    }
+    button{
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #888C9F;
+        font-weight: 500;
+        border-radius: 4px;
+        user-select: none !important;
+        transition: .2s;
+        font-size: 16px;
+        &:hover{
+            background:#888c9f34 ;
+            color: #555;
+        }
+    }
+}
+
+.row-status-running{
+    background-color: #1BC5BD33;
+    color: #1BC5BD;
+}
+.row-status{
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 0.4rem 0.6rem;
+}
+.datatable-th{
+    color: #7075F6;
+    font-size: 12px;
+    padding: 0.4rem;
+}
+.row-search{
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0px 5px 10px #888C9F1A;
+border-radius: 4px;
+box-sizing: border-box;
+height: 28px;
+padding: 0.2rem 0.4rem;
+
+
+img{
+    width: 12px;
+    height: 12px;
+}
+
+    
+    input{
+        background-color: transparent;
+        border: none;
+        outline: none;
+        overflow:hidden;
+    }
+}
+
+.tb-container{
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 1rem;
+   
+}
+
+::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+    }
+    ::-webkit-scrollbar-thumb{
+    background: #7075F6;
+    border-radius: 0px;
+    }
+    ::-webkit-scrollbar-thumb:hover{
+    background: #5459E8;
+    }
+      ::-webkit-scrollbar-track{
+    background: #F0F0F0;
+    border-radius: 0px;
+    box-shadow: inset 0px 0px 0px 0px #F0F0F0;
+    }

@@ -2,6 +2,7 @@ import React,{useEffect} from "react";
 import CarIcon from "../../assets/svg/car-icon.svg";
 import CarIconActive from "../../assets/svg/car-icon.svg";
 import DownArrow from "../../assets/svg/down-arrow-icon.svg";
+import Logo from "../../assets/svg/logo.svg";
 
 function Sidebar() {
 
@@ -35,7 +36,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <a href="#" className="logo">
-        LOGO
+        <img src={Logo} alt="" />
       </a>
       <nav>
         <ul>
