@@ -10,6 +10,7 @@ import {
   Link
 } from "react-router-dom";
 import VehicleDetails from "./views/pages/VehicleDetails"
+import AddNewCar from "./views/pages/AddNewCar"
 
 function App() {
   return (
@@ -22,6 +23,11 @@ function App() {
           <Route exact path="/">
             <Index />
           </Route>
+
+          <Route exact path="/add-new-car">
+            <AddNewCar/>
+          </Route>
+
           <Route exact path="/vehicle-details">
               <VehicleDetails/>
           </Route>
