@@ -45,7 +45,9 @@ function Sidebar() {
         <ul>
           <li className={location.pathname == "/" ? "active" : ""}>
             <Link to="/">
-              <img src="icons/dashboard-active.svg" alt="" />
+            {location.pathname == "/" ?               <img src="icons/dashboard-active.svg" alt="" />
+ :               <img src="icons/dashboard-inactive.svg" alt="" />
+ }
              <span>Dashboard</span>
             </Link>
           </li>
@@ -68,13 +70,13 @@ function Sidebar() {
             <div className="side-dropdown">
               <ul>
                 <li>
-                  <a href="">Car List</a>
+                  <Link to="/car-list">Car List</Link>
                 </li>
                 <li>
                   <Link to="/add-new-car">Add New Car</Link>
                 </li>
                 <li>
-                  <a href="">Oto-Link</a>
+                  <Link to="/oto-link">Oto-Link</Link>
                 </li>
                 <li>
                   <Link to="/vehicle-details">Vehicle Details</Link>
@@ -83,18 +85,25 @@ function Sidebar() {
             </div>
           </li>
 
-          <li>
-            <a href="#">
-              <img src={CarIcon} alt="" />
+          <li className={location.pathname == "/oto-link" ? "active" : ""}>
+            <Link to="/oto-link">
+
+            {
+              location.pathname == "/oto-link" ? <img className="is" src="icons/oto-link-active.svg" alt="" /> : <img className="is" src="icons/oto-link-inactive.svg" alt="" />
+            }
               <span>Oto-Link</span>
-            </a>
+            </Link>
           </li>
 
-          <li>
-            <a href="#">
-              <img src={CarIcon} alt="" />
+          <li  className={location.pathname == "/general-settings" ? "active" : ""}>
+            <Link to="/general-settings">
+              {
+                location.pathname == "/general-settings" ?               <img src="icons/settings-active.svg" alt="" />
+                :               <img src="icons/settings-inactive.svg" alt="" />
+
+              }
               <span>General Settings</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

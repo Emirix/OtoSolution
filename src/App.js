@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 import VehicleDetails from "./views/pages/VehicleDetails"
 import AddNewCar from "./views/pages/AddNewCar"
+import CarList from "./views/pages/CarList"
+import OtoLink from "./views/pages/OtoLink"
 
 function App() {
   return (
@@ -30,6 +32,14 @@ function App() {
 
           <Route exact path="/vehicle-details">
               <VehicleDetails/>
+          </Route>
+
+          <Route exact path="/car-list">
+              <CarList/>
+          </Route>
+
+          <Route exact path="/oto-link">
+              <OtoLink/>
           </Route>
         
         </Switch>
