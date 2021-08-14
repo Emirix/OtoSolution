@@ -685,6 +685,8 @@ img{
     background-color: #F7F7FF58;
     padding-right: 0.5rem;
     display: flex;
+    width: 50%;
+    
 }
 
 .vehicle-details{
@@ -762,5 +764,212 @@ img{
         .model{
             font-weight: 500;
         }
+    }
+}
+
+.data-progress{
+    .title{
+        color: #888C9F;
+        font-size: 12px;
+    }
+}
+
+.data-with-title{
+    font-size: 12px;
+    .data{
+        color: #44444A;
+        
+        font-weight: 700;
+    }
+
+    .title{
+        font-weight: 500;
+        color: #888C9F;
+    }
+
+}
+
+.data-title-container{
+    padding: 0.5rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    grid-template-rows: 40px 40px 40px;
+}
+.data-probar-yesil{
+    background-color: #1BC5BD33;
+    .cubuk{
+        background-color: #1BC5BD;
+    }
+}
+
+.data-probar-sari{
+    background-color: #FFA80033;
+    .cubuk{
+        background-color: #FFA800;
+    }
+}
+
+
+.data-probar{
+    width: 100%;
+    border-radius: 3px;
+    height: 6px;
+    .cubuk{
+        height: 6px;
+        border-radius: 3px;
+
+    }
+}
+
+.data-progress-container{
+    padding: 0.5rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    grid-template-rows: 26px 26px 26px;
+    flex-wrap: wrap;
+}
+
+.vm-button{
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #0BBEA5;
+    border-radius: 7px;
+    color: #0BBEA5;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none !important;
+    padding: 0.3rem 0.5rem;
+    transition: .2s;
+    &:hover{
+        background-color: #0BBEA5;
+        color:white
+
+    }
+
+}
+
+.vm{
+    position: relative;
+    .mini-title{
+        position: absolute;
+        top: -25px;
+    }
+    img{
+        border-radius: 12px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.r-a{
+    box-shadow: 0px 10px 30px #D1D9E640;
+    background-color: white;
+    border-radius: 12px;
+    padding: 0.4rem;
+
+    &__title{
+        color:#44444A;
+        font-weight: bold;
+        font-size: 16px;
+        
+    }
+
+    &__caption{
+        color:#888C9F;
+        font-size: 12px;
+        font-weight: 500;
+    }
+}
+
+.vd-list{
+    box-shadow: 0px 10px 30px #D1D9E640;
+    background-color: white;
+    border-radius: 12px;
+    padding: 0.4rem;
+    &__title{
+        color:#44444A;
+        font-weight: bold;
+        font-size: 16px;
+        
+    }
+    ul{
+        margin: 0;
+        padding: 0;
+
+        li{
+            font-size: 12px;
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(#D8D8D8,0.18);
+            align-items: center;
+            .title{
+                font-weight:500 ;
+                color: #888C9F;
+            }
+            .data{
+                font-weight: 600;
+            }
+        }
+    }
+}
+.time-cubuk{
+    background: #6C6C6C ;
+border-radius: 2px;
+width: 3px;
+height: 58px;
+margin-left: 2.9rem;
+opacity: 0.23;
+}
+.timelist{
+    margin-top: 1rem;
+    padding: 0 1rem;
+    padding-bottom: 1rem;
+}
+.time{
+    display: flex;
+    align-items: center;
+    .saat{
+        color: #888C9F;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .yuvarlak{
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin: 0 8px;
+
+    }
+
+    .yuvarlak-koyu{
+        border: 3px solid #663259;
+    }
+
+    .yuvarlak-yesil{
+        border: 3px solid #1BC5BD;
+    }
+
+    .yuvarlak-red{
+        border: 3px solid #F64E60;
+    }
+
+    .yuvarlak-mavi{
+        border: 3px solid #3799FC;
+    }
+
+    .durum{
+        font-weight: 500;
+        color:#888C9F;
+        font-size: 16px;
     }
 }

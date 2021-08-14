@@ -1,5 +1,4 @@
 import React from 'react'
-import img from "../../assets/img/car2.jpg"
 function VH({src,marka,model,fiyat}) {
     function changePhoto(e){
         const parent = e.target.parentElement.parentElement.parentElement.querySelector("img")
