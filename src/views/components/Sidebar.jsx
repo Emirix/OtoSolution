@@ -38,9 +38,9 @@ function Sidebar() {
 
   return (
     <div className="sidebar">
-      <a href="#" className="logo">
+      <Link to="/" className="logo">
         <img src={Logo} alt="" />
-      </a>
+      </Link>
       <nav>
         <ul>
           <li className={location.pathname == "/" ? "active" : ""}>

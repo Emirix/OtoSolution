@@ -13,10 +13,13 @@ function Header() {
         if(i%2==0){
             sidebar.classList.remove("sidebar-kucuk")
             document.querySelector(".page").style.paddingLeft = "231px"
+            document.querySelector(".burger").style.alignItems = "flex-end"
 
         }else{
             sidebar.classList.add("sidebar-kucuk")
             document.querySelector(".page").style.paddingLeft = "124px"
+            document.querySelector(".burger").style.alignItems = "flex-start"
+
         }
     }
 
