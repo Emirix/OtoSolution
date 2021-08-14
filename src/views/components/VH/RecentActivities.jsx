@@ -2,7 +2,7 @@ import React from 'react'
 
 function RecentActivities() {
     return (
-        <div className="r-a">
+        <div className="r-a ">
             <div className="c-title">Recent Activites</div>
             <div className="r-a__caption">Today</div>
             <div className="timelist">

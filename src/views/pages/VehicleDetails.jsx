@@ -6,6 +6,7 @@ import map from "../../assets/img/map.jpg";
 import DataInfo from "../components/VH/DataInfo";
 import DataProgress from "../components/VH/DataProgress";
 import List from "../components/VH/List";
+import SI from "../components/VH/SI";
 import RecentActivities from "../components/VH/RecentActivities";
 import CardInfo from "../components/VH/CardInfo";
 
@@ -69,6 +70,7 @@ function VehicleDetails() {
           <div className="col">
             <RecentActivities/>
             <CardInfo/>
+            <SI/>
         </div>
       </div>
     </div>

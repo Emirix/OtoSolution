@@ -622,7 +622,6 @@ tr {
   background-color: #F7F7FF58;
   padding-right: 0.5rem;
   display: flex;
-  width: 50%;
 }
 
 .vehicle-details {
@@ -869,6 +868,29 @@ tr {
   background-color: white;
   border-radius: 12px;
   padding: 0.4rem;
+}
+.c-a .c-a-bottom {
+  background-color: #F7F7FF;
+  border-radius: 12px;
+}
+.c-a .c-a-bottom li {
+  margin-bottom: 0.5rem;
+}
+.c-a .durum {
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 0.3rem 0.4rem;
+}
+.c-a .durum-yesil {
+  background-color: #1BC5BD33;
+  color: #0BBEA5;
+}
+.c-a .durum-gri {
+  background-color: #64646433;
+  color: #4A4A4A;
 }
 
 .c-list {
