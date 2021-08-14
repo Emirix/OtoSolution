@@ -875,12 +875,7 @@ img{
     border-radius: 12px;
     padding: 0.4rem;
 
-    &__title{
-        color:#44444A;
-        font-weight: bold;
-        font-size: 16px;
-        
-    }
+ 
 
     &__caption{
         color:#888C9F;
@@ -894,39 +889,20 @@ img{
     background-color: white;
     border-radius: 12px;
     padding: 0.4rem;
-    &__title{
-        color:#44444A;
-        font-weight: bold;
-        font-size: 16px;
-        
-    }
-    ul{
-        margin: 0;
-        padding: 0;
-
-        li{
-            font-size: 12px;
-            list-style-type: none;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(#D8D8D8,0.18);
-            align-items: center;
-            .title{
-                font-weight:500 ;
-                color: #888C9F;
-            }
-            .data{
-                font-weight: 600;
-            }
-        }
-    }
+ 
+  
+}
+.c-title{
+    color:#44444A;
+    font-weight: bold;
+    font-size: 16px;
 }
 .time-cubuk{
     background: #6C6C6C ;
-border-radius: 2px;
+border-radius: 10px;
 width: 3px;
 height: 58px;
-margin-left: 2.9rem;
+margin-left: 2.8rem;
 opacity: 0.23;
 }
 .timelist{
@@ -971,5 +947,34 @@ opacity: 0.23;
         font-weight: 500;
         color:#888C9F;
         font-size: 16px;
+    }
+}
+
+.c-a{
+    box-shadow: 0px 10px 30px #D1D9E640;
+    background-color: white;
+    border-radius: 12px;
+    padding: 0.4rem;
+
+ 
+}
+.c-list{
+    margin: 0;
+    padding: 0;
+
+    li{
+        font-size: 12px;
+        list-style-type: none;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(#D8D8D8,0.18);
+        align-items: center;
+        .title{
+            font-weight:500 ;
+            color: #888C9F;
+        }
+        .data{
+            font-weight: 600;
+        }
     }
 }

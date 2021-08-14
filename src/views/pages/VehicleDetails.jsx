@@ -7,6 +7,7 @@ import DataInfo from "../components/VH/DataInfo";
 import DataProgress from "../components/VH/DataProgress";
 import List from "../components/VH/List";
 import RecentActivities from "../components/VH/RecentActivities";
+import CardInfo from "../components/VH/CardInfo";
 
 function VehicleDetails() {
   return (
@@ -65,7 +66,10 @@ function VehicleDetails() {
               <List/>
           </div>
           <div className="col"><List/></div>
-          <div className="col"><RecentActivities/> </div>
+          <div className="col">
+            <RecentActivities/>
+            <CardInfo/>
+        </div>
       </div>
     </div>
   );
