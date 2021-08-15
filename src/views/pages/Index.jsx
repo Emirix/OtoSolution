@@ -5,10 +5,14 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import BA from "../components/BA";
 import MotionCars from "../components/MotionCars";
+import { Link } from "react-router-dom";
+
 import DataTable from "../components/DataTable"
+import Page from "./Page";
 export default class Index extends Component {
   render() {
     return (
+      <Page>
       <div className="sayfa">
         <div className="row m-0">
           <div className="col-xl-6 col-md-12">
@@ -234,14 +238,35 @@ export default class Index extends Component {
             />
           </div>
         </div>
-
+              <iframe className="d-none"></iframe>
         <div className="row mt-3 m-0">
           <div className="d-flex align-items-center mb-3">
             <div className="mini-title">Car List</div>
             <div className="ms-auto">
+              <Link to="/add-new-car">
               <img src="icons/add-car.svg" alt="" className="add-car-button me-3" />
+
+              </Link>
               <img src="icons/Import-csv.svg" alt="" className="add-car-button me-3" />
-              <img src="icons/print.svg" alt="" onClick={()=>{window.print()}} className="me-3 add-car-button" />
+              <img src="icons/print.svg" alt="" onClick={()=>{
+                var content = document.querySelector(".tb-container");
+                var pri = document.querySelector("iframe").contentWindow;
+                document.querySelector(".emir-pagination").style.display = "none"
+                for(var i=0;i < document.querySelectorAll(".row-search").length; i++){
+                  document.querySelectorAll(".row-search")[i].style.display="none"
+                }
+
+                pri.document.open();
+                pri.document.write(content.innerHTML);
+                pri.document.close();
+                pri.focus();
+                pri.print();
+                document.querySelector(".emir-pagination").style.display = "flex"
+                for(var i=0;i < document.querySelectorAll(".row-search").length; i++){
+                  document.querySelectorAll(".row-search")[i].style.display="block"
+                }
+
+              }} className="me-3 add-car-button" />
             </div>
           </div>
 
@@ -279,6 +304,6 @@ export default class Index extends Component {
           </div>
         </div>
       </div>
-    );
+      </Page> );
   }
 }

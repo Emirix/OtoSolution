@@ -9,9 +9,11 @@ import List from "../components/VH/List";
 import SI from "../components/VH/SI";
 import RecentActivities from "../components/VH/RecentActivities";
 import CardInfo from "../components/VH/CardInfo";
+import Page from './Page'
 
 function VehicleDetails() {
   return (
+    <Page>
     <div className="sayfa">
       <div className="vehicle-details-header">
         <img src="icons/mark-as-sold.svg" className="add-car-button" />
@@ -74,7 +76,7 @@ function VehicleDetails() {
         </div>
       </div>
     </div>
-  );
+    </Page> );
 }
 
 export default VehicleDetails;

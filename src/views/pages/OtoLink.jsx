@@ -1,9 +1,11 @@
 import React from 'react'
 import OtoLinkC from '../components/OtoLinkC'
 import DataTable from "../components/DataTable"
+import Page from './Page'
 
 function OtoLink() {
     return (
+        <Page>
         <div className="sayfa">
             <div className="row m-0">
                 <div className="mini-title">Add New Oto-link Device</div>
@@ -26,7 +28,7 @@ function OtoLink() {
           </div>
         </div>
         </div>
-    )
+        </Page> )
 }
 
 export default OtoLink 

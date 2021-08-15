@@ -1,8 +1,10 @@
 import React from 'react'
 import DataTable from "../components/DataTable"
+import Page from './Page'
 
 function CarList() {
     return (
+      <Page>
         <div className="sayfa">
             <div className="row mt-3 m-0">
           <div className="d-flex align-items-center mb-3">
@@ -33,7 +35,7 @@ function CarList() {
           </div>
         </div>
         </div>
-    )
+        </Page> )
 }
 
 export default CarList

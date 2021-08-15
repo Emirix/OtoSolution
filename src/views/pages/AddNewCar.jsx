@@ -1,8 +1,10 @@
 import React from 'react'
 import CardInfo from '../components/VH/CardInfo'
+import Page from './Page'
 
 function AddNewCar({bg,title}) {
     return (
+        <Page>
         <div className="sayfa">
             <div className="row m-0">
                 <input type="file" name="upload" id="upload" className="d-none" />
@@ -41,7 +43,7 @@ function AddNewCar({bg,title}) {
                 </div>
             </div>
         </div>
-    )
+        </Page> )
 }
 
 export default AddNewCar
