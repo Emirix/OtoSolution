@@ -54,8 +54,8 @@ function Error() {
                 </ul>
            </div>
 
-           <div className="outline-button h-44 mb-3">Scan SKU Number</div>
-           <div className="outline-button h-44 ">Scan OBD Code</div>
+           <div className="outline-button h-44 mb-3 mw-500 mx-auto">Scan SKU Number</div>
+           <div className="outline-button h-44 mw-500 mx-auto">Scan OBD Code</div>
         </div>
     )
 }

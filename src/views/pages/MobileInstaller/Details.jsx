@@ -52,8 +52,8 @@ function Details() {
                 </ul>
            </div>
 
-           <div className="pr-btn h-44 mb-3 bg-yesil">Approve</div>
-           <div className="outline-button h-44">Scan Again</div>
+           <div className="pr-btn h-44 mb-3 bg-yesil mw-500 mx-auto">Approve</div>
+           <div className="outline-button h-44 mw-500 mx-auto">Scan Again</div>
         </div>
     )
 }

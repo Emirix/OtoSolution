@@ -219,6 +219,10 @@ html {
   border: none !important;
 }
 
+.mw-500 {
+  max-width: 500px;
+}
+
 .pr-btn {
   border-radius: 8px;
   display: flex;

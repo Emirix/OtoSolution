@@ -54,8 +54,8 @@ function AllSet() {
                 </ul>
            </div>
 
-           <div className="pr-btn h-44 mb-2 bg-yesil">New Device</div>
-           <div className="outline-button h-44 bg-mor border-none text-white">Recently Added</div>
+           <div className="pr-btn h-44 mb-2 bg-yesil mw-500 mx-auto">New Device</div>
+           <div className="outline-button h-44 bg-mor mw-500 mx-auto     border-none text-white">Recently Added</div>
         </div>
     )
 }
