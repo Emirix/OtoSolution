@@ -95,7 +95,7 @@ import ColumnFilter from './ColumnFilter'
        {
         Header: 'Serial ID', Filter : ColumnFilter,
         accessor: 'col3',
-        width:70
+        width:80
       },
 
       {
@@ -155,7 +155,7 @@ import ColumnFilter from './ColumnFilter'
       {
         Header: 'Connection', Filter : ColumnFilter,
         accessor: 'col12',
-        width:80
+        width:100
       },
 
       

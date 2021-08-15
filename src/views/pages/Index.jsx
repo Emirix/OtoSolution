@@ -13,7 +13,12 @@ export default class Index extends Component {
         <div className="row m-0">
           <div className="col-xl-6 col-md-12">
             <div className="mini-title mb-3">Quick Actions</div>
-            <div className="mini-container">
+            <div className="mini-container position-relative">
+              <div className="premium-container br-12">
+                <button className="mor-button" onClick={()=>{
+                  document.querySelector(".premium-container").classList.add("premium-kapali")
+                }}>Get Premium</button>
+              </div>
               <QA
                 src="icons/low-gas-red.svg"
                 title="Tire Presuare"
