@@ -4,8 +4,11 @@ import Bell from "../../assets/svg/bell.svg"
 import PP from "../../assets/img/pp.jpg"
 import DownArrow from "../../assets/svg/down-arrow-icon2.svg"
 import Bildirimler from './Bildirimler'
+import {Link,useLocation} from "react-router-dom"
 
 function Header() {
+    const location = useLocation();
+
     var i = 0;
     function yanMenu(){
         i++;
@@ -25,7 +28,7 @@ function Header() {
     }
 
     return (
-        <div className="header">
+        <div className={location.pathname.includes("mobile") ? "d-none" : "header"}>
             <div className="burger" onClick={e=>{yanMenu()}}>
                 <div className="line"></div>
                 <div className="line"></div>
