@@ -1,6 +1,7 @@
 $gri: #F7F7FF;
 $primary: #7075F6;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "1K.scss";
 
 *{
     font-family: 'Poppins', sans-serif;
@@ -1168,7 +1169,7 @@ font-size: 12px;
 .bildirimler-container{
     transform: scale(0.5);
     transition: .3s;
-    z-index: 100000;
+    z-index: 10000;
     overflow: hidden;
     max-height: 0;
     &__bottom{
@@ -1296,3 +1297,4 @@ font-weight: 500;
         font-size: 12px;
     }
 }
+

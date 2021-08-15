@@ -1,6 +1,8 @@
-import { useTable,useSortBy,useFilters } from 'react-table'
+import { useTable,useSortBy,useFilters,usePagination } from 'react-table'
 import React from "react" 
 import ColumnFilter from './ColumnFilter'
+import range from "range";
+
  export default function DataTable() {
    const data = React.useMemo(
      () => [
@@ -20,6 +22,368 @@ import ColumnFilter from './ColumnFilter'
          col13:"Running",
          col14:"sa",
        },
+
+       {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+    
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+     
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
+
+      {
+        col1: '22D2',
+        col2: 'WAWSSASDASD',
+        col3:"123",
+        col4:"Nissan",
+        col5:"Quash",
+        col6:"2012",
+        col7:"Gray",
+        col8:"New",
+        col9:"California",
+        col10:"23/21/2021",
+        col11:"09/11/2012",
+        col12:"5G",
+        col13:"Running",
+        col14:"sa",
+      },
 
        {
         col1: '22D2',
@@ -200,11 +564,21 @@ import ColumnFilter from './ColumnFilter'
      getTableProps,
      getTableBodyProps,
      headerGroups,
-     rows,
+     
+     page,
+     canPreviousPage,
+     canNextPage,
+     pageOptions,
+     pageCount,
+     gotoPage,
+     nextPage,
+     previousPage,
+     setPageSize,
      prepareRow,
-   } = useTable({ columns, data },useFilters,useSortBy)
+     state: { pageIndex, pageSize },
+   } = useTable({ columns, data ,initialState: { pageIndex: 0 },},useFilters,useSortBy,usePagination)
  
-   return (
+   return (<>
      <table {...getTableProps()} >
        <thead>
          {headerGroups.map(headerGroup => (
@@ -231,7 +605,7 @@ import ColumnFilter from './ColumnFilter'
          ))}
        </thead>
        <tbody {...getTableBodyProps()}>
-         {rows.map(row => {
+         {page.map(row => {
            prepareRow(row)
            return (
              <tr {...row.getRowProps()}>
@@ -249,6 +623,36 @@ import ColumnFilter from './ColumnFilter'
            )
          })}
        </tbody>
+       <tbody>
+       
+       </tbody>
      </table>
+        <div className="emir-pagination">
+    
+        <button className="pagi-out" onClick={() => previousPage()} disabled={!canPreviousPage}>
+          Previous
+        </button>
+        
+        
+        
+            {/*pageIndex + 1} of {pageOptions.length */}
+            {new Array(pageCount).fill("", 0, pageCount).map((pa, i) =>{
+             return(
+              <div className={ pageIndex == i ? "pagi-num pagi-active" : "pagi-num"} onClick={e=>{
+                gotoPage(i)
+              }}>
+              {i+1}
+             
+            </div>
+             )
+})}
+         
+         <button className="pagi-out" onClick={() => nextPage()} disabled={!canNextPage}>
+          Next
+        </button>
+          
+       
+      </div>
+      </>
    )
  }

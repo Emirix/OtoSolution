@@ -1,0 +1,44 @@
+.emir-pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.pagi-out{
+    border: 1px solid #C1C1C1;
+border-radius: 4px;
+outline: none;
+font-weight: 500;
+font-size: 14px;
+padding: 0.3rem 0.6rem;
+margin: 0 0.5rem;
+transition: .2s;
+background: white;
+&:hover{
+    background: rgb(236, 236, 236);
+}
+}
+
+.pagi-active{
+    
+    background-color: #7075F6 !important;
+    color: white !important;
+    &:hover{    background-color: #7075F6;
+        ;
+    }
+}
+.pagi-num{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin: 0 0.2rem;
+    justify-content: center;
+    width: 27px;
+    color: black;
+    user-select: none !important;
+    &:hover{    background: rgb(236, 236, 236);
+    }
+    font-weight: 500;
+    height: 27px;border-radius: 4px;
+}

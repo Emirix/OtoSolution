@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.8.3",
     "match-sorter": "^6.3.0",
     "namor": "^2.0.3",
+    "range": "0.0.3",
     "react": "^17.0.2",
     "react-circular-progressbar": "^2.0.4",
     "react-data-table-component": "^7.0.0-rc2",
