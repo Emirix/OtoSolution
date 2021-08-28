@@ -37,7 +37,7 @@ function Sidebar() {
 
   return (
     
-    <div className={location.pathname.includes("mobile") ? "d-none" : "sidebar"}>
+    <div className={location.pathname.includes("mobile") || location.pathname.includes("login") ? "d-none" : "sidebar"}>
       <Link to="/" className="logo">
         <img src={Logo} alt="" />
       </Link>

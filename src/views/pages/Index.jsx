@@ -5,7 +5,7 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import BA from "../components/BA";
 import MotionCars from "../components/MotionCars";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 
 import DataTable from "../components/DataTable"
 import Page from "./Page";
@@ -46,7 +46,12 @@ export default class Index extends Component {
       this.setState({carList:newCarList})
     })
   }
+
+
   render() {
+    if(!localStorage.getItem("key")){
+     return <Redirect to="/login" />
+    }else{
     return (
       <Page>
       <div className="sayfa">
@@ -345,5 +350,5 @@ export default class Index extends Component {
         </div>
       </div>
       </Page> );
-  }
+  }}
 }

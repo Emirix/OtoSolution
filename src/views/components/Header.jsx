@@ -41,7 +41,7 @@ function Header() {
     }
 
     return (
-        <div className={location.pathname.includes("mobile") ? "d-none" : "header"}>
+        <div className={location.pathname.includes("mobile") || location.pathname.includes("login") ? "d-none" : "header"}>
             <div className="burger" onClick={e=>{yanMenu()}}>
                 <div className="line"></div>
                 <div className="line"></div>
