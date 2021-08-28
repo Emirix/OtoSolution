@@ -33,7 +33,7 @@ function Login() {
          
         })
       }).catch(err=>{
-        setHata("Hata")
+        setHata("Invalid email or password")
         setUser("")
         setPass("")
       })
