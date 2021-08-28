@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import VH from "../components/VH/VH";
 import car1 from "../../assets/img/car.jpg";
 import car2 from "../../assets/img/car2.jpg";
@@ -9,18 +9,31 @@ import List from "../components/VH/List";
 import SI from "../components/VH/SI";
 import RecentActivities from "../components/VH/RecentActivities";
 import CardInfo from "../components/VH/CardInfo";
+import { useParams } from "react-router-dom";
 import Page from './Page'
+import axios from "axios";
 
 function VehicleDetails() {
+
+  const [car,setCar] = useState(null);
+  const {id} = useParams();
+  
+  useEffect(()=>{
+      axios.get("/api/dealer/vehicles/"+id).then(res=>{
+        console.log(res)
+        setCar(res.data)
+      })
+  },[])
+
   return (
     <Page>
     <div className="sayfa">
       <div className="vehicle-details-header">
-        <img src="icons/mark-as-sold.svg" className="add-car-button" />
+        <img src="/icons/mark-as-sold.svg" className="add-car-button" />
         <div className="outline-button outline-button-primary height-44 fs-12 px-3 ms-auto me-3">
           Edit Details
         </div>
-        <img src="icons/delete.svg" className="add-car-button me-3" />
+        <img src="/icons/delete.svg" className="add-car-button me-3" />
       </div>
 
       <div className="row m-0">
@@ -28,18 +41,18 @@ function VehicleDetails() {
         <div className="br-12 col-lg-6 vd ps-0 h-266 m-0 ">
           <VH
             src={[car1, car2]}
-            marka="Chervolet"
-            model="Silverado"
+            marka={car ? car.vin.brand_name : ""}
+            model={car ? car.vin.model_name : ""}
             fiyat="12,500"
           />
           <div>
             <div className="data-title-container">
-              <DataInfo data="WAUFFAFM3CA000000" title="VIN" />
+              <DataInfo data={car ? car.vin.vin : ""} title="VIN" />
               <DataInfo data="50,000" title="Milage" />
-              <DataInfo data="12345" title="STK" />
-              <DataInfo data="5.3L V8" title="Engine" />
+              <DataInfo data={car ? car.stock_no :""} title="STK" />
+              <DataInfo data={car ? car.vin.specs.DisplacementL + "L" :""} title="Engine" />
               <DataInfo data="A312312" title="Serial ID" />
-              <DataInfo data="2012" title="Year" />
+              <DataInfo data={car ? car.year :""} title="Year" />
             </div>
             <div className="data-progress-container">
               <DataProgress color="yesil" title="Gas" value="20" />
@@ -66,9 +79,9 @@ function VehicleDetails() {
 
       <div className="row m-0 mt-3 gx-3">
           <div className="col">
-              <List/>
+              <List val={car} title="Vehicle Information"/>
           </div>
-          <div className="col"><List/></div>
+          <div className="col"><List  val={car}  title="System Information"  /></div>
           <div className="col">
             <RecentActivities/>
             <CardInfo/>

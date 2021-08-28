@@ -4,11 +4,13 @@ import Header from "./views/components/Header"
 import MobileHeader from "./views/pages/MobileInstaller/Header"
 import Sidebar from "./views/components/Sidebar"
 import Index from "./views/pages/Index"
+import Login from "./views/pages/Login"
+import Out from "./views/pages/Out"
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
+
 } from "react-router-dom";
 import VehicleDetails from "./views/pages/VehicleDetails"
 import AddNewCar from "./views/pages/AddNewCar"
@@ -40,7 +42,7 @@ function App() {
             <AddNewCar/>
           </Route>
 
-          <Route exact path="/vehicle-details">
+          <Route exact path="/vehicle-details/:id">
               <VehicleDetails/>
           </Route>
 
@@ -69,6 +71,15 @@ function App() {
               <Error/>  
           </Route>
         
+
+
+          <Route exact path="/login">
+              <Login/>
+          </Route>
+
+          <Route exact path="/logout">
+              <Out/>
+          </Route>
         
         </Switch>
         </Provider>

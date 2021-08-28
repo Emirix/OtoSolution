@@ -1,444 +1,88 @@
 import { useTable,useSortBy,useFilters,usePagination } from 'react-table'
-import React from "react" 
+import React ,{useEffect,useState} from "react" 
 import ColumnFilter from './ColumnFilter'
-import range from "range";
-
+import Spinner  from './Spinner/Spinner'
+import axios from "axios"
  export default function DataTable() {
-   const data = React.useMemo(
-     () => [
-       {
-         col1: '22D2',
-         col2: 'WAWSSASDASD',
-         col3:"123",
-         col4:"Nissan",
-         col5:"Quash",
-         col6:"2012",
-         col7:"Gray",
-         col8:"New",
-         col9:"California",
-         col10:"23/21/2021",
-         col11:"09/11/2012",
-         col12:"5G",
-         col13:"Running",
-         col14:"sa",
-       },
+  const [carList,setCarList] = useState([]);
+  const [next,setNext] = useState("");
+  const [prev,setPrev] = useState("");
+  const [pageNum,setPageNum] = useState(1)
+  var newCarList = [];
 
-       {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+  const [colors,setColors] = useState([])
 
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+  function getList(url,c){
+    setCarList([])
+    axios.get(url).then(res=>{
+      console.log(res.data)
+      if(res.data.next != null || res.data.next != undefined){
+        setNext(res.data.next)
+        console.log("Next: " + next)
+      }else{
+        setNext("")
+      }
 
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+      if(res.data.previous != null || res.data.previous != undefined){
+        setPrev(res.data.previous)
+        console.log("Prev: " + prev)
+      }else{
+        setPrev("")
+      }
+      res.data.results.map((val,i)=>{
+        
+        newCarList.push({
+          col1: val.stock_no,
+          col2:val.vin.vin,
+          col3:"?",
+          col4: val.vin.brand_name,
+          col5: val.vin.model_name,
+          col6:val.year,
+          col7:c[val.color].name,
+          col8:"?",
+          col9: "?",
+          col10:val.created_at.substring(0,10).replaceAll("-","/"),
+          col11:"?",
+          col12:val.connection_type || "Null",
+          col13:val.status || "Null"
+  
+        })
+      })
 
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+      setPageNum(url.charAt(url.length- 1))
+   
+      
+     setCarList(newCarList)
+      console.log(carList)
+    })
+  }
 
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+  useEffect(()=>{
 
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
 
     
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+    
 
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+    axios.get("/api/utils/color/names",{
+      headers:{
+        "Authorization" : `Token ${localStorage.getItem("key")}`
+      }
+    }).then(color=>{
+      setColors(color.data)
+     
+      getList("/api/dealer/vehicles/?page=1",color.data)
+    
+    })
 
 
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+   
+  },[])
 
 
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
+   const data = carList
 
      
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-       {
-        col1: '22D2',
-        col2: 'WasAWSasdsSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22asD2',
-        col2: 'WdsaasAWSSASDASD',
-        col3:"122",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-
-      {
-        col1: '22D2',
-        col2: 'WAWSSASDASD',
-        col3:"123",
-        col4:"Nissan",
-        col5:"Quash",
-        col6:"2012",
-        col7:"Gray",
-        col8:"New",
-        col9:"California",
-        col10:"23/21/2021",
-        col11:"09/11/2012",
-        col12:"5G",
-        col13:"Running",
-        col14:"sa",
-      },
-      
-     ],
-     []
-   )
+  
  
    const columns = React.useMemo(
      () => [
@@ -566,14 +210,10 @@ import range from "range";
      headerGroups,
      
      page,
-     canPreviousPage,
-     canNextPage,
-     pageOptions,
+  
      pageCount,
      gotoPage,
-     nextPage,
-     previousPage,
-     setPageSize,
+     
      prepareRow,
      state: { pageIndex, pageSize },
    } = useTable({ columns, data ,initialState: { pageIndex: 0 },},useFilters,useSortBy,usePagination)
@@ -591,10 +231,10 @@ import range from "range";
                >
                  {column.render('Header')}
                  {column.isSorted ? (column.isSortedDesc ? <svg width="12" height="12" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 2L3 1H5L4 2Z" stroke="black" stroke-width="2"/>
+<path d="M4 2L3 1H5L4 2Z" stroke="black" strokeWidth="2"/>
 </svg>
  : <svg width="12" height="12" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
- <path d="M4 2L5 3L3 3L4 2Z" stroke="black" stroke-width="2"/>
+ <path d="M4 2L5 3L3 3L4 2Z" stroke="black" strokeWidth="2"/>
  </svg>
  ) : ""}
                  <div>{column.canFilter ? column.render("Filter"):""}</div>
@@ -605,7 +245,7 @@ import range from "range";
          ))}
        </thead>
        <tbody {...getTableBodyProps()}>
-         {page.map(row => {
+         {carList.length == 0 ? <div><Spinner color="#61dafb"/></div> : page.map(row => {
            prepareRow(row)
            return (
              <tr {...row.getRowProps()}>
@@ -629,7 +269,7 @@ import range from "range";
      </table>
         <div className="emir-pagination">
     
-        <button className="pagi-out" onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <button className="pagi-out" onClick={() => getList(prev,colors)} disabled={prev == "" ? true : false}>
           Previous
         </button>
         
@@ -641,13 +281,13 @@ import range from "range";
               <div className={ pageIndex == i ? "pagi-num pagi-active" : "pagi-num"} onClick={e=>{
                 gotoPage(i)
               }}>
-              {i+1}
+              {pageNum}
              
             </div>
              )
 })}
          
-         <button className="pagi-out" onClick={() => nextPage()} disabled={!canNextPage}>
+         <button className="pagi-out" disabled={next == "" ? true : false} onClick={() => getList(next,colors)}>
           Next
         </button>
           

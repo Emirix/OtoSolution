@@ -1,13 +1,26 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import Buyutec from "../../assets/svg/buyutec.svg"
 import Bell from "../../assets/svg/bell.svg"
 import PP from "../../assets/img/pp.jpg"
 import DownArrow from "../../assets/svg/down-arrow-icon2.svg"
 import Bildirimler from './Bildirimler'
 import {Link,useLocation} from "react-router-dom"
+import axios from 'axios'
 
 function Header() {
     const location = useLocation();
+    const [user,setUser] = useState([])
+    
+    useEffect(()=>{
+        axios.get("/api/account/user/",{
+            headers:{
+                "Authorization" : `Token ${localStorage.getItem("key")}`
+            }
+        }).then(res=>{
+            console.log(res)
+            setUser(res.data)
+        })
+    },[])
 
     var i = 0;
     function yanMenu(){
@@ -55,8 +68,11 @@ function Header() {
                 <div className="kucuk-profil ms-3">
                     <img src={PP} alt="" />
                    <div>
-                   <div className="kucuk-profil__title">Emir T.</div>
-                    <div className="kucuk-profil__bottom">Autogroup</div>
+                    {
+                         
+                    }
+                   <div className="kucuk-profil__title">{user.first_name || "Null"}</div>
+                    <div className="kucuk-profil__bottom">{user.address || "Null"}</div>
                    </div>
 
                    <div className="down-icon">

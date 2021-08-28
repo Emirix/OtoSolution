@@ -9,7 +9,43 @@ import { Link } from "react-router-dom";
 
 import DataTable from "../components/DataTable"
 import Page from "./Page";
+import axios from "axios";
 export default class Index extends Component {
+  constructor(){
+    super()
+    this.state = {
+      carList:[]
+    }
+  }
+  componentDidMount(){
+    var newCarList = [];
+    axios.get("/api/dealer/vehicles").then(res=>{
+      console.log(res)
+      res.data.results.map((val,i)=>{
+        
+        newCarList.push({
+          col1: val.stock_no,
+          col2:val.vin.vin,
+          col3:"?",
+          col4: val.vin.brand_name,
+          col5: val.vin.model_name,
+          col6:val.vin.specs.ModelYear,
+          col7:val.color,
+          col8:"?",
+          col9: "?",
+          col10:val.created_at.substring(0,10).replaceAll("-","/"),
+          col11:"?",
+          col12:val.connection_type || "No Data (Null)",
+          col13:val.status || "No Data (Null)"
+          
+
+        })
+      })
+
+      console.log(newCarList)
+      this.setState({carList:newCarList})
+    })
+  }
   render() {
     return (
       <Page>
@@ -28,41 +64,42 @@ export default class Index extends Component {
                 title="Tire Presuare"
                 status="Low"
                 color="#F64E60"
+                key={0}
               />
 
               <QA
                 src="icons/service-green.svg"
                 title="Tire Presuare"
                 status="Running"
-                color="#3DCC7A"
+                color="#3DCC7A"key={1}
               />
 
               <QA
                 src="icons/battery-green.svg"
                 title="Tire Presuare"
                 status="Low"
-                color="#F64E60"
+                color="#F64E60"key={2}
               />
 
               <QA
                 src="icons/service-red.svg"
                 title="Tire Presuare"
                 status="Low"
-                color="#F64E60"
+                color="#F64E60"key={3}
               />
 
               <QA
                 src="icons/low-gas-green.svg"
                 title="Tire Presuare"
                 status="Low"
-                color="#F64E60"
+                color="#F64E60"key={4}
               />
 
               <QA
                 src="icons/low-gas-red.svg"
                 title="Tire Presuare"
                 status="Low"
-                color="#F64E60"
+                color="#F64E60"key={5}
               />
             </div>
           </div>
@@ -116,48 +153,50 @@ export default class Index extends Component {
                   src="icons/service-yellow.svg"
                   sayi="24"
                   caption="Low Gas"
+                  key={0}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
                   caption="Low Gas"
+                  key={1}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"
+                  caption="Low Gas"key={2}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"
+                  caption="Low Gas"key={3}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"
+                  caption="Low Gas"key={4}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"
+                  caption="Low Gas"key={5}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"
+                  caption="Low Gas"key={6}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"
+                  caption="Low Gas"key={7}
                 />
               </div>
             </div>
@@ -175,6 +214,7 @@ export default class Index extends Component {
               marka={"Toyota"}
               model="Corolla"
               since="1:32"
+              key={0}
             />
 
             <MotionCars
@@ -184,7 +224,7 @@ export default class Index extends Component {
               ]}
               marka={"Toyota"}
               model="Corolla"
-              since="1:32"
+              since="1:32"key={1}
             />
 
             <MotionCars
@@ -194,7 +234,7 @@ export default class Index extends Component {
               ]}
               marka={"Toyota"}
               model="Corolla"
-              since="1:32"
+              since="1:32"key={2}
             />
 
             <MotionCars
@@ -204,7 +244,7 @@ export default class Index extends Component {
               ]}
               marka={"Toyota"}
               model="Corolla"
-              since="1:32"
+              since="1:32"key={3}
             />
 
             <MotionCars
@@ -214,7 +254,7 @@ export default class Index extends Component {
               ]}
               marka={"Toyota"}
               model="Corolla"
-              since="1:32"
+              since="1:32"key={4}
             />
 
             <MotionCars
@@ -224,7 +264,7 @@ export default class Index extends Component {
               ]}
               marka={"Toyota"}
               model="Corolla"
-              since="1:32"
+              since="1:32"key={5}
             />
 
             <MotionCars
@@ -234,11 +274,11 @@ export default class Index extends Component {
               ]}
               marka={"Toyota"}
               model="Corolla"
-              since="1:32"
+              since="1:32"key={6}
             />
           </div>
         </div>
-              <iframe className="d-none"></iframe>
+              <iframe title="print frame" className="d-none"></iframe>
         <div className="row mt-3 m-0">
           <div className="d-flex align-items-center mb-3">
             <div className="mini-title">Car List</div>
@@ -300,7 +340,7 @@ export default class Index extends Component {
 
         <div className="row  mt-3 m-0">
           <div className="tb-container">
-          <DataTable/>
+          <DataTable key={0} />
           </div>
         </div>
       </div>

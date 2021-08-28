@@ -1168,6 +1168,7 @@ tr {
   padding: 0;
 }
 .c-list li {
+  padding: 0.3rem 0;
   font-size: 12px;
   list-style-type: none;
   display: flex;

@@ -1,6 +1,5 @@
 import React,{useEffect} from "react";
-import CarIcon from "../../assets/svg/car-icon.svg";
-import CarIconActive from "../../assets/svg/car-icon.svg";
+
 import DownArrow from "../../assets/svg/down-arrow-icon.svg";
 import Logo from "../../assets/svg/logo.svg";
 import {Link,useLocation} from "react-router-dom"
@@ -46,8 +45,8 @@ function Sidebar() {
         <ul>
           <li className={location.pathname == "/" ? "active" : ""}>
             <Link to="/">
-            {location.pathname == "/" ?               <img src="icons/dashboard-active.svg" alt="" />
- :               <img src="icons/dashboard-inactive.svg" alt="" />
+            {location.pathname == "/" ?               <img src="/icons/dashboard-active.svg" alt="" />
+ :               <img src="/icons/dashboard-inactive.svg" alt="" />
  }
              <span>Dashboard</span>
             </Link>
@@ -55,13 +54,13 @@ function Sidebar() {
 
           <li
             onClick={(e) => {
-              dropdown(e,"icons/car-settings-active.svg","icons/car-settings-inactive.svg");
+              dropdown(e,"/icons/car-settings-active.svg","/icons/car-settings-inactive.svg");
             }}
 
             data-dropdown="kapali"
           >
             <a href="#">
-              <img src="icons/car-settings-inactive.svg" alt="" />
+              <img src="/icons/car-settings-inactive.svg" alt="" />
               <span>Car Settings</span>
               <div className="arrow">
                 <img src={DownArrow} alt="" />
@@ -90,7 +89,7 @@ function Sidebar() {
             <Link to="/oto-link">
 
             {
-              location.pathname == "/oto-link" ? <img className="is" src="icons/oto-link-active.svg" alt="" /> : <img className="is" src="icons/oto-link-inactive.svg" alt="" />
+              location.pathname == "/oto-link" ? <img className="is" src="/icons/oto-link-active.svg" alt="" /> : <img className="is" src="/icons/oto-link-inactive.svg" alt="" />
             }
               <span>Oto-Link</span>
             </Link>
@@ -99,8 +98,8 @@ function Sidebar() {
           <li  className={location.pathname == "/general-settings" ? "active" : ""}>
             <Link to="/general-settings">
               {
-                location.pathname == "/general-settings" ?               <img src="icons/settings-active.svg" alt="" />
-                :               <img src="icons/settings-inactive.svg" alt="" />
+                location.pathname == "/general-settings" ?               <img src="/icons/settings-active.svg" alt="" />
+                :               <img src="/icons/settings-inactive.svg" alt="" />
 
               }
               <span>General Settings</span>
