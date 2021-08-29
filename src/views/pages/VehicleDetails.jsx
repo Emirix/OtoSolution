@@ -9,7 +9,7 @@ import List from "../components/VH/List";
 import SI from "../components/VH/SI";
 import RecentActivities from "../components/VH/RecentActivities";
 import CardInfo from "../components/VH/CardInfo";
-import { useParams } from "react-router-dom";
+import { useParams,Redirect} from "react-router-dom";
 import Page from './Page'
 import axios from "axios";
 
@@ -24,7 +24,9 @@ function VehicleDetails() {
         setCar(res.data)
       })
   },[])
-
+  if(!localStorage.getItem("key")){
+    return <Redirect to="/login" />
+   }else{
   return (
     <Page>
     <div className="sayfa">
@@ -90,6 +92,7 @@ function VehicleDetails() {
       </div>
     </div>
     </Page> );
+   }
 }
 
 export default VehicleDetails;

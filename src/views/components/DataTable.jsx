@@ -3,7 +3,10 @@ import React ,{useEffect,useState} from "react"
 import ColumnFilter from './ColumnFilter'
 import Spinner  from './Spinner/Spinner'
 import axios from "axios"
+import { useHistory } from 'react-router-dom'
  export default function DataTable() {
+  const history = useHistory();
+
   const [carList,setCarList] = useState([]);
   const [next,setNext] = useState("");
   const [prev,setPrev] = useState("");
@@ -13,7 +16,9 @@ import axios from "axios"
   const [colors,setColors] = useState([])
 
   function getList(url,c){
+
     setCarList([])
+    
     axios.get(url).then(res=>{
       console.log(res.data)
       if(res.data.next != null || res.data.next != undefined){
@@ -44,8 +49,8 @@ import axios from "axios"
           col10:val.created_at.substring(0,10).replaceAll("-","/"),
           col11:"?",
           col12:val.connection_type || "Null",
-          col13:val.status || "Null"
-  
+          col13:val.status || "Null",
+          id:val.id
         })
       })
 
@@ -69,7 +74,7 @@ import axios from "axios"
       }
     }).then(color=>{
       setColors(color.data)
-     
+      
       getList("/api/dealer/vehicles/?page=1",color.data)
     
     })
@@ -81,128 +86,128 @@ import axios from "axios"
 
    const data = carList
 
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'STK',
+        Filter : ColumnFilter,
+        accessor: 'col1', 
+        
+        width:80
+      },
+      {
+        Header: 'VIN',
+        Filter : ColumnFilter,
+        accessor: 'col2',
+        width:140
+      },
+
+      {
+       Header: 'Serial ID', Filter : ColumnFilter,
+       accessor: 'col3',
+       width:80
+     },
+
+     {
+       Header: 'Make', Filter : ColumnFilter,
+       accessor: 'col4',
+       width:70
+     },
+
+     {
+       Header: 'Model', Filter : ColumnFilter,
+       accessor: 'col5',
+       width:70
+     },
+
+
+     {
+       Header: 'Year', Filter : ColumnFilter,
+       accessor: 'col6',
+       width:60
+     },
+
+     {
+       Header: 'Color', Filter : ColumnFilter,
+       accessor: 'col7',
+       width:70
+     },
+
+     {
+       Header: 'Type', Filter : ColumnFilter,
+       accessor: 'col8',
+       width:60
+     },
+
      
-  
- 
-   const columns = React.useMemo(
-     () => [
-       {
-         Header: 'STK',
-         Filter : ColumnFilter,
-         accessor: 'col1', 
-         
-         width:80
-       },
-       {
-         Header: 'VIN',
-         Filter : ColumnFilter,
-         accessor: 'col2',
-         width:140
-       },
+     {
+       Header: 'Dealer', Filter : ColumnFilter,
+       accessor: 'col9',
+       width:80
+     },
 
-       {
-        Header: 'Serial ID', Filter : ColumnFilter,
-        accessor: 'col3',
-        width:80
-      },
+     
+     {
+       Header: 'Created', Filter : ColumnFilter,
+       accessor: 'col10',
+       width:70
+     },
 
-      {
-        Header: 'Make', Filter : ColumnFilter,
-        accessor: 'col4',
-        width:70
-      },
+     
+     {
+       Header: 'Updated', Filter : ColumnFilter,
+       accessor: 'col11',
+       width:70
 
-      {
-        Header: 'Model', Filter : ColumnFilter,
-        accessor: 'col5',
-        width:70
-      },
+     },
 
+     
+     {
+       Header: 'Connection', Filter : ColumnFilter,
+       accessor: 'col12',
+       width:100
+     },
 
-      {
-        Header: 'Year', Filter : ColumnFilter,
-        accessor: 'col6',
-        width:60
-      },
+     
+     {
+       Header: 'Status', Filter : ColumnFilter,
+       accessor: 'col13',
+       width:90,
+       status:"running",
+       Cell: ({ cell }) => (
+           <span className={"row-status row-status-running"}  >
+             {cell.row.values.col13}
+           </span>
+         )
+     },
 
-      {
-        Header: 'Color', Filter : ColumnFilter,
-        accessor: 'col7',
-        width:70
-      },
+     {
+       Header: '', Filter : "",
+       accessor: 'col14',
+       width:25,
+       Cell: ({ cell }) => (
+        <div className="edit-button" onClick={e=>{
+          console.log(cell)
+          history.push("/vehicle-details/"+cell.row.original.id)
+      }}>
+         </div>
+       )
+   
+     },
 
-      {
-        Header: 'Type', Filter : ColumnFilter,
-        accessor: 'col8',
-        width:60
-      },
-
-      
-      {
-        Header: 'Dealer', Filter : ColumnFilter,
-        accessor: 'col9',
-        width:80
-      },
-
-      
-      {
-        Header: 'Created', Filter : ColumnFilter,
-        accessor: 'col10',
-        width:70
-      },
-
-      
-      {
-        Header: 'Updated', Filter : ColumnFilter,
-        accessor: 'col11',
-        width:70
-
-      },
-
-      
-      {
-        Header: 'Connection', Filter : ColumnFilter,
-        accessor: 'col12',
-        width:100
-      },
-
-      
-      {
-        Header: 'Status', Filter : ColumnFilter,
-        accessor: 'col13',
-        width:90,
-        status:"running",
-        Cell: ({ cell }) => (
-            <span className={"row-status row-status-running"}  >
-              {cell.row.values.col13}
-            </span>
-          )
-      },
-
-      {
-        Header: '', Filter : "",
-        accessor: 'col14',
-        width:25,
-        Cell: ({ cell }) => (
-          <div className="refresh-button" >
-           
-          </div>
-        )
-    
-      },
-
-      {
-        Header: '', Filter : "",
-        accessor: 'col15',width:25,
-        Cell: ({ cell }) => (
-          <div className="edit-button" >
-           
-          </div>
-        )
-      },
-     ],
-     []
-   )
+     {
+       Header: '', Filter : "",
+       accessor: 'col15',width:25,
+       Cell: ({ cell }) => (
+         <div className="edit-button" >
+          
+         </div>
+       )
+     },
+    ],
+    []
+  )
+   
  
    const {
      getTableProps,
@@ -275,17 +280,12 @@ import axios from "axios"
         
         
         
-            {/*pageIndex + 1} of {pageOptions.length */}
-            {new Array(pageCount).fill("", 0, pageCount).map((pa, i) =>{
-             return(
-              <div className={ pageIndex == i ? "pagi-num pagi-active" : "pagi-num"} onClick={e=>{
-                gotoPage(i)
-              }}>
+              <div className="pagi-num pagi-active" >
               {pageNum}
              
             </div>
-             )
-})}
+             
+
          
          <button className="pagi-out" disabled={next == "" ? true : false} onClick={() => getList(next,colors)}>
           Next

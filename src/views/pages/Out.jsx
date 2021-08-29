@@ -11,6 +11,7 @@ function Login() {
         console.log(res)
         localStorage.removeItem("key")
         setSL("Çıkış Yapıldı")
+        window.location="/"
       }).catch(err=>{
           setSL("Hata.")
       })

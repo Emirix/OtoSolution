@@ -4,7 +4,7 @@ function ColumnFilter({column}) {
      const {filterValue,setFilter} = column   
     return (
         <div className="row-search">
-    <img src="icons/search2.svg" alt="" />
+    <img src="/icons/search2.svg" alt="" />
 
 
    

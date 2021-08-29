@@ -1,8 +1,12 @@
 import React from 'react'
 import DataTable from "../components/DataTable"
 import Page from './Page'
+import { Redirect} from "react-router-dom";
 
 function CarList() {
+  if(!localStorage.getItem("key")){
+    return <Redirect to="/login" />
+   }else{
     return (
       <Page>
         <div className="sayfa">
@@ -36,6 +40,6 @@ function CarList() {
         </div>
         </div>
         </Page> )
-}
+}}
 
 export default CarList

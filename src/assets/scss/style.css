@@ -1432,4 +1432,19 @@ tr {
   border-radius: 5px;
 }
 
+.info-form select {
+  height: 44px;
+  background-color: #EFEFEF;
+  border: none;
+  outline: none;
+  color: #44444A;
+  padding: 0.3rem 0.5rem;
+  height: 44px;
+  font-style: italic;
+  margin-bottom: 0.4rem;
+}
+.info-form option {
+  color: #44444A;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -61,7 +61,7 @@ function Header() {
                 <div className="bildirim bildirim-h " onClick={()=>{
                     document.querySelector(".bildirimler-container").classList.toggle("acik-bc")
                 }}>
-                    <img src="icons/notification.svg" alt="" />
+                    <img src="/icons/notification.svg" alt="" />
                     <Bildirimler/>
                 </div>
 
@@ -76,7 +76,7 @@ function Header() {
                    </div>
 
                    <div className="down-icon">
-                       <img src="icons/arrow-down-short.svg" alt="" />
+                       <img src="/icons/arrow-down-short.svg" alt="" />
                    </div>
                 </div>
             </div>

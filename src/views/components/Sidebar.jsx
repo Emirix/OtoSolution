@@ -79,7 +79,7 @@ function Sidebar() {
                   <Link to="/oto-link">Oto-Link</Link>
                 </li>
                 <li>
-                  <Link to="/vehicle-details">Vehicle Details</Link>
+                  <Link to="/vehicle-details/2">Vehicle Details</Link>
                 </li>
               </ul>
             </div>

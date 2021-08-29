@@ -20,30 +20,11 @@ export default class Index extends Component {
   componentDidMount(){
     var newCarList = [];
     axios.get("/api/dealer/vehicles").then(res=>{
-      console.log(res)
-      res.data.results.map((val,i)=>{
-        
-        newCarList.push({
-          col1: val.stock_no,
-          col2:val.vin.vin,
-          col3:"?",
-          col4: val.vin.brand_name,
-          col5: val.vin.model_name,
-          col6:val.vin.specs.ModelYear,
-          col7:val.color,
-          col8:"?",
-          col9: "?",
-          col10:val.created_at.substring(0,10).replaceAll("-","/"),
-          col11:"?",
-          col12:val.connection_type || "No Data (Null)",
-          col13:val.status || "No Data (Null)"
-          
 
-        })
-      })
+   
 
-      console.log(newCarList)
-      this.setState({carList:newCarList})
+     
+      this.setState({carList:res.data.results})
     })
   }
 
@@ -120,7 +101,7 @@ export default class Index extends Component {
                     background="#7075F6"
                   />
                   <div className="semi-bar__option">
-                    <div className="title">8,350</div>
+                    <div className="title">{this.state.carList.length}</div>
                     <div className="bottom">Total Cars</div>
                   </div>
 
