@@ -20,11 +20,8 @@ export default class Index extends Component {
   componentDidMount(){
     var newCarList = [];
     axios.get("/api/dealer/vehicles").then(res=>{
-
-   
-
-     
-      this.setState({carList:res.data.results})
+      console.log(res.data.count)
+      this.setState({carList:res.data})
     })
   }
 
@@ -96,12 +93,13 @@ export default class Index extends Component {
               <div className="">
                 <div className="semi-bar">
                   <SemiCircleProgressBar
-                    percentage={33}
+                    percentage={this.state.carList.count || 0}
+                    
                     stroke="#1BC3BB"
                     background="#7075F6"
                   />
                   <div className="semi-bar__option">
-                    <div className="title">{this.state.carList.length}</div>
+                    <div className="title">{this.state.carList.count || "0"}</div>
                     <div className="bottom">Total Cars</div>
                   </div>
 

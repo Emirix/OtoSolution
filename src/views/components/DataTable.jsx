@@ -8,17 +8,21 @@ import { useHistory } from 'react-router-dom'
   const history = useHistory();
 
   const [carList,setCarList] = useState([]);
+  const [paginationCount,setPaginationCount] = useState(0)
   const [next,setNext] = useState("");
   const [prev,setPrev] = useState("");
   const [pageNum,setPageNum] = useState(1)
+  
   var newCarList = [];
 
   const [colors,setColors] = useState([])
 
   function getList(url,c){
     setCarList([])
+ 
     axios.get(url).then(res=>{
-      console.log(res.data)
+      console.log(Number(res.data.count) / 10)    
+      setPaginationCount(Math.round(Number(res.data.count) / 10))
       if(res.data.next != null || res.data.next != undefined){
         setNext(res.data.next)
         console.log("Next: " + next)
@@ -45,7 +49,7 @@ import { useHistory } from 'react-router-dom'
           col8:"?",
           col9: "?",
           col10:val.created_at.substring(0,10).replaceAll("-","/"),
-          col11:"?",
+          col11:"",
           col12:val.connection_type || "Null",
           col13:val.status || "Null",
           id:val.id
@@ -189,10 +193,10 @@ import { useHistory } from 'react-router-dom'
        accessor: 'col14',
        width:25,
        Cell: ({ cell }) => (
-        <div className="edit-button" onClick={e=>{
+        <div className="refresh-button" onClick={e=>{
           console.log(cell)
-          history.push("/vehicle-details/"+cell.row.original.id)
-      }}>
+          getList("/api/dealer/vehicles/?page="+pageNum,colors)
+  }}>
          </div>
        )
    
@@ -202,7 +206,10 @@ import { useHistory } from 'react-router-dom'
        Header: '', Filter : "",
        accessor: 'col15',width:25,
        Cell: ({ cell }) => (
-         <div className="edit-button" >
+         <div className="edit-button"  onClick={e=>{
+          console.log(cell)
+          history.push("/vehicle-details/"+cell.row.original.id)
+      }}>
           
          </div>
        )
@@ -282,11 +289,19 @@ import { useHistory } from 'react-router-dom'
         </button>
         
         
-        
-              <div className="pagi-num pagi-active" >
-              {pageNum}
-             
-            </div>
+            {
+              Array(paginationCount).fill(1).map((val,i)=>{
+                return(
+                  <div onClick={()=>{
+                    setPageNum(i+1)
+                     getList("/api/dealer/vehicles/?page="+(i+1),colors)
+                  }} className={pageNum == i+1 ? "pagi-num pagi-active" : "pagi-num"} >
+                  {i+1}
+                
+                </div>
+                )
+              })
+            }
              
 
          
