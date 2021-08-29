@@ -122,7 +122,7 @@ function AddNewCar({bg,title}) {
 
 
 
-                    
+
 
                     <select disabled={brand.length == 0 ? true : false} value={model} onChange={e=>setModel(e.target.value)}>
                         <option value="">Model</option>
@@ -146,10 +146,7 @@ function AddNewCar({bg,title}) {
 
                    
                    
-                    <input value={style} onChange={e=>setStyle(e.target.value)} type="text" placeholder="Style" />
-                    <input value={madeIn} onChange={e=>setMadeIn(e.target.value)} type="text" placeholder="Made in" />
-                    <input value={streeingType} onChange={e=>setStreeingType(e.target.value)} type="text" placeholder="Steering Type" />
-                </div>
+                       </div>
                 <div className="btn btn-primary" onClick={()=>{addCar()}}>Add Car</div>
                 </div>
             </div>

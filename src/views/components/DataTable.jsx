@@ -16,9 +16,7 @@ import { useHistory } from 'react-router-dom'
   const [colors,setColors] = useState([])
 
   function getList(url,c){
-
     setCarList([])
-    
     axios.get(url).then(res=>{
       console.log(res.data)
       if(res.data.next != null || res.data.next != undefined){
@@ -86,7 +84,12 @@ import { useHistory } from 'react-router-dom'
 
    const data = carList
 
-  const columns = React.useMemo(
+     
+  
+ 
+
+
+   const columns = React.useMemo(
     () => [
       {
         Header: 'STK',
