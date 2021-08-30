@@ -3,6 +3,9 @@ import React,{useState,useEffect} from 'react'
 import CardInfo from '../components/VH/CardInfo'
 import Page from './Page'
 import {Redirect} from "react-router-dom"
+import SolBildirim from '../components/SolBildirim'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 function AddNewCar({bg,title}) {
 
@@ -20,6 +23,15 @@ function AddNewCar({bg,title}) {
     const [style, setStyle] = useState("")
     const [madeIn, setMadeIn] = useState("")
     const [streeingType, setStreeingType] = useState("")
+
+    const [bildirim,setBildirim] = useState({
+        img:"",
+        title:"",
+        caption:"",
+        show:false
+    })
+
+  
 
     useEffect(()=>{
         axios.get("/api/catalog/brandnames/",{
@@ -71,18 +83,47 @@ function AddNewCar({bg,title}) {
         }}).then(res=>{
             console.log(res)
             if(res.statusText == "Created"){
-                alert("Araba Eklendi")
+                setBildirim({
+                    img:"valid",
+                    title:"Car successfully added.",
+                    caption:"You can find it in the car list",
+                    show:true
+                })
+
+                NotificationManager.success("Car successfully added.","You can find it in the car list",2000)
+
+                setVin("")
+                setStk("")
+                setYear("")
+                setserialId("")
+                setMake("")
+                setModel("")
+                setColor("")
             }
         }).catch(err=>{
-            alert("Hata. Bilgileri Kontrol Edin")
+           NotificationManager.error("Could not add car","Check the information",2000)
+           
         })
     }
+
+
+
+
+
+
+
+
+
+
     if(!localStorage.getItem("key")){
         return <Redirect to="/login" />
        }else{
     return (
         <Page>
         <div className="sayfa">
+        <NotificationContainer/>
+
+           
             <div className="row m-0">
                 <input type="file" name="upload" id="upload" className="d-none" />
                 <div className="col-lg-6 col-md-12">
@@ -106,7 +147,7 @@ function AddNewCar({bg,title}) {
                 <div className="col-lg-6 col-md-12">
                 <div className="mini-title">Vehicle Information</div>
                 <div className="info-form">
-                    <input value={stk} onChange={e=>setStk(e.target.value)} type="text" placeholder="STK"  />
+                    <input value={stk} onChange={e=>setStk(e.target.value)} type="text" placeholder="*STK"  />
                     <input value={vin} onChange={e=>setVin(e.target.value)} type="text" placeholder="VIN" />
                     <input value={serialId} onChange={e=>setserialId(e.target.value)} type="text" placeholder="Serial ID" />
 

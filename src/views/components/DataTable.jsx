@@ -41,17 +41,17 @@ import { useHistory } from 'react-router-dom'
         newCarList.push({
           col1: val.stock_no,
           col2:val.vin.vin,
-          col3:"?",
+          col3:"",
           col4: val.vin.brand_name,
           col5: val.vin.model_name,
           col6:val.year,
           col7:c[val.color].name,
-          col8:"?",
-          col9: "?",
+          col8:"",
+          col9: "",
           col10:val.created_at.substring(0,10).replaceAll("-","/"),
           col11:"",
-          col12:val.connection_type || "Null",
-          col13:val.status || "Null",
+          col12:val.connection_type || "",
+          col13:val.status || "",
           id:val.id
         })
       })

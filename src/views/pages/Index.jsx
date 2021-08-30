@@ -14,15 +14,24 @@ export default class Index extends Component {
   constructor(){
     super()
     this.state = {
-      carList:[]
+      carList:[],
+      parkingLots:[]
     }
   }
   componentDidMount(){
-    var newCarList = [];
-    axios.get("/api/dealer/vehicles").then(res=>{
-      console.log(res.data.count)
-      this.setState({carList:res.data})
-    })
+ 
+
+
+    axios.all([
+      axios.get(`/api/dealer/vehicles`), 
+      axios.get(`/api/dealer/lots`)
+    ])
+    .then(axios.spread((car, lot) => {
+      this.setState({carList:car.data})
+      this.setState({parkingLots:lot.data})
+      console.log(car)
+      console.log(lot)
+    }));
   }
 
 
@@ -94,7 +103,7 @@ export default class Index extends Component {
                 <div className="semi-bar">
                   <SemiCircleProgressBar
                     percentage={this.state.carList.count || 0}
-                    
+                    key={0}
                     stroke="#1BC3BB"
                     background="#7075F6"
                   />
@@ -113,6 +122,7 @@ export default class Index extends Component {
                     value={31}
                     text={`31 %`}
                     strokeWidth={9}
+                    key={0}
                     styles={buildStyles({
                       pathColor: `#0BB783`,
                       trailColor: "#D7F9EF",
@@ -311,12 +321,16 @@ export default class Index extends Component {
           <div className="table-header-buttons">
            
             <button className="active">All</button>
-            <button>Parking Lot 1</button>
-            <button>Parking Lot 2</button>
-            <button>Parking Lot 3</button>
-            <button>Parking Lot 4</button>
-            <button>Parking Lot 5</button>
-            <button>Parking Lot 6 </button>
+            {
+              this.state.parkingLots.length != 0 ?
+              this.state.parkingLots.results.map((val,i)=>{
+                return(
+                  <button title={val.address} key={i}>{val.name}</button>
+
+                )
+              }) : ""
+            }
+              
           </div>
 
           
