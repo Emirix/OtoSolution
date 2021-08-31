@@ -1,6 +1,10 @@
 import React from 'react'
+import {Redirect} from "react-router-dom"
 
 function Details() {
+    if(!localStorage.getItem("key")){
+        return <Redirect to="/login" />
+       }else{
     return (
         <div className="p-3">
            <div className="details br-12 p-3">
@@ -56,6 +60,8 @@ function Details() {
            <div className="outline-button h-44 mw-500 mx-auto">Scan Again</div>
         </div>
     )
+
+       }
 }
 
 export default Details

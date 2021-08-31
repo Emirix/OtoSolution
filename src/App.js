@@ -10,6 +10,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect,
 
 } from "react-router-dom";
 import VehicleDetails from "./views/pages/VehicleDetails"
@@ -23,6 +24,11 @@ import AllSet from "./views/pages/MobileInstaller/AllSet"
 import Error from "./views/pages/MobileInstaller/Error"
 
 function App() {
+  function detectMob() {
+    return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
+  }
+
+  const isMobile = detectMob();
 
   return (
     <Router>
@@ -35,23 +41,42 @@ function App() {
         <MobileHeader/>
         <Switch>
           <Route exact path="/">
-            <Index />
+            {
+              isMobile ? <Redirect to="/mobile/add"/> : <Index />
+            }
           </Route>
 
           <Route exact path="/add-new-car">
-            <AddNewCar/>
+            {
+              isMobile ? <Redirect to="/mobile/add"/> :  <AddNewCar/>
+            }
+           
           </Route>
 
           <Route exact path="/vehicle-details/:id">
-              <VehicleDetails/>
+          {
+              isMobile ? <Redirect to="/mobile/add"/> :  <VehicleDetails/>
+            }
+              
           </Route>
 
           <Route exact path="/car-list">
-              <CarList/>
+           
+
+            {
+              isMobile ? <Redirect to="/mobile/add"/> :    <CarList/>
+            }
+          </Route>
+
+          <Route exact path="/mobile">
+            <Redirect to="/mobile/adad"/>
           </Route>
 
           <Route exact path="/oto-link">
-              <OtoLink/>
+             
+            {
+              isMobile ? <Redirect to="/mobile/add"/> :    <OtoLink/>
+            }
           </Route>
 
           <Route exact path="/mobile/add">

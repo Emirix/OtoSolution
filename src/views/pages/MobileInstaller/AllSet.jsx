@@ -1,6 +1,10 @@
 import React from 'react'
+import {Redirect} from "react-router-dom"
 
 function AllSet() {
+    if(!localStorage.getItem("key")){
+        return <Redirect to="/login" />
+       }else{
     return (
         <div className="p-3">
 
@@ -58,6 +62,6 @@ function AllSet() {
            <div className="outline-button h-44 bg-mor mw-500 mx-auto     border-none text-white">Recently Added</div>
         </div>
     )
-}
+}}
 
 export default AllSet

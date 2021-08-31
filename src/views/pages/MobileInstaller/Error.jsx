@@ -1,6 +1,10 @@
 import React from 'react'
+import {Redirect} from "react-router-dom"
 
 function Error() {
+    if(!localStorage.getItem("key")){
+        return <Redirect to="/login" />
+       }else{
     return (
         <div className="p-3">
 
@@ -58,6 +62,7 @@ function Error() {
            <div className="outline-button h-44 mw-500 mx-auto">Scan OBD Code</div>
         </div>
     )
+       }
 }
 
 export default Error

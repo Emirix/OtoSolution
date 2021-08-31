@@ -1,6 +1,9 @@
 import React from 'react'
-
+import {Redirect} from "react-router-dom"
 function Add() {
+    if(!localStorage.getItem("key")){
+        return <Redirect to="/login" />
+       }else{
     return (
         <div className="p-3">
             <div className="mini-title">Add New Oto-Link Device</div>
@@ -43,7 +46,7 @@ function Add() {
         </div>
         
         </div>
-    )
+    )}
 }
 
 export default Add
