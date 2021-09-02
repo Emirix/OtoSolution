@@ -12,6 +12,8 @@ function AddNewCar({bg,title}) {
     const [brand,setBrand] = useState([])
     const [models,setModels] = useState([])
     const [colors,setColors] = useState([])
+    const [dealers,setDealers] = useState([])
+    const [lots,setLots] = useState([])
 
     const [stk,setStk] = useState("")
     const [vin, setVin] = useState("")
@@ -20,9 +22,9 @@ function AddNewCar({bg,title}) {
     const [model, setModel] = useState("")
     const [year, setYear] = useState("")
     const [color, setColor] = useState("")
-    const [style, setStyle] = useState("")
-    const [madeIn, setMadeIn] = useState("")
-    const [streeingType, setStreeingType] = useState("")
+    const [dealer, setDealer] = useState("")
+    const [iv, setIV] = useState("")
+    const [desiretLot, setDesiretLot] = useState("")
 
     const [bildirim,setBildirim] = useState({
         img:"",
@@ -50,6 +52,23 @@ function AddNewCar({bg,title}) {
             })
         })
 
+        axios.get("/admin/api/dealers/",{
+            headers:{
+                "Authorization" : `Token ${localStorage.getItem("key")}`
+            }
+        }).then(res=>{
+            console.log(res)
+            setDealers(res.data.results)
+        })
+
+        axios.get("/api/dealer/lots",{
+            headers:{
+                "Authorization" : `Token ${localStorage.getItem("key")}`
+            }
+        }).then(res=>{
+            setLots(res.data.results)
+        })
+
       
     },[])
 
@@ -67,16 +86,58 @@ function AddNewCar({bg,title}) {
     }
 
     function addCar(){
-        axios.post("/api/dealer/vehicles/",{
-            
+        if(vin.trim() == ""){
+            axios.post("/api/dealer/vehicles/",{
+        
                 "stock_no": stk,
-                "dealer": localStorage.getItem("dealer_id"),
-                "vin": vin.trim(),
-                "color": color,
-                "year": year,
-                "brand": make,
-                "model": model,
-                "desired_lot": 1
+                "dealer": Number(dealer) || null,              
+                "color": color || null,
+                "year": year || null,
+                "brand": make || null,
+                "model": model || null,
+                "desired_lot": Number(desiretLot) || null,
+                "inventory_type": Number(iv) || null
+
+       
+    },{    headers:{
+        "Authorization" : `Token ${localStorage.getItem("key")}`
+    }}).then(res=>{
+        console.log(res)
+        if(res.statusText == "Created"){
+            setBildirim({
+                img:"valid",
+                title:"Car successfully added.",
+                caption:"You can find it in the car list",
+                show:true
+            })
+
+            NotificationManager.success("Car successfully added.","You can find it in the car list",2000)
+
+            setVin("")
+            setStk("")
+            setYear("")
+            setserialId("")
+            setMake("")
+            setModel("")
+            setColor("")
+        }
+    }).catch(err=>{
+       NotificationManager.error("Could not add car","Check the information",2000)
+       
+    })
+        }else{
+        axios.post("/api/dealer/vehicles/",{
+        
+                    "stock_no": stk,
+                    "dealer": Number(dealer)  || null,
+                    "vin":vin.trim(),
+                    "color": color || null,
+                    "year": year || null,
+                    "brand": make || null,
+                    "model": model || null,
+                    
+                    "desired_lot": Number(desiretLot) || null,
+                    "inventory_type": Number(iv) || null
            
         },{    headers:{
             "Authorization" : `Token ${localStorage.getItem("key")}`
@@ -104,6 +165,7 @@ function AddNewCar({bg,title}) {
            NotificationManager.error("Could not add car","Check the information",2000)
            
         })
+    }
     }
 
 
@@ -185,7 +247,39 @@ function AddNewCar({bg,title}) {
                         }) || <option>Loading</option>}
                     </select>
 
-                   
+                    <select value={dealer} onChange={e=>setDealer(e.target.value)}>
+                        <option value="0">Dealer</option>
+                        {dealers.map(val=>{
+                            return(
+                                <option value={val.id} key={val.id}>{val.name}</option>
+                            )
+                        }) || <option>Loading</option>}
+                    </select>
+
+
+
+                    <select  value={desiretLot} onChange={e=>setDesiretLot(e.target.value)}>
+                        <option value="0">Desiret Lot</option>
+                        {lots.map(val=>{
+                            return(
+                                <option value={val.id} key={val.id}>{val.name}</option>
+                            )
+                        }) || <option>Loading</option>}
+                    </select>
+
+
+                    <select  value={iv} onChange={e=>setIV(e.target.value)} >
+                        <option value="0">Inventory Type</option>
+                        <option value="1">New</option>
+                        <option value="2">Used</option>
+                    </select>
+
+
+
+
+
+                        
+                
                    
                        </div>
                 <div className="btn btn-primary" onClick={()=>{addCar()}}>Add Car</div>
