@@ -1,0 +1,87 @@
+@media screen and (max-width:992px) {
+    .sidebar{
+        display: none !important;
+    }
+
+    .page{
+        padding-left: 0 !important;
+    }
+
+    .sayfa{
+        padding-left: 0rem !important;
+    }
+}
+
+@media screen and (max-width:580px) {
+    .qa {
+        img{
+            width: 47px !important;
+        }
+
+        .ms-3{
+            margin-left: 0.5rem !important;
+        }
+
+        &__title{
+            font-size: 14px !important;
+        }
+
+        &__status{
+            font-size: 14px !important;
+        }
+    }
+
+    .ba{
+        img{
+            width: 35px !important;
+        }
+
+        .ms-3{
+            margin-left: 0.5rem !important;
+        }
+    }
+
+    .sayfa{
+       
+    }
+}
+
+@media screen and (max-width:510px) {
+    .qa{
+        width: 100% !important;
+        justify-content: flex-start !important;
+
+        .react-switch{
+            margin-left: auto !important;
+        }
+    }
+
+    .mini-container{
+        height: unset !important;
+    }
+
+    .mini-container-responsive{
+        .graph-kir{
+            width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .circu-bar{
+        
+    }
+        }
+      
+    }
+
+    .jspr{
+        justify-content: space-between;
+    }
+    .ba{
+        width: 39% !important;
+    }
+    .c-2{
+        width: 60% !important;
+    margin: 0 auto !important;
+    }
+}

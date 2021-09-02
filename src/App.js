@@ -1,5 +1,7 @@
 import "./assets/css/bootstrap.min.css"
 import "./assets/scss/style.css"
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+
 import Header from "./views/components/Header"
 import MobileHeader from "./views/pages/MobileInstaller/Header"
 import Sidebar from "./views/components/Sidebar"
@@ -11,6 +13,7 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory
 
 } from "react-router-dom";
 import VehicleDetails from "./views/pages/VehicleDetails"
@@ -23,12 +26,32 @@ import Details from "./views/pages/MobileInstaller/Details"
 import AllSet from "./views/pages/MobileInstaller/AllSet"
 import Error from "./views/pages/MobileInstaller/Error"
 
-function App() {
-  function detectMob() {
-    return ( ( window.innerWidth <= 800 ) && ( window.innerHeight <= 600 ) );
-  }
 
-  const isMobile = detectMob();
+
+
+function App() {
+  let history = useHistory()
+
+  function detectMob() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+    
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+
+  //const isMobile = detectMob();
+  const isMobile = false;
+
+
 
   return (
     <Router>

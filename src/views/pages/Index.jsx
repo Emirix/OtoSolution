@@ -98,9 +98,9 @@ export default class Index extends Component {
 
           <div className="col-xl-6 col-md-12">
             <div className="mini-title mb-3">Summary</div>
-            <div className="mini-container">
-              <div className="">
-                <div className="semi-bar">
+            <div className="mini-container mini-container-responsive">
+              <div className="graph-kir">
+                <div className="semi-bar ">
                   <SemiCircleProgressBar
                     percentage={this.state.carList.count || 0}
                     key={0}
@@ -117,6 +117,9 @@ export default class Index extends Component {
                     <div className="bottom">Ready for Customer</div>
                   </div>
                 </div>
+                <div className="c-2">
+
+               
                 <div className="circu-bar mt-3">
                   <CircularProgressbar
                     value={31}
@@ -141,8 +144,8 @@ export default class Index extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="col d-flex flex-wrap ">
+                </div> </div>
+              <div className="col d-flex flex-wrap ps-3 jspr ">
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
@@ -274,7 +277,7 @@ export default class Index extends Component {
         </div>
               <iframe title="print frame" className="d-none"></iframe>
         <div className="row mt-3 m-0">
-          <div className="d-flex align-items-center mb-3">
+          <div className="d-flex align-items-center mb-3 mobile-car-list">
             <div className="mini-title">Car List</div>
             <div className="ms-auto">
               <Link to="/add-new-car">

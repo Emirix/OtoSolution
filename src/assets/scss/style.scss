@@ -2,6 +2,7 @@ $gri: #F7F7FF;
 $primary: #7075F6;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import "1K.scss";
+@import "media.scss";
 
 *{
     font-family: 'Poppins', sans-serif;
@@ -1430,4 +1431,10 @@ border-radius: 5px;
         opacity: 0;
     }to{opacity: 0;
     }
+}
+
+.graph-kir{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
