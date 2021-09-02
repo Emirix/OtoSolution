@@ -8,7 +8,7 @@ function DealerList() {
       <div className="sayfa">
         <div className="row mt-3 m-0">
           <div className="d-flex align-items-center mb-3">
-            <div className="mini-title">Car List</div>
+            <div className="mini-title">Dealership List</div>
             <div className="ms-auto">
               <img
                 src="icons/add-car.svg"

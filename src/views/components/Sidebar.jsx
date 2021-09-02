@@ -95,16 +95,51 @@ function Sidebar() {
             </Link>
           </li>
 
-          <li  className={location.pathname == "/general-settings" ? "active" : ""}>
-            <Link to="/general-settings">
-              {
-                location.pathname == "/general-settings" ?               <img src="/icons/settings-active.svg" alt="" />
-                :               <img src="/icons/settings-inactive.svg" alt="" />
+          <li
+            onClick={(e) => {
+              dropdown(e,"/icons/settings-active.svg","/icons/settings-inactive.svg");
+            }}
 
-              }
+            data-dropdown="kapali"
+          >
+            <a href="#">
+            <img src="/icons/settings-inactive.svg" alt="" />
               <span>General Settings</span>
-            </Link>
+              <div className="arrow">
+                <img src={DownArrow} alt="" />
+              </div>
+            </a>
+
+            <div className="side-dropdown">
+              <ul>
+                <li>
+                  <Link to="/add-dealer">Add New Dealer</Link>
+                </li>
+                <li>
+                  <Link to="/dealership-list">Dealership List</Link>
+                </li>
+                <li>
+                  <Link to="/dealer">Dealer Info</Link>
+                </li>
+
+                <li>
+                  <Link to="/add-lot">Add New Lot</Link>
+                </li>
+
+                <li>
+                  <Link to="/parking-lots">Parking Lots List</Link>
+                </li>
+
+              
+                <li>
+                  <Link to="/lot">Lot Details</Link>
+                </li>
+              </ul>
+            </div>
           </li>
+
+
+     
         </ul>
       </nav>
     </div>

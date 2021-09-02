@@ -17,7 +17,7 @@ function AddDealer() {
         <div className="row m-0">
           <input type="file" name="upload" id="upload" className="d-none" />
           <div className="col-lg-6 col-md-12">
-            <div className="mini-title">Vehicle Information</div>
+            <div className="mini-title">Add New Dealer</div>
             <div className="info-form">
               <input type="text" placeholder="Name" />
               <input type="text" placeholder="Description" />
