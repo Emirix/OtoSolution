@@ -1603,4 +1603,46 @@ tr {
   justify-content: space-around;
 }
 
+.tb-container > table > tbody:nth-child(2) > tr:nth-child(odd) {
+  background-color: #F3F6F9;
+}
+
+.add-dealer-sag img {
+  width: 100%;
+  height: 282px;
+  object-fit: cover;
+}
+
+.primary-btn {
+  color: white;
+  background-color: #0BBEA5;
+}
+
+.seconadary-btn {
+  background-color: #888C9F;
+  color: white;
+}
+
+.btn {
+  padding: 0 1.3rem;
+  border-radius: 8px !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.btn:hover {
+  color: white;
+  opacity: 0.8;
+}
+
+.delete-button {
+  width: 47px !important;
+  height: 44px !important;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.delete-button:hover {
+  transform: translate(0px, -2px);
+}
+
 /*# sourceMappingURL=style.css.map */

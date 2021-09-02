@@ -25,6 +25,12 @@ import Provider from "./views/components/Provider"
 import Details from "./views/pages/MobileInstaller/Details"
 import AllSet from "./views/pages/MobileInstaller/AllSet"
 import Error from "./views/pages/MobileInstaller/Error"
+import DealerList from "./views/pages/DealerList";
+import AddDealer from "./views/pages/AddDealer";
+import DealerInfo from "./views/pages/DealerInfo";
+import ParkingLotList from "./views/pages/ParkingLotList";
+import AddLot from "./views/pages/AddLot";
+import LotInfo from "./views/pages/LotInfo";
 
 
 
@@ -75,6 +81,36 @@ function App() {
             }
            
           </Route>
+
+
+          
+          <Route exact path="/dealership-list">      
+              <DealerList/>
+          </Route>
+
+          <Route exact path="/add-dealer">      
+              <AddDealer/>
+          </Route>
+
+          <Route exact path="/dealer">      
+             <DealerInfo/>
+          </Route>
+
+          <Route exact path="/parking-lots">      
+            <ParkingLotList/>
+          </Route>
+
+          <Route exact path="/add-lot">      
+            <AddLot/>
+          </Route>
+
+
+          <Route exact path="/lot">      
+            <LotInfo/>
+          </Route>
+
+
+          
 
           <Route exact path="/vehicle-details/:id">
           {

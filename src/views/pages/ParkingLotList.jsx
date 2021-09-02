@@ -1,18 +1,14 @@
 import React from 'react'
-import DataTable from "../components/DataTable"
 import Page from './Page'
-import { Redirect} from "react-router-dom";
+import Table from "../components/LotList";
 
-function CarList() {
-  if(!localStorage.getItem("key")){
-    return <Redirect to="/login" />
-   }else{
+function ParkingLotList() {
     return (
-      <Page>
-        <div className="sayfa">
-        <div className="row mt-3 m-0">
+       <Page>
+           <div className="sayfa">
+           <div className="row mt-3 m-0">
           <div className="d-flex align-items-center mb-3">
-            <div className="mini-title">Car List</div>
+            <div className="mini-title">Parking Lot List</div>
             <div className="ms-auto">
               <img src="icons/add-car.svg" alt="" className="add-car-button me-3" />
               <img src="icons/Import-csv.svg" alt="" className="add-car-button me-3" />
@@ -35,11 +31,12 @@ function CarList() {
 
         <div className="row  mt-3 m-0">
           <div className="tb-container">
-          <DataTable/>
+          <Table/>
           </div>
         </div>
-        </div>
-        </Page> )
-}}
+           </div>
+       </Page>
+    )
+}
 
-export default CarList
+export default ParkingLotList
