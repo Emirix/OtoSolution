@@ -694,6 +694,7 @@ img{
     background-image: url("../svg/Icons/edit.svg");
     background-size: 100% 100%;
     cursor: pointer;
+    z-index: 10000;
 
     &:hover{
         opacity: 0.9;
@@ -1551,4 +1552,94 @@ height: 44px !important;
 
 .otolink-error{
     background-color: rgba(#FF989D,0.2);
+}
+
+.emir-dropdown-kapali{
+    max-height: 0;
+    padding: 0;
+}
+
+.emir-dropdown-acik{
+    max-height: 400px !important; 
+    padding: 1rem;
+    opacity: 1 !important;
+}
+.emir-dropdown{
+    width: 100%;
+    max-height: 0;
+    overflow: scroll;
+    position: absolute;
+    background-color: white;
+    box-shadow: 2px 10px 30px #D1D9E6A8;
+    border-radius: 12px;
+    transition: .2s;
+    box-sizing: border-box;
+    opacity: 0;
+    z-index: 10000;
+
+    .dp-search{
+        background-color: rgba($color: #bebebe, $alpha: 0.1) !important;
+        display: flex;
+        align-items: center;
+        padding: 0.4rem;
+        border-radius: 8px;
+
+
+        input{
+            margin: 0 !important;
+            margin-left: 0.4rem;
+            height: 100%;
+            background-color: transparent !important;
+        }
+    }
+
+    &__selectbox{
+        display: grid;
+        grid-gap: 0.5rem;
+        grid-template-columns: 1fr 1fr;
+
+    }
+
+    &__select{
+        background-color: rgba(#555,0.1);
+        padding: 0.4rem;
+        border-radius: .430rem;
+        overflow: hidden;
+        transition: .2s;
+        &:hover{
+            cursor: pointer;
+            background: linear-gradient(90deg, rgba(#555,0.1) 0%, rgba(#444,0.3) 100%);
+        }
+
+        &:active{
+            transform: scale(0.9);
+        }
+    }
+    .title{
+        font-weight: 500;
+    }
+}
+
+.emir-selectbox{
+    width:100%;
+    position: relative;
+    margin-bottom: 0.4rem;
+    &__header{
+        border: none;
+        outline: none;
+        background-color: #EFEFEF;
+        border-radius: 4px;
+        color: #44444A;
+        padding: 0.3rem 0.5rem;
+        height: 44px;
+        display: block;
+        font-style: italic;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.tr-hover:hover{
+    background-color: rgba($color: #7075F6, $alpha: 0.3) !important;
+    cursor: pointer;
 }

@@ -2,7 +2,6 @@ import React,{useState,useEffect} from "react";
 import VH from "../components/VH/VH";
 import car1 from "../../assets/img/car.jpg";
 import car2 from "../../assets/img/car2.jpg";
-import map from "../../assets/img/map.jpg";
 import DataInfo from "../components/VH/DataInfo";
 import DataProgress from "../components/VH/DataProgress";
 import List from "../components/VH/List";
@@ -13,7 +12,7 @@ import { useParams,Redirect} from "react-router-dom";
 import Page from './Page'
 import axios from "axios";
 import { GoogleMap,withScriptjs, Marker,withGoogleMap } from "react-google-maps"
-
+import {Link} from "react-router-dom"
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) => {
   const [lat,setLat] = useState(-34.397)
@@ -55,9 +54,9 @@ function VehicleDetails() {
     <div className="sayfa">
       <div className="vehicle-details-header">
         <img src="/icons/mark-as-sold.svg" className="add-car-button" />
-        <div className="outline-button outline-button-primary height-44 fs-12 px-3 ms-auto me-3">
+        <Link to={"/add-new-car?edit=true&id="+id} className="outline-button outline-button-primary height-44 fs-12 px-3 ms-auto me-3">
           Edit Details
-        </div>
+        </Link>
         <img src="/icons/delete.svg" className="add-car-button me-3" />
       </div>
 

@@ -51,7 +51,7 @@ import { useHistory } from 'react-router-dom'
           col10:val.created_at.substring(0,10).replaceAll("-","/"),
           col11:"",
           col12:val.connection_type || "",
-          col13:val.status || "",
+          col13:val.status || "Running",
           id:val.id
         })
       })
@@ -205,10 +205,11 @@ import { useHistory } from 'react-router-dom'
      {
        Header: '', Filter : "",
        accessor: 'col15',width:25,
+       go:false,
        Cell: ({ cell }) => (
          <div className="edit-button"  onClick={e=>{
           console.log(cell)
-          history.push("/vehicle-details/"+cell.row.original.id)
+          history.push("/add-new-car/?edit=true&id="+cell.row.original.id)
       }}>
           
          </div>
@@ -423,10 +424,15 @@ import { useHistory } from 'react-router-dom'
          </> : page.map(row => {
            prepareRow(row)
            return (
-             <tr {...row.getRowProps()}>
-               {row.cells.map(cell => {
+             <tr title="Click for details" className="tr-hover" {...row.getRowProps()} >
+               {row.cells.map((cell,i) => {
                  return (
                    <td
+                   onClick={e=>{
+                     if(i != 14){
+                      history.push("/vehicle-details/"+row.original.id)}
+                     }
+                   }
                      {...cell.getCellProps()}
                      className="datatable-td"
                    >
