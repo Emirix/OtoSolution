@@ -24,14 +24,14 @@ import { useHistory } from 'react-router-dom'
       console.log(Number(res.data.count) / 10)    
       setPaginationCount(Math.round(Number(res.data.count) / 10))
       if(res.data.next != null || res.data.next != undefined){
-        setNext(res.data.next)
+        setNext(res.data.next.replace("http","https"))
         console.log("Next: " + next)
       }else{
         setNext("")
       }
 
       if(res.data.previous != null || res.data.previous != undefined){
-        setPrev(res.data.previous)
+        setPrev(res.data.previous.replace("http","https"))
         console.log("Prev: " + prev)
       }else{
         setPrev("")
@@ -260,7 +260,167 @@ import { useHistory } from 'react-router-dom'
          ))}
        </thead>
        <tbody {...getTableBodyProps()}>
-         {carList.length == 0 ? <div><Spinner color="#61dafb"/></div> : page.map(row => {
+         {carList.length == 0 ? <>
+          <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+         </> : page.map(row => {
            prepareRow(row)
            return (
              <tr {...row.getRowProps()}>

@@ -131,9 +131,7 @@ function Sidebar() {
                 </li>
 
               
-                <li>
-                  <Link to="/lot">Lot Details</Link>
-                </li>
+               
               </ul>
             </div>
           </li>

@@ -4,6 +4,7 @@ import ColumnFilter from './ColumnFilter'
 import Spinner  from './Spinner/Spinner'
 import axios from "axios"
 import { useHistory } from 'react-router-dom'
+
  export default function DataTable() {
   const history = useHistory();
 
@@ -28,14 +29,14 @@ import { useHistory } from 'react-router-dom'
       console.log(Number(res.data.count) / 10)    
       setPaginationCount(Math.round(Number(res.data.count) / 10))
       if(res.data.next != null || res.data.next != undefined){
-        setNext(res.data.next)
-        console.log("Next: " + next)
+        setNext(res.data.next.replace("http","https"))
+        console.log("Next: " + next.replace("http","https"))
       }else{
         setNext("")
       }
 
       if(res.data.previous != null || res.data.previous != undefined){
-        setPrev(res.data.previous)
+        setPrev(res.data.previous.replace("http","https"))
         console.log("Prev: " + prev)
       }else{
         setPrev("")
@@ -49,18 +50,11 @@ import { useHistory } from 'react-router-dom'
           col4: "7",
           col5: val.created_at.substring(0,10).replaceAll("-","/"),
           col6:val.updated_at.substring(0,10).replaceAll("-","/"),
+          id:val.id
           
         })
 
-        newCarList.push({
-          col1: val.name,
-          col2:val.address,
-          col3:"9",
-          col4: "7",
-          col5: val.created_at.substring(0,10).replaceAll("-","/"),
-          col6:val.updated_at.substring(0,10).replaceAll("-","/"),
-          
-        })
+    
       })
 
       setPageNum(url.charAt(url.length- 1))
@@ -73,7 +67,7 @@ import { useHistory } from 'react-router-dom'
 
   useEffect(()=>{
 
-    getList("/admin/api/dealers/?page=1",)
+    getList("/api/dealer/lots/")
    
   },[])
 
@@ -138,7 +132,7 @@ import { useHistory } from 'react-router-dom'
        Cell: ({ cell }) => (
          <div className="edit-button"  onClick={e=>{
           console.log(cell)
-          history.push("/vehicle-details/"+cell.row.original.id)
+          history.push("/lot/"+cell.row.original.id)
       }}>
           
          </div>
@@ -190,7 +184,106 @@ import { useHistory } from 'react-router-dom'
          ))}
        </thead>
        <tbody {...getTableBodyProps()}>
-         {carList.length == 0 ? <div><Spinner color="#61dafb"/></div> : page.map(row => {
+         {carList.length == 0 ?  <>
+          <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+
+            <tr>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+               <td><div className="skeleton-text-yuksek"></div></td>
+            </tr>
+         </> : page.map(row => {
            prepareRow(row)
            return (
              <tr {...row.getRowProps()}>
@@ -214,7 +307,7 @@ import { useHistory } from 'react-router-dom'
      </table>
         <div className="emir-pagination">
     
-        <button className="pagi-out" onClick={() => getList(prev,colors)} disabled={prev == "" ? true : false}>
+        <button className="pagi-out" onClick={() => getList(prev)} disabled={prev == "" ? true : false}>
           Previous
         </button>
         
@@ -224,7 +317,7 @@ import { useHistory } from 'react-router-dom'
                 return(
                   <div onClick={()=>{
                     setPageNum(i+1)
-                     getList("/api/dealer/vehicles/?page="+(i+1),colors)
+                     getList("/api/dealer/lots/?page="+(i+1))
                   }} className={pageNum == i+1 ? "pagi-num pagi-active" : "pagi-num"} >
                   {i+1}
                 
@@ -235,7 +328,7 @@ import { useHistory } from 'react-router-dom'
              
 
          
-         <button className="pagi-out" disabled={next == "" ? true : false} onClick={() => getList(next,colors)}>
+         <button className="pagi-out" disabled={next == "" ? true : false} onClick={() => getList(next)}>
           Next
         </button>
           

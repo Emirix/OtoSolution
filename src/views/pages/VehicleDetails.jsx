@@ -12,12 +12,35 @@ import CardInfo from "../components/VH/CardInfo";
 import { useParams,Redirect} from "react-router-dom";
 import Page from './Page'
 import axios from "axios";
+import { GoogleMap,withScriptjs, Marker,withGoogleMap } from "react-google-maps"
+
+
+const MyMapComponent = withScriptjs(withGoogleMap((props) => {
+  const [lat,setLat] = useState(-34.397)
+  const [lng,setLng] = useState(150.644)
+
+  return(
+    <GoogleMap
+    defaultZoom={8}
+    defaultCenter={{ lat: lat, lng: lng }}
+   
+  >
+    {props.isMarkerShown && <Marker position={{ lat: lat, lng: lng }} />}
+  </GoogleMap>
+  )
+}))
 
 function VehicleDetails() {
 
   const [car,setCar] = useState(null);
   const {id} = useParams();
-  
+  const [map,setMap] = useState({
+    center:{
+      lat:38.401545,
+      lng: 27.115088
+    },
+    zoom:50
+  })
   useEffect(()=>{
       axios.get("/api/dealer/vehicles/"+id).then(res=>{
         console.log(res)
@@ -49,12 +72,12 @@ function VehicleDetails() {
           />
           <div>
             <div className="data-title-container">
-              <DataInfo data={car ? car.vin.vin : ""} title="VIN" />
+              <DataInfo data={car ? car.vin.vin : <div className="skeleton-text-kucuk"></div>} title="VIN" />
               <DataInfo data="50,000" title="Milage" />
-              <DataInfo data={car ? car.stock_no :""} title="STK" />
-              <DataInfo data={car ? car.vin.specs.DisplacementL + "L" :""} title="Engine" />
+              <DataInfo data={car ? car.stock_no :<div className="skeleton-text-kucuk"></div>} title="STK" />
+              <DataInfo data={car ? car.vin.specs.DisplacementL + "L" :<div className="skeleton-text-kucuk"></div>} title="Engine" />
               <DataInfo data="A312312" title="Serial ID" />
-              <DataInfo data={car ? car.year :""} title="Year" />
+              <DataInfo data={car ? car.year :<div className="skeleton-text-kucuk"></div>} title="Year" />
             </div>
             <div className="data-progress-container">
               <DataProgress color="yesil" title="Gas" value="20" />
@@ -74,7 +97,21 @@ function VehicleDetails() {
 
         <div className="br-12 col-lg-6 vm m-0 h-266">
           <div className="mini-title">Map</div>
-          <img src={map} alt="" />
+          <div style={{height:"100%",width:"100%"}}>
+      {
+        map != null ?     <MyMapComponent
+        
+        isMarkerShown
+        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `100%` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+        /> : <div className="vd-list  skeleton-text"></div>
+      }
+   
+        
+     
+    </div>
           <div className="vm-button">Get Direction</div>
         </div>
       </div>

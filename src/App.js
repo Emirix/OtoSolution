@@ -105,7 +105,7 @@ function App() {
           </Route>
 
 
-          <Route exact path="/lot">      
+          <Route exact path="/lot/:id">      
             <LotInfo/>
           </Route>
 

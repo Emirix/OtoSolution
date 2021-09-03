@@ -1,16 +1,20 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import CardInfo from "../components/VH/CardInfo";
 import Page from "./Page";
 import { Redirect } from "react-router-dom";
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
-import "react-notifications/lib/notifications.css";
+
 import map from "../../assets/img/map.jpg";
 
 function AddDealer() {
+
+  const [data,setData] = useState(null);
+
+  useEffect(()=>{
+    alert("ID'YE GORE DEALER CEKME APISI LAZIM")
+  },[])
+
+
+
   return (
     <Page>
       <div className="sayfa">

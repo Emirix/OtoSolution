@@ -296,6 +296,7 @@ height: 266px;
 .sayfa{
     background-color: white;
     box-sizing: border-box;
+    min-height: calc(86vh);
     padding-left: 2rem;
     padding-top: 1rem;
     transition: .2s;
@@ -1054,9 +1055,11 @@ opacity: 0.23;
         }
         .data{
             font-weight: 600;
+           
         }
     }
 }
+
 
 
 #upload{
@@ -1486,5 +1489,58 @@ height: 44px !important;
     cursor: pointer;
     &:hover{
         transform: translate(0px,-2px);
+    }
+}
+
+.map{
+    width: 100%;
+    height: 50vh;
+}
+
+
+.skeleton-container{
+    animation: skeleton-container .2s linear infinite alternate;
+
+}
+.skeleton-text{
+    width: 100px;
+    height: 10px;
+    border-radius: .125rem;
+  
+    animation: skeleton-loading-bg .2s linear infinite alternate;
+}
+
+.skeleton-text-yuksek{
+    width: 70%;
+    height: 15px;
+    margin: 0.4rem 0;   border-radius: .125rem;
+    opacity: 0.6;
+    animation: skeleton-loading-bg .2s linear infinite alternate;
+}
+.skeleton-text-kucuk{
+    width: 100%;
+    height: 5px;
+    margin: 0.4rem 0;   border-radius: .125rem;
+    opacity: 0.3;
+    animation: skeleton-loading-bg .2s linear infinite alternate;
+}
+
+
+@keyframes skeleton-container{
+    from{
+        opacity: 0.5;
+    }
+
+    to{
+        opacity: 0.7;
+    }
+}
+
+@keyframes skeleton-loading-bg{
+    from{
+        background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+    to{
+        background-color: rgba($color: #000000, $alpha: 0.5);
     }
 }
