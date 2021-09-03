@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Page from "./Page";
-import { Redirect } from "react-router-dom";
+import { Redirect,useHistory } from "react-router-dom";
 import {
   NotificationContainer,
   NotificationManager,
@@ -46,6 +46,8 @@ function AddDealer() {
 
   const url = new URLSearchParams(window.location.search);
   const [data,setData] = useState(null)
+
+  let history = useHistory()
 
   function useForceUpdate(){
     const [value, setValue] = useState(0); // integer state

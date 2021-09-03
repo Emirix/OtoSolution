@@ -210,8 +210,8 @@ function AddNewCar({bg,title}) {
                 <div className="mini-title">Vehicle Information</div>
                 <div className="info-form">
                     <input value={stk} onChange={e=>setStk(e.target.value)} type="text" placeholder="*STK"  />
-                    <input value={vin} onChange={e=>setVin(e.target.value)} type="text" placeholder="VIN" />
-                    <input value={serialId} onChange={e=>setserialId(e.target.value)} type="text" placeholder="Serial ID" />
+                    <input value={vin} onChange={e=>setVin(e.target.value)} type="text" placeholder="*VIN" />
+                    <input value={serialId} onChange={e=>setserialId(e.target.value)} type="text" placeholder="*Serial ID" />
 
                     <select value={make} onChange={e=>brandChange(e)}>
                         <option value="">Make</option>
@@ -282,7 +282,7 @@ function AddNewCar({bg,title}) {
                 
                    
                        </div>
-                <div className="btn btn-primary" onClick={()=>{addCar()}}>Add Car</div>
+                <div className="btn btn-primary h-44" onClick={()=>{addCar()}}>Add Car</div>
                 </div>
             </div>
         </div>

@@ -6,9 +6,9 @@ function OtoLinkC({desc,img,validImg}) {
             <img src={img} alt={desc} />
             <div className="ms-3">
                 <div className="link-container-desc">
-                    Enter the <b>{desc}</b> number on the car
+                    Enter the Oto Link Device ID
                     </div>
-                    <input type="text" placeholder={desc} />
+                    <input type="text" placeholder={"Oto Link Device ID"} />
                 
             </div>
         </div>

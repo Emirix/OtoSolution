@@ -61,7 +61,7 @@ function Sidebar() {
           >
             <a href="#">
               <img src="/icons/car-settings-inactive.svg" alt="" />
-              <span>Car Settings</span>
+              <span>Vehicles</span>
               <div className="arrow">
                 <img src={DownArrow} alt="" />
               </div>
@@ -75,12 +75,7 @@ function Sidebar() {
                 <li>
                   <Link to="/add-new-car">Add New Car</Link>
                 </li>
-                <li>
-                  <Link to="/oto-link">Oto-Link</Link>
-                </li>
-                <li>
-                  <Link to="/vehicle-details/2">Vehicle Details</Link>
-                </li>
+               
               </ul>
             </div>
           </li>
@@ -118,10 +113,7 @@ function Sidebar() {
                 <li>
                   <Link to="/dealership-list">Dealership List</Link>
                 </li>
-                <li>
-                  <Link to="/dealer">Dealer Info</Link>
-                </li>
-
+            
                 <li>
                   <Link to="/add-lot">Add New Lot</Link>
                 </li>
