@@ -35,12 +35,39 @@ function AddNewCar({ bg, title }) {
 
 
   function editCar(){
-      
+     const data = {
+      color:color || null,
+      inventory_type:iv || null,
+      year:year || null,
+      brand:make || null,
+      model:model || null,
+      desired_lot:Number(desiretLot),
+      device:Number(device) || null
+     }
+     
+     axios.put(`/api/dealer/vehicles/${url.get("id")}/`,data,{
+       headers:{
+        "Authorization" : `Token ${localStorage.getItem("key")}`
+       }
+     }).then(res=>{
+       console.log(res)
+       
+     })
+     
+     alert("MESAJ: CONSOLE'U KONTROL EDİN")
+     console.clear()
+     console.log("%cPUT ISTEKLERINDE BİR CORS HATASI ALIYORUM, POSTMANDE FALAN HİÇBİR SIKINTI YOK ÇOK UĞRAŞTIM ÇÖZEMEDİM BUNA NE YAPABİLİRİZ ","background-color:#d35400")
+     console.log(`Put İsteğinin gitti yer: /api/dealer/vehicles/${url.get("id")}/`)
+     console.log("Giden veri:")
+     console.log(data)
   }
 
   useEffect(() => {
-
+    var brand_name = "";
+    var brand_id = 0;
+    var model_name = "";
     if(url.get("edit")){
+
         axios.get("/api/dealer/vehicles/"+url.get("id"),{
             headers:{
               "Authorization" : `Token ${localStorage.getItem("key")}`
@@ -49,20 +76,52 @@ function AddNewCar({ bg, title }) {
             setStk(res.data.stock_no)
             setVin(res.data.vin.vin)
             setserialId(res.data.device_serial_no)            
-            brandChange({target:{value:res.data.vin.MakeID}})
+            
             setYear(res.data.year)
             setColor(res.data.color)            
            setDesiretLot(res.data.desired_lot.id)
            setIV(res.data.inventory_type)
            setDealer(res.data.dealer.id)   
 
-           document.querySelector("#span-dealer").innerText = " : " + res.data.dealer.name
-           document.querySelector("#span-make").innerText = " : " + res.data.vin.brand_name
-           document.querySelector("#span-model").innerText = " : " + res.data.vin.model_name
+           brand_name =res.data.brand_name
+           model_name=res.data.model_name
+           
+
+           //document.querySelector("#span-dealer").innerText = " : " + res.data.dealer.name
+           document.querySelector("#span-make").innerText = " : " + res.data.brand_name
+          // document.querySelector("#span-model").innerText = " : " + res.data.model_name
            document.querySelector("#span-color").innerText = " : " + res.data.color_name
            document.querySelector("#span-lot").innerText = " : " + res.data.desired_lot.name
+          }).then(f=>{
+            axios
+            .get("/api/catalog/brandnames/", {
+              headers: {
+                Authorization: `Token ${localStorage.getItem("key")}`,
+              },
+            })
+            .then((res) => {
+              setBrand(res.data);
+              if(url.get("edit")){
+                res.data.map(val=>{
+                  if(val.name == brand_name){
+                    setMake(val.id)
+                    brand_id = val.id
+                    brandChange({target:{value:val.id}})
+                  }
+                })
+              }
+              axios
+                .get("/api/utils/color/names", {
+                  headers: {
+                    Authorization: `Token ${localStorage.getItem("key")}`,
+                  },
+                })
+                .then((res) => {
+                  setColors(res.data);
+                });
+            })
+      
           })
-
     }
 
     axios
@@ -72,8 +131,13 @@ function AddNewCar({ bg, title }) {
         },
       })
       .then((res) => {
-        
         setBrand(res.data);
+        if(url.get("edit")){
+          res.data.map(val=>{
+            if(val.name == brand_name){
+            }
+          })
+        }
         axios
           .get("/api/utils/color/names", {
             headers: {
@@ -273,24 +337,27 @@ function AddNewCar({ bg, title }) {
             <div className="col-lg-6 col-md-12">
               <div className="mini-title">{url.get("edit") ? "Edit " : ""}Vehicle Information</div>
               <div className="info-form">
-                <input
+                {!url.get("edit") ?  <input
                   value={stk}
                   onChange={(e) => setStk(e.target.value)}
                   type="text"
                   placeholder="*STK"
-                />
+                /> : "" }
+               {!url.get("edit") ?
                 <input
                   value={vin}
                   onChange={(e) => setVin(e.target.value)}
                   type="text"
                   placeholder="*VIN"
-                />
+                /> : "" }
+
+{!url.get("edit") ?
                 <input
                   value={serialId}
                   onChange={(e) => setserialId(e.target.value)}
                   type="text"
                   placeholder="*Serial ID"
-                />
+                />  : "" }
 
              
 
@@ -314,6 +381,8 @@ function AddNewCar({ bg, title }) {
                     onSelect={(id,val)=>{
                       setMake(id);
                       setModels([]);
+                      setModel("")
+                      document.querySelector("#span-model").innerText = ""
                       axios
                         .get("/api/catalog/brandnames/" + id + "/models/", {
                           headers: {
@@ -441,7 +510,7 @@ function AddNewCar({ bg, title }) {
                   />
                 </div>
 
-
+                    {!url.get("edit") ? 
                 <div className="emir-selectbox">
                   <div
                     className="emir-selectbox__header"
@@ -471,7 +540,7 @@ function AddNewCar({ bg, title }) {
                     index="id"
                   />
                 </div>
-
+: "" }
               
 
                 <div className="emir-selectbox">
