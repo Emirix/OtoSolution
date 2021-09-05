@@ -56,7 +56,7 @@ function AddNewCar({ bg, title }) {
      
      alert("MESAJ: CONSOLE'U KONTROL EDİN")
      console.clear()
-     console.log("%cPUT ISTEKLERINDE BİR CORS HATASI ALIYORUM, POSTMANDE FALAN HİÇBİR SIKINTI YOK ÇOK UĞRAŞTIM ÇÖZEMEDİM BUNA NE YAPABİLİRİZ ","background-color:#d35400")
+     console.log("%cPUT ISTEKLERINDE BİR CORS HATASI ALIYORUM, POSTMANDE DENEDİĞİMDE HİÇBİR SIKINTI YOK ÇOK UĞRAŞTIM ÇÖZEMEDİM BUNA NE YAPABİLİRİZ ","background-color:#d35400")
      console.log(`Put İsteğinin gitti yer: /api/dealer/vehicles/${url.get("id")}/`)
      console.log("Giden veri:")
      console.log(data)
