@@ -7,7 +7,7 @@ function Sidebar() {
   const location = useLocation();
 
   useEffect(()=>{
-      console.log(location)
+      
   },[location])
   
 

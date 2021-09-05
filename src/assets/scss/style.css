@@ -845,11 +845,20 @@ tr {
   display: flex;
   align-items: center;
 }
+.table-header-buttons::-webkit-scrollbar {
+  width: 8px;
+  height: 2px !important;
+}
 .table-header-buttons .active {
   font-weight: 600;
   color: #7075F6;
 }
+.table-header-buttons .active:hover {
+  background-color: transparent !important;
+  color: #7075F6 !important;
+}
 .table-header-buttons button {
+  white-space: nowrap;
   background: transparent;
   border: none;
   outline: none;
@@ -1800,6 +1809,19 @@ tr {
 .tr-hover:hover {
   background-color: rgba(112, 117, 246, 0.3) !important;
   cursor: pointer;
+}
+
+.w-50px {
+  width: 50px;
+}
+
+.emir-container {
+  max-width: 1366px;
+}
+
+.table-header-buttons {
+  overflow-x: scroll;
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

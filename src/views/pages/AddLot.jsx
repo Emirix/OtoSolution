@@ -19,8 +19,8 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => {
     defaultZoom={8}
     defaultCenter={{ lat: lat, lng: lng }}
     onClick={ev => {
-      console.log("latitide = ", ev.latLng.lat());
-      console.log("longitude = ", ev.latLng.lng());
+      
+      
       setLat(ev.latLng.lat())
       setLng(ev.latLng.lng())
       props.onChange(ev.latLng.lat(),ev.latLng.lng())
@@ -78,8 +78,8 @@ function AddDealer() {
           "Authorization" : `Token ${localStorage.getItem("key")}`
         }
       }).then(res=>{
-        console.log("EDIT DATA")
-        console.log(res.data)
+        
+        
         setData(res.data)
         setDealer(res.data.dealer)
         setName(res.data.name)
@@ -117,7 +117,7 @@ function AddDealer() {
 
       }
     }).then(res=>{
-      console.log(res)
+      
     })
 
     
@@ -148,7 +148,7 @@ function AddDealer() {
         "Authorization" : `Token ${localStorage.getItem("key")}`
       } 
     }).then(res=>{
-      console.log(res)
+      
       NotificationManager.success("Lot Created","",2000)
       resetForm()
     }).catch(err=>{
@@ -197,7 +197,7 @@ function AddDealer() {
               <input  value={state} onChange={e=>setState(e.target.value)} placeholder="State" />
               <input  value={p1} onChange={e=>{
                 setP1(Number(e.target.value))
-                console.log(Number(e.target.value))
+                
                 
               }} type="number" placeholder="*P1 lat" />
               <input  value={p2} onChange={e=>setP2(e.target.value)} type="number" placeholder="*P1 lon" />

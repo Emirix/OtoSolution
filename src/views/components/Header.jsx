@@ -17,7 +17,7 @@ function Header() {
                 "Authorization" : `Token ${localStorage.getItem("key")}`
             }
         }).then(res=>{
-            console.log(res)
+            
             setUser(res.data)
         })
     },[])

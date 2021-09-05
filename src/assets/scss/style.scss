@@ -598,12 +598,21 @@ tr{
     display: flex;
     align-items: center;
  
+    &::-webkit-scrollbar{
+        width: 8px;
+        height: 2px !important;
+        }
 
     .active{
         font-weight: 600;
         color: #7075F6;
+        &:hover{
+            background-color: transparent !important;
+            color: $primary !important;
+        }
     }
     button{
+        white-space: nowrap;
         background: transparent;
         border: none;
         outline: none;
@@ -1643,3 +1652,17 @@ height: 44px !important;
     background-color: rgba($color: #7075F6, $alpha: 0.3) !important;
     cursor: pointer;
 }
+
+.w-50px{
+    width:50px;
+}
+
+.emir-container{
+    max-width: 1366px;
+}
+
+.table-header-buttons{
+    overflow-x: scroll;
+    width: 100%;
+}
+

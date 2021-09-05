@@ -12,7 +12,7 @@ function SolBildirim({img,title,caption,show,onKapat}) {
        
         
             setTimeout(()=>{
-                console.log(bil)
+                
                 bil.current.style.display = "none"
             },4000)
        

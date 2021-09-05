@@ -27,7 +27,7 @@ function AddDealer() {
         "Authorization" : `Token ${localStorage.getItem("key")}`
     }
     }).then(res=>{
-      console.log(res)
+      
       setAutoGroupList(res.data.results)
     })
   },[])
@@ -61,7 +61,7 @@ function AddDealer() {
         "Authorization" : `Token ${localStorage.getItem("key")}`
       }
     }).then(res=>{
-      console.log(res)
+      
       NotificationManager.success("Dealer Created","",2000)
       resetForm()
 

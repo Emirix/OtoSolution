@@ -14,7 +14,7 @@ function QA({ src,title,status,color}) {
             checked={checked}
             onChange={()=>{setChecked(!checked)}}
             onColor="#3ECD7B"
-            onHandleColor="white"
+            onHandleColor="#fff"
             handleDiameter={17}
             uncheckedIcon={false}
             checkedIcon={false}

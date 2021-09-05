@@ -24,20 +24,20 @@ import { useHistory } from 'react-router-dom'
         "Authorization" : `Token ${localStorage.getItem("key")}`
       }
     }).then(res=>{
-      console.log("s")
-      console.log(res.data)
-      console.log(res.data.count / 10)    
+      
+      
+      
       setPaginationCount(Math.round(Number(res.data.count) / 10))
       if(res.data.next != null || res.data.next != undefined){
         setNext(res.data.next.replace("http","https"))
-        console.log("Next: " + next)
+        
       }else{
         setNext("")
       }
 
       if(res.data.previous != null || res.data.previous != undefined){
         setPrev(res.data.previous.replace("http","https"))
-        console.log("Prev: " + prev.replace("http","https"))
+        
       }else{
         setPrev("")
       }
@@ -60,7 +60,7 @@ import { useHistory } from 'react-router-dom'
    
       
      setCarList(newCarList)
-      console.log(carList)
+      
     })
   }
 
@@ -130,7 +130,7 @@ import { useHistory } from 'react-router-dom'
        accessor: 'col7',width:25,
        Cell: ({ cell }) => (
          <div className="edit-button"  onClick={e=>{
-          console.log(cell)
+          
           history.push("/vehicle-details/"+cell.row.original.id)
       }}>
           

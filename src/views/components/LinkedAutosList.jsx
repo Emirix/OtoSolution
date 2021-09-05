@@ -25,8 +25,8 @@ import { useHistory } from 'react-router-dom'
             "Authorization" : `Token ${localStorage.getItem("key")}`
         }
     }).then(res=>{
-        console.log("Data")
-        console.log(res.data)
+        
+        
         res.data.map((val,i)=>{
         
         newCarList.push({
@@ -43,16 +43,18 @@ import { useHistory } from 'react-router-dom'
    
       
      setCarList(newCarList)
-     console.log(carList)
+     
     })
   }
+
 
   useEffect(()=>{
 
 
       getList("/api/devices/oto-link-devices/")
   
-
+      setPageSize(9999)
+    
    
   },[])
 
@@ -112,7 +114,7 @@ import { useHistory } from 'react-router-dom'
        accessor: 'col15',width:25,
        Cell: ({ cell }) => (
          <div className="edit-button"  onClick={e=>{
-          console.log(cell)
+          
           history.push("/vehicle-details/"+cell.row.original.id)
       }}>
           
@@ -133,11 +135,12 @@ import { useHistory } from 'react-router-dom'
   
      pageCount,
      gotoPage,
-     
+     setPageSize,
+
      prepareRow,
-     state: { pageIndex, pageSize },
+     state: { pageIndex, pageSize  },
    } = useTable({ columns, data ,initialState: { pageIndex: 0 },},useFilters,useSortBy,usePagination)
- 
+   
    return (<>
      <table {...getTableProps()} >
        <thead>

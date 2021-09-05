@@ -29,7 +29,7 @@ function AddDealer() {
         "Authorization" : `Token ${localStorage.getItem("key")}`
       }
     }).then(res=>{
-      console.log(res.data)
+      
       setInfo(res.data)
       setMap({
         center: {

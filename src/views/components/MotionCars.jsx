@@ -10,7 +10,7 @@ function MotionCars({src,marka,model,since}) {
             
         }
         e.target.classList.add("active")
-        console.log(e.target)
+        
     }
     return (
         <div className="motion-car">

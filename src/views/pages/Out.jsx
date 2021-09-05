@@ -8,7 +8,7 @@ function Login() {
       axios.post("/api/account/logout/",{headers:{
         "Authorization" : `Token ${localStorage.getItem("key")}`
       }}).then(res=>{
-        console.log(res)
+        
         localStorage.removeItem("key")
         setSL("Çıkış Yapıldı")
         window.location="/"

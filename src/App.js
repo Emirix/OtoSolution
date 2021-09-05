@@ -62,7 +62,7 @@ function App() {
   return (
     <Router>
       
-    <div className="container-fluid p-0">
+    <div className="container-fluid emir-container  p-0">
       <Sidebar/>
       
         <Provider>

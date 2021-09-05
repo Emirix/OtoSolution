@@ -17,7 +17,7 @@ function Login() {
     "password": pass
 
       }).then(res=>{
-        console.log(res)
+        
         localStorage.setItem("key",res.data.key)
         
       }).then(()=>{
@@ -26,7 +26,7 @@ function Login() {
             "Authorization" : `Token ${localStorage.getItem("key")}`
         }
         }).then(user=>{
-          console.log(user)
+          
           localStorage.setItem("dealer_id",user.data.dealer.id)
          
          window.location="/"

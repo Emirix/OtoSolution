@@ -15,22 +15,33 @@ export default class Index extends Component {
     super()
     this.state = {
       carList:[],
-      parkingLots:[]
+      parkingLots:[],
+      dealers:[],
+      lotFiltre:null,
+      dealerFiltre:null
+      
     }
   }
   componentDidMount(){
- 
-
-
     axios.all([
       axios.get(`/api/dealer/vehicles`), 
-      axios.get(`/api/dealer/lots`)
+      axios.get(`/api/dealer/lots`),
+      axios.get("/admin/api/dealers",{
+        headers:{
+          "Authorization" : `Token ${localStorage.getItem("key")}`
+        }
+      })
     ])
-    .then(axios.spread((car, lot) => {
-      this.setState({carList:car.data})
-      this.setState({parkingLots:lot.data})
-      console.log(car)
-      console.log(lot)
+    .then(axios.spread((car, lot,dealer) => {
+      this.setState({
+        carList:car.data,
+        parkingLots:lot.data,
+        dealers:dealer.data
+      })
+     
+      console.log(dealer.data)
+      
+      
     }));
   }
 
@@ -314,24 +325,65 @@ export default class Index extends Component {
 
           <div className="table-header-border"></div>
 
-          <div className="table-header-buttons">
-            <button>Success Automotive</button>
-            <button>Real Cars</button>
-            <button className="active">General Auto</button>
+          <div className="table-header-buttons dealer-buttons">
+            <button className="active" onClick={e=>{
+                    document.querySelectorAll(".dealer-buttons button").forEach(e=>e.classList.remove("active"))
+                    e.currentTarget.classList.add("active")
+                    this.setState({dealerFiltre:null})
+                  }}>All</button>
+            {
+              this.state.dealers.length != 0 ?
+              this.state.dealers.results.map((val,i)=>{
+                return(
+                  <button onClick={e=>{
+                    document.querySelectorAll(".dealer-buttons button").forEach(e=>e.classList.remove("active"))
+                    e.currentTarget.classList.add("active")
+                    this.setState({dealerFiltre:e.currentTarget.dataset.id})
+                  }} data-id={val.id} title={val.address} key={i}>{val.name}</button>
+                )
+              }) : <div className="d-flex">
+              <div className="skeleton-text-yuksek w-50px"></div>
+              <div className="skeleton-text-yuksek ms-3 w-50px"></div>
+              <div className="skeleton-text-yuksek ms-3 w-50px"></div>
+              <div className="skeleton-text-yuksek ms-3 w-50px"></div>
+              <div className="skeleton-text-yuksek ms-3 w-50px"></div>
+              <div className="skeleton-text-yuksek ms-3 w-50px"></div>
+              <div className="skeleton-text-yuksek ms-3 w-50px"></div>
+              <div className="skeleton-text-yuksek ms-3 w-50px"></div>
+              <div className="skeleton-text-yuksek ms-3 w-50px"></div>
+                            </div>
+            }
           </div>
 
           <div className="table-header-border"></div>
-          <div className="table-header-buttons">
+          <div className="table-header-buttons lot-buttons">
            
-            <button className="active">All</button>
+            <button className="active" onClick={e=>{
+                    document.querySelectorAll(".lot-buttons button").forEach(e=>e.classList.remove("active"))
+                    e.currentTarget.classList.add("active")
+                    this.setState({lotFiltre:null})
+                  }}>All</button>
             {
               this.state.parkingLots.length != 0 ?
               this.state.parkingLots.results.map((val,i)=>{
                 return(
-                  <button title={val.address} key={i}>{val.name}</button>
-
+                  <button onClick={e=>{
+                    document.querySelectorAll(".lot-buttons button").forEach(e=>e.classList.remove("active"))
+                    e.currentTarget.classList.add("active")
+                    this.setState({lotFiltre:e.currentTarget.dataset.id})
+                  }} data-id={val.id} title={val.address} key={i}>{val.name}</button>
                 )
-              }) : ""
+              }) : <div className="d-flex">
+<div className="skeleton-text-yuksek w-50px"></div>
+<div className="skeleton-text-yuksek ms-3 w-50px"></div>
+<div className="skeleton-text-yuksek ms-3 w-50px"></div>
+<div className="skeleton-text-yuksek ms-3 w-50px"></div>
+<div className="skeleton-text-yuksek ms-3 w-50px"></div>
+<div className="skeleton-text-yuksek ms-3 w-50px"></div>
+<div className="skeleton-text-yuksek ms-3 w-50px"></div>
+<div className="skeleton-text-yuksek ms-3 w-50px"></div>
+<div className="skeleton-text-yuksek ms-3 w-50px"></div>
+              </div>
             }
               
           </div>
@@ -341,7 +393,7 @@ export default class Index extends Component {
 
         <div className="row  mt-3 m-0">
           <div className="tb-container">
-          <DataTable key={0} />
+          <DataTable key={0} lotFiltre={this.state.lotFiltre} dealerFiltre={this.state.dealerFiltre} />
           </div>
         </div>
       </div>

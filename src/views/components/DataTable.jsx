@@ -4,16 +4,19 @@ import ColumnFilter from './ColumnFilter'
 import Spinner  from './Spinner/Spinner'
 import axios from "axios"
 import { useHistory } from 'react-router-dom'
- export default function DataTable() {
+ export default function DataTable({lotFiltre,dealerFiltre}) {
   const history = useHistory();
 
   const [carList,setCarList] = useState([]);
+  const [orj,setOrj] = useState([]);
+  const [isEmpty,setIsEmpty] = useState(false)
   const [paginationCount,setPaginationCount] = useState(0)
   const [next,setNext] = useState("");
   const [prev,setPrev] = useState("");
   const [pageNum,setPageNum] = useState(1)
   
   var newCarList = [];
+  var newOrj = []
 
   const [colors,setColors] = useState([])
 
@@ -21,23 +24,22 @@ import { useHistory } from 'react-router-dom'
     setCarList([])
  
     axios.get(url).then(res=>{
-      console.log(Number(res.data.count) / 10)    
+      
       setPaginationCount(Math.round(Number(res.data.count) / 10))
       if(res.data.next != null || res.data.next != undefined){
         setNext(res.data.next.replace("http","https"))
-        console.log("Next: " + next)
+        
       }else{
         setNext("")
       }
 
       if(res.data.previous != null || res.data.previous != undefined){
         setPrev(res.data.previous.replace("http","https"))
-        console.log("Prev: " + prev)
+        
       }else{
         setPrev("")
       }
-      res.data.results.map((val,i)=>{
-        
+      res.data.results.map((val,i)=>{  
         newCarList.push({
           col1: val.stock_no,
           col2:val.vin.vin,
@@ -52,17 +54,88 @@ import { useHistory } from 'react-router-dom'
           col11:"",
           col12:val.connection_type || "",
           col13:val.status || "Running",
-          id:val.id
+          id:val.id,
+          lot_id:val.desired_lot.id,
+          dealer_id:1
         })
+
+
+      
+
+
       })
+
+      
 
       setPageNum(url.charAt(url.length- 1))
    
+      setOrj(newCarList)
       
-     setCarList(newCarList)
-      console.log(carList)
+
+      if(lotFiltre != null || dealerFiltre != null){
+
+        var arr2 = [];
+        var arr3 = []
+        if(lotFiltre != null){
+          arr2 = orj.filter(val=>val.lot_id == lotFiltre)
+        }
+  
+        if(dealerFiltre != null){
+          arr3 = orj.filter(val=>val.dealer_id == dealerFiltre)
+        }
+  
+        var final = [...new Set(arr2.concat(arr3))]
+  
+        
+         
+        
+        if(final.length == 0){
+          setIsEmpty(true)
+        }else{
+          setIsEmpty(false)
+        }
+  
+        setCarList(final)
+      }else{
+        setCarList(newCarList)
+      }
+
+      
     })
   }
+
+  useEffect(()=>{
+    
+
+    if(lotFiltre != null || dealerFiltre != null){
+
+      var arr2 = [];
+      var arr3 = []
+      if(lotFiltre != null){
+        arr2 = orj.filter(val=>val.lot_id == lotFiltre)
+      }
+
+      if(dealerFiltre != null){
+        arr3 = orj.filter(val=>val.dealer_id == dealerFiltre)
+      }
+
+      var final = [...new Set(arr2.concat(arr3))]
+
+      
+       
+      
+      if(final.length == 0){
+        setIsEmpty(true)
+      }else{
+        setIsEmpty(false)
+      }
+
+      setCarList(final)
+    }else{
+      setCarList(newCarList)
+    }
+  },[lotFiltre,dealerFiltre])
+
 
   useEffect(()=>{
 
@@ -194,7 +267,7 @@ import { useHistory } from 'react-router-dom'
        width:25,
        Cell: ({ cell }) => (
         <div className="refresh-button" onClick={e=>{
-          console.log(cell)
+          
           getList("/api/dealer/vehicles/?page="+pageNum,colors)
   }}>
          </div>
@@ -208,7 +281,7 @@ import { useHistory } from 'react-router-dom'
        go:false,
        Cell: ({ cell }) => (
          <div className="edit-button"  onClick={e=>{
-          console.log(cell)
+          
           history.push("/add-new-car/?edit=true&id="+cell.row.original.id)
       }}>
           
@@ -237,10 +310,11 @@ import { useHistory } from 'react-router-dom'
    return (<>
      <table {...getTableProps()} >
        <thead>
-         {headerGroups.map(headerGroup => (
-           <tr {...headerGroup.getHeaderGroupProps()}>
-             {headerGroup.headers.map(column => (
+         {headerGroups.map((headerGroup,i) => (
+           <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+             {headerGroup.headers.map((column,i2) => (
                <th
+               key={i2}
                  {...column.getHeaderProps(column.getSortByToggleProps())}
                  className="datatable-th"
                  style={{width:column.width, maxWidth:column.width}}
@@ -261,7 +335,7 @@ import { useHistory } from 'react-router-dom'
          ))}
        </thead>
        <tbody {...getTableBodyProps()}>
-         {carList.length == 0 ? <>
+         {isEmpty ? "" :  carList.length == 0 ? <>
           <tr>
                <td><div className="skeleton-text-yuksek"></div></td>
                <td><div className="skeleton-text-yuksek"></div></td>
@@ -421,10 +495,10 @@ import { useHistory } from 'react-router-dom'
                <td><div className="skeleton-text-yuksek"></div></td>
                <td><div className="skeleton-text-yuksek"></div></td>
             </tr>
-         </> : page.map(row => {
+         </> : page.map((row,i3) => {
            prepareRow(row)
            return (
-             <tr title="Click for details" className="tr-hover" {...row.getRowProps()} >
+             <tr key={i3} title="Click for details" className="tr-hover" {...row.getRowProps()} >
                {row.cells.map((cell,i) => {
                  return (
                    <td
@@ -435,9 +509,7 @@ import { useHistory } from 'react-router-dom'
                    }
                      {...cell.getCellProps()}
                      className="datatable-td"
-                   >
-                     {cell.render('Cell')}
-                   </td>
+                   >{cell.render('Cell')}</td>
                  )
                })}
              </tr>
@@ -448,6 +520,10 @@ import { useHistory } from 'react-router-dom'
        
        </tbody>
      </table>
+
+     {isEmpty ? <div className="d-flex justify-content-center"><h3>There is no Result for this filter</h3></div> : ""}
+
+
         <div className="emir-pagination">
     
         <button className="pagi-out" onClick={() => getList(prev,colors)} disabled={prev == "" ? true : false}>
@@ -458,7 +534,8 @@ import { useHistory } from 'react-router-dom'
             {
               Array(paginationCount).fill(1).map((val,i)=>{
                 return(
-                  <div onClick={()=>{
+                  <div  key={i} onClick={()=>{
+                   
                     setPageNum(i+1)
                      getList("/api/dealer/vehicles/?page="+(i+1),colors)
                   }} className={pageNum == i+1 ? "pagi-num pagi-active" : "pagi-num"} >

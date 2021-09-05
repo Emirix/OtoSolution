@@ -2,7 +2,7 @@ import React from 'react'
 import Buyutec from "../../assets/svg/buyutec.svg"
 function Dropdown({title,data,object,index,onChange,onSelect}) {
     return (
-        <div className="emir-dropdown  ">
+        <div className="emir-dropdown">
             <div className="d-flex justify-content-between align-items-center mb-3">
             <div className="title">Select {title}</div>
             <div className="dp-search">

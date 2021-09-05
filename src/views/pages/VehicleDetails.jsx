@@ -42,7 +42,7 @@ function VehicleDetails() {
   })
   useEffect(()=>{
       axios.get("/api/dealer/vehicles/"+id).then(res=>{
-        console.log(res)
+        
         setCar(res.data)
       })
   },[])
