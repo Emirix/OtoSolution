@@ -55,8 +55,7 @@ import { useHistory } from 'react-router-dom'
           col12:val.connection_type || "",
           col13:val.status || "Running",
           id:val.id,
-          lot_id:val.desired_lot.id,
-          dealer_id:1
+         
         })
 
 
@@ -70,9 +69,9 @@ import { useHistory } from 'react-router-dom'
       setPageNum(url.charAt(url.length- 1))
    
       setOrj(newCarList)
-      
+      setCarList(newCarList)
 
-      if(lotFiltre != null || dealerFiltre != null){
+      /*if(lotFiltre != null || dealerFiltre != null){
 
         var arr2 = [];
         var arr3 = []
@@ -97,8 +96,8 @@ import { useHistory } from 'react-router-dom'
   
         setCarList(final)
       }else{
-        setCarList(newCarList)
-      }
+        
+      }*/
 
       
     })
@@ -107,7 +106,7 @@ import { useHistory } from 'react-router-dom'
   useEffect(()=>{
     
 
-    if(lotFiltre != null || dealerFiltre != null){
+    /*if(lotFiltre != null || dealerFiltre != null){
 
       var arr2 = [];
       var arr3 = []
@@ -133,7 +132,7 @@ import { useHistory } from 'react-router-dom'
       setCarList(final)
     }else{
       setCarList(newCarList)
-    }
+    }*/
   },[lotFiltre,dealerFiltre])
 
 

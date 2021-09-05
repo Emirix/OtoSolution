@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Page from "./Page";
-import { Redirect,useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import { GoogleMap,withScriptjs, Marker,withGoogleMap } from "react-google-maps"
+import Dropdown from "../components/Dropdown";
 
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) => {
@@ -181,14 +182,38 @@ function AddDealer() {
               url.get("edit") ? "Edit Parking Lot": "Add New Parking Lot"
             }</div>
             <div className="info-form">
-            <select value={dealer} onChange={e=>setDealer(e.target.value)} >
-                        <option value="">Select Dealer</option>
-                        {dealerList.map(val=>{
-                            return(
-                                <option value={val.id} key={val.id}>{val.name}</option>
-                            )
-                        }) || <option>Loading</option>}
-              </select>
+           
+              <div className="emir-selectbox">
+                  <div
+                    className="emir-selectbox__header"
+                    onClick={(e) => {
+                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
+                      e.currentTarget.parentNode
+                        .querySelector(".emir-dropdown")
+                        .classList.toggle("emir-dropdown-acik");
+                    }}
+                  >
+                   Dealer<span id="span-dealer"></span>
+                  </div>
+                  <Dropdown
+                    onChange={(val) => {
+                      
+                    }}
+
+                    onSelect={(id,val)=>{
+                      setDealer(id);
+                     
+                        document.querySelector("#span-dealer").innerText = " : "+val
+                    }}
+                    title="Dealer"
+                    data={dealerList
+                      .sort((a, b) => a.name.localeCompare(b.name))}
+                    object="name"
+                    index="id"
+                  />
+                </div>
+
+
 
 
               <input value={name} onChange={e=>setName(e.target.value)}  placeholder="*Name" />
@@ -199,8 +224,8 @@ function AddDealer() {
                 setP1(Number(e.target.value))
                 
                 
-              }} type="number" placeholder="*P1 lat" />
-              <input  value={p2} onChange={e=>setP2(e.target.value)} type="number" placeholder="*P1 lon" />
+              }} type="number" placeholder="*P1 lat (You can choose from the map)" />
+              <input  value={p2} onChange={e=>setP2(e.target.value)} type="number" placeholder="*P1 lon (You can choose from the map)" />
               <input  value={radius} onChange={e=>setRadius(e.target.value)} type="number" placeholder="*Radius" />
              
            

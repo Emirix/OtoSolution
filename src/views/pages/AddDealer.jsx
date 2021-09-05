@@ -7,6 +7,7 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import map from "../../assets/img/map.jpg";
+import Dropdown from "../components/Dropdown";
 
 function AddDealer() {
 
@@ -88,15 +89,41 @@ function AddDealer() {
               <input value={zip} onChange={e=>setZip(e.target.value)} type="text" placeholder="Zip Code" />  
               <input value={mainAccount} onChange={e=>setMainAccount(e.target.value)} type="number" placeholder="Main Account" />  
 
+    
 
-              <select value={autoGroup} onChange={e=>setAutoGroup(e.target.value)} >
-                        <option value="">Select Auto Group</option>
-                        {autoGroupList.map(val=>{
-                            return(
-                                <option value={val.id} key={val.id}>{val.name}</option>
-                            )
-                        }) || <option>Loading</option>}
-                    </select>
+
+
+              <div className="emir-selectbox">
+                  <div
+                    className="emir-selectbox__header"
+                    onClick={(e) => {
+                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
+                      e.currentTarget.parentNode
+                        .querySelector(".emir-dropdown")
+                        .classList.toggle("emir-dropdown-acik");
+                    }}
+                  >
+                   Auto Group<span id="span-grup"></span>
+                  </div>
+                  <Dropdown
+                    onChange={(val) => {
+                      
+                    }}
+
+                    onSelect={(id,val)=>{
+                      setAutoGroup(id);
+                     
+                        document.querySelector("#span-grup").innerText = " : "+val
+                    }}
+                    title="Auto Group"
+                    data={autoGroupList
+                      .sort((a, b) => a.name.localeCompare(b.name))}
+                    object="name"
+                    index="id"
+                  />
+                </div>
+
+
 
 
               {/*
