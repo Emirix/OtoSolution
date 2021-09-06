@@ -56,7 +56,9 @@ a{
 }
 
 .sidebar{
+    z-index: 1000000;
     transition: .2s;
+    overflow: hidden;
     position: fixed;
     background-color: $gri;
     width: 231px;
@@ -147,13 +149,6 @@ a{
     }
 }
 
-.header{
-background-color: $gri;
-height: 84px;
-padding-left: 1rem;
-display: flex;
-align-items: center;
-
 .search-acik{
     width: 250px !important;
 }
@@ -176,7 +171,9 @@ align-items: center;
         border: none;    padding-left: 0.4rem;
     }
 }
-
+.w-215{
+    width: 215px !important;
+}
 img.arayici{
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -195,6 +192,15 @@ img.ara{
     transition: .2s;
 
 }
+
+
+.header{
+background-color: $gri;
+height: 84px;
+padding-left: 1rem;
+display: flex;
+align-items: center;
+
 
 
 }
@@ -960,7 +966,7 @@ img{
 border-radius: 10px;
 width: 3px;
 height: 58px;
-margin-left: 2.8rem;
+margin-left: 43px;
 opacity: 0.23;
 }
 .timelist{
@@ -1358,75 +1364,6 @@ border-radius: 5px;
     }
    
 }
-/*
-.notification-container{
-    position: fixed;
-    overflow: hidden;
-    background-color: white;
-    border-radius: 8px;
-   
-    transition:.5s;
-    box-shadow: 3px 4px 6px 0px rgba(0,0,0,0.34);
-    -webkit-box-shadow: 3px 4px 6px 0px rgba(0,0,0,0.34);
-    -moz-box-shadow: 3px 4px 6px 0px rgba(0,0,0,0.34);
-    bottom:40px;
-    
-    left:40px;
-    animation: bildirim 0.5s ease-out;;
-
-    &__loading{
-        height:3px;
-        background-color: rgba(#0d6efd,0.6);
-
-        .line{
-            transition: 4s;
-            
-            height:3px;
-            background-color: #0d6efd;
-        }
-    }
-
-    &__flex{padding: 0.7rem 1.5rem;
-        padding-right: 2.4rem;
-        display: flex;
-        align-items: center;
-        position: relative;
-
-        .carpi{
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: transparent;
-            border-radius: 50%;
-            right: 10px;
-            top: 10px;
-            background-image: url("../svg/Icons/carpi.svg");
-            background-size: 90% 90%;
-            background-position: center center;
-            transition: .2s;
-            cursor: pointer;
-
-            &:hover{
-                background-color: rgba($color: #000000, $alpha: 0.2);
-            }
-
-        }
-    }
-    img{
-        width:50px;
-        margin-right: 1rem;
-    }
-    .title{
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 0rem;
-    }
-
-    .message{
-        opacity: 0.8;
-    }
-}
-*/
 
 
 
@@ -1664,5 +1601,22 @@ height: 44px !important;
 .table-header-buttons{
     overflow-x: scroll;
     width: 100%;
+}
+
+.data-progress-text{
+    color: #44444A;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.carpi{
+    
+    width: 20px;
+    height:20px;
+    top: 5px;
+    left: 5px;
+    background-image: url("../svg/Icons/carpi.svg");
+    background-size: 100% 100%;
+
 }
 

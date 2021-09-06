@@ -1,4 +1,5 @@
 import React,{useEffect} from "react";
+import Buyutec from "../../assets/svg/buyutec.svg"
 
 import DownArrow from "../../assets/svg/down-arrow-icon.svg";
 import Logo from "../../assets/svg/logo.svg";
@@ -41,6 +42,13 @@ function Sidebar() {
       <Link to="/" className="logo">
         <img src={Logo} alt="" />
       </Link>
+      <div onClick={()=>{ document.querySelector(".sidebar").style.left="-280px"}} className="carpi d-lg-none position-absolute"></div>
+      <div className="d-lg-none search m-0 mt-5 search-acik w-215">
+                    <input type="text" placeholder="Search Car" />
+                    
+            </div>
+           
+      
       <nav>
         <ul>
           <li className={location.pathname == "/" ? "active" : ""}>

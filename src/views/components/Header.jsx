@@ -1,8 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import Buyutec from "../../assets/svg/buyutec.svg"
-import Bell from "../../assets/svg/bell.svg"
 import PP from "../../assets/img/pp.jpg"
-import DownArrow from "../../assets/svg/down-arrow-icon2.svg"
 import Bildirimler from './Bildirimler'
 import {Link,useLocation} from "react-router-dom"
 import axios from 'axios'
@@ -25,19 +23,24 @@ function Header() {
     var i = 0;
     function yanMenu(){
         i++;
+        console.log(window.innerWidth <= 992)
         const sidebar = document.querySelector(".sidebar");
-        
-        if(i%2==0){
-            sidebar.classList.remove("sidebar-kucuk")
-            document.querySelector(".page").style.paddingLeft = "231px"
-            document.querySelector(".burger").style.alignItems = "flex-end"
-
+        if(window.innerWidth <= 992){
+            sidebar.style.left = "0"
         }else{
-            sidebar.classList.add("sidebar-kucuk")
-            document.querySelector(".page").style.paddingLeft = "124px"
-            document.querySelector(".burger").style.alignItems = "flex-start"
-
+            if(i%2==0){
+                sidebar.classList.remove("sidebar-kucuk")
+                document.querySelector(".page").style.paddingLeft = "231px"
+                document.querySelector(".burger").style.alignItems = "flex-end"
+    
+            }else{
+                sidebar.classList.add("sidebar-kucuk")
+                document.querySelector(".page").style.paddingLeft = "124px"
+                document.querySelector(".burger").style.alignItems = "flex-start"
+    
+            }
         }
+        
     }
 
     return (
@@ -51,7 +54,7 @@ function Header() {
             <div className="search">
                     <input type="text" placeholder="Search Car" />
             </div>
-            <img src={Buyutec} alt="" className="ara " onClick={(e)=>{
+            <img src={Buyutec} alt="" className="ara d-none d-lg-block " onClick={(e)=>{
                 document.querySelector(".search").classList.add("search-acik")
                 e.currentTarget.classList.add("arayici")
                 e.currentTarget.style.padding = "10px"

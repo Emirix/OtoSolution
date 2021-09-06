@@ -1,6 +1,7 @@
 @media screen and (max-width:992px) {
     .sidebar{
-        display: none !important;
+        left: -280px;
+        box-shadow: 3px 1px 4px rgba(0, 0, 0, 0.25);
     }
 
     .page{
@@ -83,5 +84,10 @@
     .c-2{
         width: 60% !important;
     margin: 0 auto !important;
+    }
+}
+@media screen and (max-width:984px){
+    .map-m{
+        margin-top: 2rem !important;
     }
 }

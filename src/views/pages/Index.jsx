@@ -288,7 +288,7 @@ export default class Index extends Component {
         </div>
               <iframe title="print frame" className="d-none"></iframe>
         <div className="row mt-3 m-0">
-          <div className="d-flex align-items-center mb-3 mobile-car-list">
+          <div className="d-flex align-items-center mb-3 mobile-car-list flex-wrap">
             <div className="mini-title">Car List</div>
             <div className="ms-auto">
               <Link to="/add-new-car">
