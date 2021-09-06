@@ -371,7 +371,7 @@ function AddNewCar({ bg, title }) {
                         .classList.toggle("emir-dropdown-acik");
                     }}
                   >
-                   Make<span id="span-make"></span>
+                   *Make<span id="span-make"></span>
                   </div>
                   <Dropdown
                     onChange={(val) => {
@@ -417,7 +417,7 @@ function AddNewCar({ bg, title }) {
                         .classList.toggle("emir-dropdown-acik");
                     }}
                   >
-                   Model<span id="span-model"></span>
+                   *Model<span id="span-model"></span>
                   </div>
                   <Dropdown
                     onChange={(val) => {
@@ -458,7 +458,7 @@ function AddNewCar({ bg, title }) {
                         .classList.toggle("emir-dropdown-acik");
                     }}
                   >
-                    Color<span id="span-color"></span>
+                    *Color<span id="span-color"></span>
                   </div>
                   <Dropdown
                     onChange={(val) => {
@@ -522,7 +522,7 @@ function AddNewCar({ bg, title }) {
                         .classList.toggle("emir-dropdown-acik");
                     }}
                   >
-                    Dealer <span id="span-dealer"></span>
+                    *Dealer <span id="span-dealer"></span>
                   </div>
                   <Dropdown
                     onChange={(val) => {
@@ -553,7 +553,7 @@ function AddNewCar({ bg, title }) {
                         .classList.toggle("emir-dropdown-acik");
                     }}
                   >
-                    Desiret Lot<span id="span-lot"></span>
+                    *Desiret Lot<span id="span-lot"></span>
                   </div>
                   <Dropdown
                     onChange={(val) => {
@@ -578,7 +578,7 @@ function AddNewCar({ bg, title }) {
 
 
                 <select value={iv} onChange={(e) => setIV(e.target.value)}>
-                  <option value="0">Inventory Type</option>
+                  <option value="0">*Inventory Type</option>
                   <option value="1">New</option>
                   <option value="2">Used</option>
                 </select>

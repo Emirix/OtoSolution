@@ -993,6 +993,10 @@ tr {
   border-radius: 12px;
 }
 
+.br-8 {
+  border-radius: 8px;
+}
+
 .vd {
   background-color: #F7F7FF58;
   padding-right: 0.5rem;
@@ -1281,6 +1285,9 @@ tr {
   justify-content: space-between;
   border-bottom: 1px solid rgba(216, 216, 216, 0.18);
   align-items: center;
+}
+.c-list li:last-child {
+  border-bottom: none !important;
 }
 .c-list li .title {
   font-weight: 500;
@@ -1784,6 +1791,31 @@ tr {
   left: 5px;
   background-image: url("../svg/Icons/carpi.svg");
   background-size: 100% 100%;
+}
+
+.dropdown-kapat {
+  height: 20px;
+  background-color: #F64E60;
+  width: 20px;
+  align-self: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.dropdown-kapat:hover {
+  background-color: #e04050;
+}
+.dropdown-kapat svg {
+  width: 8px;
+}
+
+.truncate {
+  width: 140px;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /*# sourceMappingURL=style.css.map */

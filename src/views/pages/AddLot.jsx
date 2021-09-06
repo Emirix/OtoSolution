@@ -220,12 +220,12 @@ function AddDealer() {
               <input  value={ desc} onChange={e=>setDesc(e.target.value)} placeholder="Description" />
               <input  value={adress} onChange={e=>setAdress(e.target.value)} placeholder="Address" />
               <input  value={state} onChange={e=>setState(e.target.value)} placeholder="State" />
-              <input  value={p1} onChange={e=>{
+              <input  disabled value={p1} onChange={e=>{
                 setP1(Number(e.target.value))
                 
                 
               }} type="number" placeholder="*P1 lat (You can choose from the map)" />
-              <input  value={p2} onChange={e=>setP2(e.target.value)} type="number" placeholder="*P1 lon (You can choose from the map)" />
+              <input disabled value={p2} onChange={e=>setP2(e.target.value)} type="number" placeholder="*P1 lon (You can choose from the map)" />
               <input  value={radius} onChange={e=>setRadius(e.target.value)} type="number" placeholder="*Radius" />
              
            

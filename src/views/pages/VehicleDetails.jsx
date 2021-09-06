@@ -6,6 +6,7 @@ import DataInfo from "../components/VH/DataInfo";
 import DataProgress from "../components/VH/DataProgress";
 import List from "../components/VH/List";
 import SI from "../components/VH/SI";
+import SI2 from "../components/VH/SI2";
 import RecentActivities from "../components/VH/RecentActivities";
 import CardInfo from "../components/VH/CardInfo";
 import { useParams, Redirect } from "react-router-dom";
@@ -220,8 +221,9 @@ function VehicleDetails() {
             </div>
             <div className="col">
               <RecentActivities />
-              <CardInfo />
-              <SI />
+              <CardInfo data={car} />
+              <SI data={car} title="Dealer Information" />
+              <SI2 data={car} title="Parking Lot Information" />
             </div>
           </div>
         </div>

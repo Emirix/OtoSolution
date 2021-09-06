@@ -743,6 +743,10 @@ img{
     border-radius: 12px;
 }
 
+.br-8{
+    border-radius: 8px;
+}
+
 .vd{
     background-color: #F7F7FF58;
     padding-right: 0.5rem;
@@ -1065,6 +1069,9 @@ opacity: 0.23;
         justify-content: space-between;
         border-bottom: 1px solid rgba(#D8D8D8,0.18);
         align-items: center;
+        &:last-child{
+            border-bottom: none !important;
+        }
         .title{
             font-weight:500 ;
             color: #888C9F;
@@ -1620,3 +1627,28 @@ height: 44px !important;
 
 }
 
+
+.dropdown-kapat{
+    height: 20px;
+    background-color: #F64E60;
+    width: 20px;
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+&:hover{
+    background-color: #e04050;
+}
+    svg{
+        width:8px;
+    }
+}
+
+.truncate {
+    width: 140px;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
