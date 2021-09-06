@@ -1652,3 +1652,30 @@ height: 44px !important;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+.refresh-data{
+    width: 50px;
+    height: 50px;
+    background-color: rgba(218, 218, 218, 0.267);
+    top: 0;
+    right: 0;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 3rem;
+    background-repeat: no-repeat;
+    background-image: url("../svg/refresh-bos.svg");
+    background-size: 70% 70%;
+    background-position: center 0px;
+    transition: .2s;
+
+    &:hover{
+        background-color:rgba(218, 218, 218, 0.6) ;
+        cursor: pointer;
+    }
+
+    &:active{
+        width: 40px;
+        height: 40px;
+    }
+
+    
+}

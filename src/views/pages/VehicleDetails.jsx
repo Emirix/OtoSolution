@@ -5,6 +5,7 @@ import car2 from "../../assets/img/car2.jpg";
 import DataInfo from "../components/VH/DataInfo";
 import DataProgress from "../components/VH/DataProgress";
 import List from "../components/VH/List";
+import List2 from "../components/VH/List2";
 import SI from "../components/VH/SI";
 import SI2 from "../components/VH/SI2";
 import RecentActivities from "../components/VH/RecentActivities";
@@ -90,13 +91,33 @@ function VehicleDetails() {
 
           <div className="row m-0">
             <div className="mini-title mt-3">Vehicle Details</div>
-            <div className="br-12 col-lg-6 vd h-266 m-0 ">
+            <div className="br-12 col-lg-6 vd h-266 m-0 position-relative ">
               <VH
                 src={[car1, car2]}
                 marka={car ? car.vin.brand_name : ""}
                 model={car ? car.vin.model_name : ""}
-                fiyat="12,500"
+                fiyat={car ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',maximumFractionDigits:0 }).format(Number(car.vin.specs.BasePrice))  : ""}
               />
+              <div onClick={()=>{
+                setCar(null)
+                axios.get("/api/dealer/vehicles/" + id).then((res) => {
+                  console.log(res.data);
+                  setCar(res.data);
+            
+                  setMap({
+                    center: {
+                      lat: res.data.lat,
+                      lng: res.data.lon,
+                    },
+                    zoom: 80,
+                    radius: res.data.desired_lot.radius,
+                    parkingLot: {
+                      lat: res.data.desired_lot.p1_lat,
+                      lng: res.data.desired_lot.p1_lon,
+                    },
+                  });
+                });
+              }} title="Click for refresh data" className="refresh-data position-absolute"></div>
               <div>
                 <div className="data-title-container">
                   <DataInfo
@@ -217,7 +238,7 @@ function VehicleDetails() {
               <List val={car} title="Vehicle Information" />
             </div>
             <div className="col">
-              <List val={car} title="System Information" />
+              <List2 val={car} title="Vehicle Information" />
             </div>
             <div className="col">
               <RecentActivities />
