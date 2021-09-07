@@ -1,118 +1,235 @@
-import React, { useState } from "react";
+import React, { useState, useRef} from "react";
 import Page from "./Page";
 import LinkedAutosList from "../components/LinkedAutosList";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+
 function OtoLink() {
+  const location = useLocation()
   const [odb, setOdb] = useState("");
-  const [status,setStatus] = useState(null)
+  const [status, setStatus] = useState(null);
 
-  const [model, setModel] = useState("")
-  const [version, setVersion] = useState("")
-  const [mDate, setMDate] = useState("")
+  const [model, setModel] = useState("");
+  const [version, setVersion] = useState("");
+  const [mDate, setMDate] = useState("");
 
-  function submit() {
-    
+  const [step, setStep] = useState(1);
 
-    if(model != "" &&  version != "" && odb != "" ){
-      axios
-      .post(
-        "/api/devices/oto-link-devices/",
-        {
-          serial_no: odb,
-          version:version,
-          manufacture_date:mDate || null,
-          model:model 
-        },
-        {
-          headers: {
-            Authorization: `Token ${localStorage.getItem("key")}`,
-          },
-        }
-      )
-      .then((res) => {
-        
-        setStatus("ok")
-        window.location.reload()
-      }).catch(err=>{
-          setStatus("hata")
-      })
-    }else{
-      setStatus("hata")
-      alert("Fill in all fields")
-    }
+  const popup = useRef()
 
- 
+  function close(){
+    popup.current.classList.add("d-none")
+  }
+
+  function open(){
+    popup.current.classList.remove("d-none")
   }
 
   return (
     <Page>
       <div className="sayfa">
-        <div className="row m-0">
-          <div className="mini-title text-center">Add New Oto-link Device</div>
+        <div ref={popup} className="popup-bg position-fixed d-flex justify-content-center align-items-center w-100 h-100">
+          
+          {!location.pathname.includes("unlink") ? 
+          <div className="popup bg-white br-12 p-3 d-flex flex-column align-items-center">
+            <div className="mini-title">
+              {step == 3 ? "You are about to pair" : "Link New Device"}
+            </div>
+            <img
+              src={step == 3 ? "/icons/qr-valid.svg" : "/icons/qr-code.svg"}
+              width="130"
+              height="130"
+              className="mt-3 mb-5"
+              alt=""
+            />
 
-          <div className="d-flex justify-content-center">
-            <div className={ status == "ok" ? " otolink-success link-container br-12  " : status == "hata" ? " otolink-error link-container br-12 " : " link-container br-12"}>
-              <img src={status == "ok" ? "/icons/qr-valid.svg" : status == "hata" ? "/icons/qr-hata.svg" : "/icons/qr-code.svg" } />
-              <div className="ms-3 d-flex flex-column">
-                <div className="link-container-desc">
-                  Enter the Oto Link Device ID
-                </div>
-                <input
-                className="w-75"
-                  value={odb}
-                  onChange={(e) => setOdb(e.target.value)}
-                  type="text"
-                  placeholder={"*Oto Link Device ID"}
-                  onFocus={e=>setStatus("")}
-                />
-
-<input
-className="mt-2 w-75"
-                  value={version}
-                  onChange={(e) => setVersion(e.target.value)}
-                  type="text"
-                  placeholder={"*Version"}
-                  onFocus={e=>setStatus("")}
-                />
-
-<input
-className="mt-2 w-75"
-                  value={model}
-                  onChange={(e) => setModel(e.target.value)}
-                  type="text"
-                  placeholder={"*Model"}
-                  onFocus={e=>setStatus("")}
-                />
-
-<input
-className="mt-2 w-75 d-none"
-                  value={mDate}
-                  onChange={(e) => setMDate(e.target.value)}
-                  type="text"
-                  placeholder={"*Manufacture Date"}
-                  onFocus={e=>setStatus("")}
-                />
-                <div className={status == "ok" ? " mesaj succes " : status == "hata" ?  " mesaj hata " :  " mesaj "}>{status == "ok" ? "Added" : status == "hata" ? "Error" :""}</div>
+            {step == 1 ? (
+              <>
+              <div className="tit-falan">
+              Please scan or enter
+              Stock number or VIN
               </div>
+              
+              <div className="form-floating mb-3 next-step">
+                <div className="mini-title"></div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="Enter VIN Number"
+                />
+                <label htmlFor="floatingInput">Enter VIN Number</label>
+              </div></>
+            ) : (
+              ""
+            )}
+
+            {step == 2 ? (
+              <>
+              <div className="tit-falan">
+              Please scan or enter
+OTO-Link serial number
+
+              </div>
+             
+              <div className="form-floating mb-3 next-step">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="Enter Device Serial ID"
+                />
+                <label htmlFor="floatingInput">Enter Device Serial ID</label>
+              </div> </>
+            ) : (
+              ""
+            )}
+
+            {step == 3 ? (
+              <div className="basarili-linkleme w-75">
+                <ul className="c-list ">
+                  <li>
+                    <div className="title">Vehicle </div>
+                    <div className="data">WDBUF70J45A636373 2005 MBZ E500 White</div>
+                  </li>
+
+                  <li>
+                    <div className="title">OTO-Link</div>
+                    <div className="data">776348901 Silver Model</div>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+
+            <div className="d-flex mt-5  justify-content-between w-100 align-items-center">
+              <button onClick={()=>{close()}} className="btn bg-secondary text-white py-2 px-5">
+                Close
+              </button>
+              <div className="step-container">
+                <div className="d-flex">
+                  <div
+                    className={step == 1 ? "step me-2 active" : "step me-2"}
+                  ></div>
+                  <div className={step == 2 ? "step active" : "step"}></div>
+                  <div
+                    className={step == 3 ? "step ms-2 active" : "step ms-2"}
+                  ></div>
+                </div>
+                <div className="step-title">Step {step}</div>
+              </div>
+              <button
+                className="btn bg-primary text-white py-2 px-5"
+                onClick={() => {
+                  if(step == 3) {
+                    close()
+                  }else{
+                    if (step < 3) {
+                      setStep(step + 1);
+                    }
+                  }
+                 
+                }}
+              >
+                {step == 3 ? "Submit" : "Next"}
+              </button>
             </div>
           </div>
-          <div className="row">
-            <button
-              onClick={() => {
-                submit();
-              }}
-              className="btn btn-yesil w-25 h-44 mx-auto my-3"
-            >
-              Submit
-            </button>
+          :
+          <div className="popup bg-white br-12 p-3 d-flex flex-column align-items-center">
+            <div className="mini-title">
+              {step == 2 ? "You are about to un-pair" : "Unlink a Device"}
+            </div>
+          
+
+            {step == 1 ? (
+              <>
+              <div className="tit-falan w-50  mt-5">Please scan or enter
+Stock number, VIN or OTO-Link serial number
+</div>
+              <div className="form-floating mb-3 next-step">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="Enter"
+                />
+                <label htmlFor="floatingInput">Enter</label>
+              </div>
+
+
+
+</>
+            ) : (
+              ""
+            )}
+
+           
+
+            {step == 2 ? (
+              <div className="basarili-linkleme w-75">
+                <ul className="c-list mt-5 ">
+                  <li>
+                    <div className="title">Vehicle</div>
+                    <div className="data">WDBUF70J45A636373 2005 MBZ E500 White
+</div>
+                  </li>
+
+                  <li>
+                    <div className="title">OTO-Link</div>
+                    <div className="data">776348901 Silver Model
+</div>
+                  </li>
+
+                 
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+
+            <div className="d-flex mt-5  justify-content-between w-100 align-items-center">
+              <button onClick={()=>{close()}} className="btn bg-secondary text-white py-2 px-5">
+                Close
+              </button>
+              <div className="step-container">
+                <div className="d-flex">
+                  <div
+                    className={step == 1 ? "step me-2 active" : "step "}
+                  ></div>
+                 
+                  <div
+                    className={step == 2 ? "step ms-2 active" : "step ms-2"}
+                  ></div>
+                </div>
+                <div className="step-title">Step {step}</div>
+              </div>
+              <button
+                className="btn bg-primary text-white py-2 px-5"
+                onClick={() => {
+                  if(step == 2) {
+                    close()
+                  }else{
+                    if (step < 2) {
+                      setStep(step + 1);
+                    }
+                  }
+                 
+                }}
+              >
+                {step == 2 ? "Submit" : "Next"}
+              </button>
+            </div>
           </div>
+          }
+        
         </div>
 
         <div className="row  mt-3 m-0">
           <div className="mini-title mb-3">Recently Added</div>
           <div className="tb-container">
-             <LinkedAutosList  />
-            
+            <LinkedAutosList />
           </div>
         </div>
       </div>

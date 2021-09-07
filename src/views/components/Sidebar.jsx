@@ -88,15 +88,35 @@ function Sidebar() {
             </div>
           </li>
 
-          <li className={location.pathname == "/oto-link" ? "active" : ""}>
-            <Link to="/oto-link">
+      
+          <li
+            onClick={(e) => {
+              dropdown(e,"/icons/oto-link-active.svg","/icons/oto-link-inactive.svg");
+            }}
 
-            {
-              location.pathname == "/oto-link" ? <img className="is" src="/icons/oto-link-active.svg" alt="" /> : <img className="is" src="/icons/oto-link-inactive.svg" alt="" />
-            }
+            data-dropdown="kapali"
+          >
+            <a href="#">
+              <img src="/icons/oto-link-inactive.svg" alt="" />
               <span>Oto-Link</span>
-            </Link>
+              <div className="arrow">
+                <img src={DownArrow} alt="" />
+              </div>
+            </a>
+
+            <div className="side-dropdown">
+              <ul>
+                <li>
+                  <Link to="/oto-link">Link</Link>
+                </li>
+                <li>
+                  <Link to="/oto-link/unlink">Unlink</Link>
+                </li>
+               
+              </ul>
+            </div>
           </li>
+
 
           <li
             onClick={(e) => {

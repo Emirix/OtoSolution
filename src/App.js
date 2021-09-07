@@ -130,13 +130,16 @@ function App() {
           <Route exact path="/mobile">
             <Redirect to="/mobile/adad"/>
           </Route>
-
           <Route exact path="/oto-link">
              
-            {
-              isMobile ? <Redirect to="/mobile/add"/> :    <OtoLink/>
-            }
-          </Route>
+             <OtoLink/>
+         
+         </Route> <Route exact path="/oto-link/unlink">
+             
+             <OtoLink/>
+         
+         </Route>
+         
 
           <Route exact path="/mobile/add">
               <Add/>
