@@ -39,7 +39,7 @@ function AddDealer() {
   const [name, setName] = useState("")
   const [desc, setDesc] = useState("")
   const [adress, setAdress] = useState("")
-  const [city, setCity] = useState("")
+  const [zip, setZip] = useState("")
   const [state, setState] = useState("")
   const [p1, setP1] = useState("")
   const [p2, setP2] = useState("")
@@ -141,7 +141,7 @@ function AddDealer() {
         "dealer": dealer || null,
         "description": desc || null,
         "address": adress || null,
-        "city":"s",
+        "zip":zip || null,
         "state": state || null
       
     },{
@@ -165,7 +165,7 @@ function AddDealer() {
     setRadius("")
     setState("")
     setAdress("")
-    setCity("")
+    setZip("")
     setDesc("")
   }
 
@@ -220,6 +220,9 @@ function AddDealer() {
               <input  value={ desc} onChange={e=>setDesc(e.target.value)} placeholder="Description" />
               <input  value={adress} onChange={e=>setAdress(e.target.value)} placeholder="Address" />
               <input  value={state} onChange={e=>setState(e.target.value)} placeholder="State" />
+              <input  value={zip} onChange={e=>setZip(e.target.value)} placeholder="Zip" />
+
+              
               <input  disabled value={p1} onChange={e=>{
                 setP1(Number(e.target.value))
                 

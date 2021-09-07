@@ -51,7 +51,8 @@ function List({ val, title }) {
         <li>
           <div className="title">Color</div>
           <div className="data truncate">
-            {val && colors ? colors[2].name : ""}
+            {/*val && colors ? colors[2].name : ""*/}
+            {val ? val.color_name :""}
           </div>
         </li>
 

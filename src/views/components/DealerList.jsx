@@ -14,7 +14,20 @@ import { useHistory } from 'react-router-dom'
   const [pageNum,setPageNum] = useState(1)
   
   var newCarList = [];
-
+  var months = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec",
+  };
 
   function getList(url){
     setCarList([])
@@ -48,8 +61,8 @@ import { useHistory } from 'react-router-dom'
           col2:val.address,
           col3:"9",
           col4: "7",
-          col5: val.created_at.substring(0,10).replaceAll("-","/"),
-          col6: val.updated_at.substring(0,10).replaceAll("-","/")
+          col5: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4)  ,
+          col6: months[val.updated_at.substring(5, 7)] + " " + val.updated_at.substring(8, 10) + " " +  val.created_at.substring(0, 4)  
           
         })
 

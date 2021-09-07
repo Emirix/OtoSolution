@@ -16,7 +16,20 @@ import { useHistory } from 'react-router-dom'
   var newCarList = [];
 
   const [colors,setColors] = useState([])
-
+  var months = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec",
+  };
   function getList(url,c){
     setCarList([])
  
@@ -30,12 +43,13 @@ import { useHistory } from 'react-router-dom'
         res.data.map((val,i)=>{
         
         newCarList.push({
-            col1:val.manufacture_date,
+            
+            col1:val.manufacture_date ? months[val.manufacture_date.substring(5, 7)] + " " + val.manufacture_date.substring(8, 10) + " " +  val.manufacture_date.substring(0, 4) : "",
             col2:val.serial_no,
             col3:val.version,
             col4:val.model,
-            col5:val.created_at.substring(0,10).replaceAll("-","/"),
-            col5:val.updated_at.substring(0,10).replaceAll("-","/"),
+            col5:months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4)   ,
+            col5:months[val.updated_at.substring(5, 7)] + " " + val.updated_at.substring(8, 10) + " " +  val.updated_at.substring(0, 4) ,
             id:val.id
             })
         })

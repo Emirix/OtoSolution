@@ -1,6 +1,7 @@
 import React from "react";
 
 function CardInfo({ data }) {
+  
   return (
     <div className="c-a mt-3 p-0">
       <div className="c-title p-2">Card Info</div>
@@ -35,7 +36,7 @@ function CardInfo({ data }) {
         <li>
           <div className="title">Manufacture Date</div>
           {data != null || data != undefined ? (
-            <div className="data">{data.device.manufacture_date.substring(0,10).replace("-","/")}</div>
+            <div className="data">{data.device.manufacture_date ? data.device.manufacture_date.substring(0,10).replaceAll("-","/") : ""}</div>
           ) : (
             <div className="skeleton-text w-50"> </div>
           )}
@@ -45,7 +46,7 @@ function CardInfo({ data }) {
         <li>
           <div className="title">Created At</div>
           {data != null || data != undefined ? (
-            <div className="data">{data.device.created_at.substring(0,10).replaceAll("-","/")}</div>
+            <div className="data">{data.device.created_at ? data.device.created_at.substring(0,10).replaceAll("-","/") : ""}</div>
           ) : (
             <div className="skeleton-text w-50"> </div>
           )}
@@ -54,7 +55,7 @@ function CardInfo({ data }) {
         <li>
           <div className="title">Updated At</div>
           {data != null || data != undefined ? (
-            <div className="data">{data.device.updated_at.substring(0,10).replaceAll("-","/")}</div>
+            <div className="data">{data.device.updated_at ? data.device.updated_at.substring(0,10).replaceAll("-","/") :""}</div>
           ) : (
             <div className="skeleton-text w-50"> </div>
           )}

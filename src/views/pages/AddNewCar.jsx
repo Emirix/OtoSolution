@@ -3,13 +3,13 @@ import React, { useState, useEffect } from "react";
 import CardInfo from "../components/VH/CardInfo";
 import Page from "./Page";
 import { Redirect } from "react-router-dom";
-import SolBildirim from "../components/SolBildirim";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import Dropdown from "../components/Dropdown";
+import {Yil} from "../../yillar"
 
 function AddNewCar({ bg, title }) {
   const [brand, setBrand] = useState([]);
@@ -18,7 +18,6 @@ function AddNewCar({ bg, title }) {
   const [dealers, setDealers] = useState([]);
   const [lots, setLots] = useState([]);
   const [devices, setDevices] = useState([])
-
   const [stk, setStk] = useState("");
   const [vin, setVin] = useState("");
   const [serialId, setserialId] = useState("");
@@ -38,9 +37,9 @@ function AddNewCar({ bg, title }) {
      const data = {
       color:color || null,
       inventory_type:iv || null,
-      year:year || null,
-      brand:make || null,
-      model:model || null,
+      year:Number(year) || null,
+      brand:Number(make) || null,
+      model:Number(model) || null,
       desired_lot:Number(desiretLot),
       device:Number(device) || null
      }
@@ -231,7 +230,7 @@ function AddNewCar({ bg, title }) {
   }
 
   function checkInputs(){
-    if(stk == "" || vin == "" || serialId == "" || make == "" ||model == "" || year == "" ||color == "" ||device == "" ||dealer == "" ||desiretLot == "" ||iv == ""){
+    if(stk == "" || vin == "" || make == "" ||model == "" || year == "" ||color == "" ||device == "" ||dealer == "" ||desiretLot == "" ||iv == ""){
       return false
     }else{
       return true
@@ -248,10 +247,10 @@ function AddNewCar({ bg, title }) {
           stock_no: stk,
           dealer: Number(dealer) || null,
           vin: vin.trim(),
-          color: color || null,
-          year: year || null,
-          brand: make || null,
-          model: model || null,
+          color: Number(color) || null,
+          year: Number(year) || null,
+          brand: Number(make) || null,
+          model: Number(model) || null,
           device: Number(device) || null,
           desired_lot: Number(desiretLot) || null,
           inventory_type: Number(iv) || null,
@@ -295,6 +294,8 @@ function AddNewCar({ bg, title }) {
           "Check the information",
           2000
         );
+
+        console.log(err.response)
       });
     }else{
       alert("Fill in the mandatory fields")
@@ -351,13 +352,7 @@ function AddNewCar({ bg, title }) {
                   placeholder="*VIN"
                 /> : "" }
 
-{!url.get("edit") ?
-                <input
-                  value={serialId}
-                  onChange={(e) => setserialId(e.target.value)}
-                  type="text"
-                  placeholder="*Serial ID"
-                />  : "" }
+
 
              
 
@@ -437,12 +432,36 @@ function AddNewCar({ bg, title }) {
                 </div>
 
 
-                <input
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                  type="number"
-                  placeholder="*Year"
-                />
+
+<div className="emir-selectbox">
+                  <div
+                    className="emir-selectbox__header"
+                    onClick={(e) => {
+                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
+
+                      e.currentTarget.parentNode
+                        .querySelector(".emir-dropdown")
+                        .classList.toggle("emir-dropdown-acik");
+                    }}
+                  >
+                    *Year<span id="span-year"></span>
+                  </div>
+                  <Dropdown
+                   
+
+                    onSelect={(id,val)=>{
+                        
+                        setYear(id)
+                        document.querySelector("#span-year").innerText = " : "+val
+                    }}
+                    title="Year"
+                    data={Yil}
+                    object="yil"
+                    index="id"
+                    hideSearch
+                  />
+                </div>
+
 
 
 
@@ -507,6 +526,7 @@ function AddNewCar({ bg, title }) {
                     data={devices}
                     object="serial_no"
                     index="id"
+                    addNull={true}
                   />
                 </div>
 
@@ -553,7 +573,7 @@ function AddNewCar({ bg, title }) {
                         .classList.toggle("emir-dropdown-acik");
                     }}
                   >
-                    *Desiret Lot<span id="span-lot"></span>
+                    *Desired Lot<span id="span-lot"></span>
                   </div>
                   <Dropdown
                     onChange={(val) => {
@@ -565,7 +585,7 @@ function AddNewCar({ bg, title }) {
                       setDesiretLot(id)
                         document.querySelector("#span-lot").innerText = " : "+val
                     }}
-                    title="Desiret Lot"
+                    title="Desired Lot"
                     data={lots}
                     object="name"
                     index="id"

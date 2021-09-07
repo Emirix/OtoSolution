@@ -29,7 +29,7 @@ function AddDealer() {
         "Authorization" : `Token ${localStorage.getItem("key")}`
       }
     }).then(res=>{
-      
+      console.log(res.data)
       setInfo(res.data)
       setMap({
         center: {
@@ -60,13 +60,13 @@ function AddDealer() {
             
 
                 <li>
-                    <div className="title">Dealer Name</div>    
+                    <div className="title">Dealer Name (Dealer ID)</div>    
                     <div className="data">{info.dealer || "Unspecified"}</div>    
                 </li>
 
                 <li>
                     <div className="title">Parking Lot Name</div>    
-                    <div className="data">{info.lot || "Unspecified"}</div>    
+                    <div className="data">{info.name || "Unspecified"}</div>    
                 </li>
 
                 <li>

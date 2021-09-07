@@ -68,18 +68,20 @@ function Header() {
                     <Bildirimler/>
                 </div>
 
-                <div className="kucuk-profil ms-3">
+                <div className="kucuk-profil ms-3 position-relative">
                     <img src={PP} alt="" />
-                   <div>
-                    {
-                         
-                    }
-                   <div className="kucuk-profil__title">{user.first_name || "Null"}</div>
-                    <div className="kucuk-profil__bottom">{user.address || "Null"}</div>
+                   <div className="">
+                   
+                   <div className="kucuk-profil__title">{user.first_name || ""}</div>
+                    <div className="kucuk-profil__bottom">{user.address || ""}</div>
                    </div>
 
                    <div className="down-icon">
                        <img src="/icons/arrow-down-short.svg" alt="" />
+                   </div>
+
+                   <div className="p-d d-none">
+                       <div className="eposta">{user.email}</div>
                    </div>
                 </div>
             </div>

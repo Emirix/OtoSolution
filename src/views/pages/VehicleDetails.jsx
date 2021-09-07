@@ -151,7 +151,7 @@ function VehicleDetails() {
                     }
                     title="Engine"
                   />
-                  <DataInfo data="A312312" title="Serial ID" />
+                  <DataInfo data={car != null && car.device != null ? car.device.id : "No Device"} title="Device ID" />
                   <DataInfo
                     data={
                       car ? (
@@ -168,7 +168,7 @@ function VehicleDetails() {
                   <div className="data-progress">
                     <div className="title">Speed</div>
                     {car ? (
-                      <div className="data-progress-text">{car.speed} KM</div>
+                      <div className="data-progress-text">{car.speed ? car.speed + " MPH" : "0 MPH"}</div>
                     ) : (
                       <div className="skeleton-text-kucuk"></div>
                     )}
@@ -177,7 +177,7 @@ function VehicleDetails() {
                   <div className="data-progress">
                     <div className="title">RPM</div>
                     {car ? (
-                      <div className="data-progress-text">{car.rpm}</div>
+                      <div className="data-progress-text">{car.rpm ? car.rpm : "0"}</div>
                     ) : (
                       <div className="skeleton-text-kucuk"></div>
                     )}
@@ -186,7 +186,7 @@ function VehicleDetails() {
                   <div className="data-progress">
                     <div className="title">Battery</div>
                     {car ? (
-                      <div className="data-progress-text">{car.battery}</div>
+                      <div className="data-progress-text">{car.battery ? car.battery : "No Data"}</div>
                     ) : (
                       <div className="skeleton-text-kucuk"></div>
                     )}
@@ -212,20 +212,23 @@ function VehicleDetails() {
             <div className="br-12 col-lg-6 vm m-0 h-266 map-m">
               <div className="mini-title ">Map</div>
               <div style={{ height: "100%", width: "100%" }}>
-                {map != null ? (
-                  <MyMapComponent
-                    isMarkerShown
-                    isRadius
-                    p1={map.center.lat}
-                    p2={map.center.lng}
-                    radius={map.radius}
-                    parkingLot={map.parkingLot}
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIekKkymRnVUNN800c6_Kd7OfMsTnVFWg&v=3.exp&libraries=geometry,drawing,places"
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `100%` }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
-                  />
-                ) : (
+                {map != null  ? 
+                 map.center.lat != null & map.center.lng != null ? 
+                 <MyMapComponent
+                 isMarkerShown
+                 isRadius
+                 p1={map.center.lat}
+                 p2={map.center.lng}
+                 radius={map.radius}
+                 parkingLot={map.parkingLot}
+                 googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIekKkymRnVUNN800c6_Kd7OfMsTnVFWg&v=3.exp&libraries=geometry,drawing,places"
+                 loadingElement={<div style={{ height: `100%` }} />}
+                 containerElement={<div style={{ height: `100%` }} />}
+                 mapElement={<div style={{ height: `100%` }} />}
+               /> : (
+                 <div className="hata-map"><img draggable={false} src="/icons/map-error.svg" alt="" /></div>
+               )
+                 : (
                   <div className="vd-list  skeleton-text"></div>
                 )}
               </div>
@@ -242,7 +245,8 @@ function VehicleDetails() {
             </div>
             <div className="col">
               <RecentActivities />
-              <CardInfo data={car} />
+              {car && car.device ? <CardInfo data={car} />  : "" }
+              
               <SI data={car} title="Dealer Information" />
               <SI2 data={car} title="Parking Lot Information" />
             </div>
