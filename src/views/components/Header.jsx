@@ -55,7 +55,7 @@ function Header() {
                     <input type="text" placeholder="Search Car" />
             </div>
             <img src={Buyutec} alt="" className="ara d-none d-lg-block " onClick={(e)=>{
-                document.querySelector(".search").classList.add("search-acik")
+                document.querySelectorAll(".search")[1].classList.add("search-acik")
                 e.currentTarget.classList.add("arayici")
                 e.currentTarget.style.padding = "10px"
             }} />

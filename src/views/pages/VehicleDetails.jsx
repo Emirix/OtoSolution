@@ -13,13 +13,13 @@ import CardInfo from "../components/VH/CardInfo";
 import { useParams, Redirect } from "react-router-dom";
 import Page from "./Page";
 import axios from "axios";
-
 import {
   GoogleMap,
   withScriptjs,
   Marker,
   withGoogleMap,
   Circle,
+  Polyline,
 } from "react-google-maps";
 import { Link } from "react-router-dom";
 
@@ -32,6 +32,14 @@ const MyMapComponent = withScriptjs(
     return (
       <GoogleMap defaultZoom={14} defaultCenter={{ lat: lat, lng: lng }}>
         {props.isMarkerShown && <Marker position={{ lat: lat, lng: lng }} />}
+        <Polyline
+          path={[
+            { lat: 37.772, lng: -122.214 },
+            { lat: 21.291, lng: -157.821 },
+            { lat: -18.142, lng: 178.431 },
+            { lat: -27.467, lng: 153.027 }
+          ]}
+        />
         {props.isRadius ? (
           <Circle
             options={{
@@ -96,28 +104,40 @@ function VehicleDetails() {
                 src={[car1, car2]}
                 marka={car ? car.vin.brand_name : ""}
                 model={car ? car.vin.model_name : ""}
-                fiyat={car ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD',maximumFractionDigits:0 }).format(Number(car.vin.specs.BasePrice))  : ""}
+                fiyat={
+                  car
+                    ? new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                        maximumFractionDigits: 0,
+                      }).format(Number(car.vin.specs.BasePrice))
+                    : ""
+                }
               />
-              <div onClick={()=>{
-                setCar(null)
-                axios.get("/api/dealer/vehicles/" + id).then((res) => {
-                  console.log(res.data);
-                  setCar(res.data);
-            
-                  setMap({
-                    center: {
-                      lat: res.data.lat,
-                      lng: res.data.lon,
-                    },
-                    zoom: 80,
-                    radius: res.data.desired_lot.radius,
-                    parkingLot: {
-                      lat: res.data.desired_lot.p1_lat,
-                      lng: res.data.desired_lot.p1_lon,
-                    },
+              <div
+                onClick={() => {
+                  setCar(null);
+                  axios.get("/api/dealer/vehicles/" + id).then((res) => {
+                    console.log(res.data);
+                    setCar(res.data);
+
+                    setMap({
+                      center: {
+                        lat: res.data.lat,
+                        lng: res.data.lon,
+                      },
+                      zoom: 80,
+                      radius: res.data.desired_lot.radius,
+                      parkingLot: {
+                        lat: res.data.desired_lot.p1_lat,
+                        lng: res.data.desired_lot.p1_lon,
+                      },
+                    });
                   });
-                });
-              }} title="Click for refresh data" className="refresh-data position-absolute"></div>
+                }}
+                title="Click for refresh data"
+                className="refresh-data position-absolute"
+              ></div>
               <div>
                 <div className="data-title-container">
                   <DataInfo
@@ -151,7 +171,14 @@ function VehicleDetails() {
                     }
                     title="Engine"
                   />
-                  <DataInfo data={car != null && car.device != null ? car.device.id : "No Device"} title="Device ID" />
+                  <DataInfo
+                    data={
+                      car != null && car.device != null
+                        ? car.device.id
+                        : "No Device"
+                    }
+                    title="Device ID"
+                  />
                   <DataInfo
                     data={
                       car ? (
@@ -163,12 +190,14 @@ function VehicleDetails() {
                     title="Year"
                   />
                 </div>
-                
+
                 <div className="data-progress-container">
                   <div className="data-progress">
                     <div className="title">Speed</div>
                     {car ? (
-                      <div className="data-progress-text">{car.speed ? car.speed + " MPH" : "0 MPH"}</div>
+                      <div className="data-progress-text">
+                        {car.speed ? car.speed + " MPH" : "0 MPH"}
+                      </div>
                     ) : (
                       <div className="skeleton-text-kucuk"></div>
                     )}
@@ -177,7 +206,9 @@ function VehicleDetails() {
                   <div className="data-progress">
                     <div className="title">RPM</div>
                     {car ? (
-                      <div className="data-progress-text">{car.rpm ? car.rpm : "0"}</div>
+                      <div className="data-progress-text">
+                        {car.rpm ? car.rpm : "0"}
+                      </div>
                     ) : (
                       <div className="skeleton-text-kucuk"></div>
                     )}
@@ -186,7 +217,9 @@ function VehicleDetails() {
                   <div className="data-progress">
                     <div className="title">Battery</div>
                     {car ? (
-                      <div className="data-progress-text">{car.battery ? car.battery : "No Data"}</div>
+                      <div className="data-progress-text">
+                        {car.battery ? car.battery : "No Data"}
+                      </div>
                     ) : (
                       <div className="skeleton-text-kucuk"></div>
                     )}
@@ -201,7 +234,6 @@ function VehicleDetails() {
                     )}
                   </div>
 
-
                   <DataProgress color="sari" title="Gas" value="90" />
 
                   <DataProgress color="yesil" title="Battery" value="30" />
@@ -212,23 +244,31 @@ function VehicleDetails() {
             <div className="br-12 col-lg-6 vm m-0 h-266 map-m">
               <div className="mini-title ">Map</div>
               <div style={{ height: "100%", width: "100%" }}>
-                {map != null  ? 
-                 map.center.lat != null & map.center.lng != null ? 
-                 <MyMapComponent
-                 isMarkerShown
-                 isRadius
-                 p1={map.center.lat}
-                 p2={map.center.lng}
-                 radius={map.radius}
-                 parkingLot={map.parkingLot}
-                 googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIekKkymRnVUNN800c6_Kd7OfMsTnVFWg&v=3.exp&libraries=geometry,drawing,places"
-                 loadingElement={<div style={{ height: `100%` }} />}
-                 containerElement={<div style={{ height: `100%` }} />}
-                 mapElement={<div style={{ height: `100%` }} />}
-               /> : (
-                 <div className="hata-map"><img draggable={false} src="/icons/map-error.svg" alt="" /></div>
-               )
-                 : (
+                {map != null ? (
+                  (map.center.lat != null) & (map.center.lng != null) ? (
+                    <MyMapComponent
+                      isMarkerShown
+                      isRadius
+                      isRoad
+                      p1={map.center.lat}
+                      p2={map.center.lng}
+                      radius={map.radius}
+                      parkingLot={map.parkingLot}
+                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIekKkymRnVUNN800c6_Kd7OfMsTnVFWg&v=3.exp&libraries=geometry,drawing,places"
+                      loadingElement={<div style={{ height: `100%` }} />}
+                      containerElement={<div style={{ height: `100%` }} />}
+                      mapElement={<div style={{ height: `100%` }} />}
+                    />
+                  ) : (
+                    <div className="hata-map">
+                      <img
+                        draggable={false}
+                        src="/icons/map-error.svg"
+                        alt=""
+                      />
+                    </div>
+                  )
+                ) : (
                   <div className="vd-list  skeleton-text"></div>
                 )}
               </div>
@@ -245,8 +285,8 @@ function VehicleDetails() {
             </div>
             <div className="col">
               <RecentActivities />
-              {car && car.device ? <CardInfo data={car} />  : "" }
-              
+              {car && car.device ? <CardInfo data={car} /> : ""}
+
               <SI data={car} title="Dealer Information" />
               <SI2 data={car} title="Parking Lot Information" />
             </div>

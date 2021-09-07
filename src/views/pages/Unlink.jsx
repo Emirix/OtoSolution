@@ -4,7 +4,7 @@ import LinkedAutosList from "../components/LinkedAutosList";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-function OtoLink() {
+function Unlink() {
   const location = useLocation()
   const [odb, setOdb] = useState("");
   const [status, setStatus] = useState(null);
@@ -238,4 +238,4 @@ Stock number, VIN or OTO-Link serial number
   );
 }
 
-export default OtoLink;
+export default Unlink;

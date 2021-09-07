@@ -1,6 +1,4 @@
 import React,{useEffect} from "react";
-import Buyutec from "../../assets/svg/buyutec.svg"
-
 import DownArrow from "../../assets/svg/down-arrow-icon.svg";
 import Logo from "../../assets/svg/logo.svg";
 import {Link,useLocation} from "react-router-dom"
@@ -20,12 +18,18 @@ function Sidebar() {
     }
 
     if(e.currentTarget.dataset.dropdown == "kapali"){
+       //document.querySelectorAll(".side-dropdown").forEach(e=>{e.style.maxHeight="0px"})
+       //document.querySelectorAll(".sidebar li").forEach(e=>{e.style.backgroundColor = "transparent"})
+
+
        document.querySelector(".sidebar").classList.remove("sidebar-kucuk")
        document.querySelector(".page").style.paddingLeft = "231px"
         e.currentTarget.querySelector(".side-dropdown").style.maxHeight = "300px";
         e.currentTarget.querySelector("img").src = acikImg
         e.currentTarget.style.backgroundColor = "white"
         e.currentTarget.dataset.dropdown = "acik"
+
+      
     }else{
         e.currentTarget.querySelector(".side-dropdown").style.maxHeight = "0px";
         e.currentTarget.style.backgroundColor = "transparent"
@@ -110,7 +114,7 @@ function Sidebar() {
                   <Link to="/oto-link">Link</Link>
                 </li>
                 <li>
-                  <Link to="/oto-link/unlink">Unlink</Link>
+                  <Link to="/unlink">Unlink</Link>
                 </li>
                
               </ul>
