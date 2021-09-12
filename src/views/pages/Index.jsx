@@ -64,7 +64,7 @@ export default class Index extends Component {
               </div>
               <QA
                 src="icons/low-gas-red.svg"
-                title="Tire Presuare"
+                title="All Doors"
                 status="Low"
                 color="#F64E60"
                 key={0}
@@ -72,35 +72,35 @@ export default class Index extends Component {
 
               <QA
                 src="icons/service-green.svg"
-                title="Tire Presuare"
+                title="All Windows"
                 status="Running"
                 color="#3DCC7A"key={1}
               />
 
               <QA
                 src="icons/battery-green.svg"
-                title="Tire Presuare"
+                title="All Trunk"
                 status="Low"
                 color="#F64E60"key={2}
               />
 
               <QA
                 src="icons/service-red.svg"
-                title="Tire Presuare"
+                title="All Sunroof"
                 status="Low"
                 color="#F64E60"key={3}
               />
 
               <QA
                 src="icons/low-gas-green.svg"
-                title="Tire Presuare"
+                title="Car Engine"
                 status="Low"
                 color="#F64E60"key={4}
               />
 
               <QA
                 src="icons/low-gas-red.svg"
-                title="Tire Presuare"
+                title="Car Immobilize"
                 status="Low"
                 color="#F64E60"key={5}
               />
