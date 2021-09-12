@@ -774,6 +774,7 @@ img.ara {
 }
 .motion-car .sag .progress-title .title {
   color: #888C9F;
+  font-size: 14px;
 }
 .motion-car .sag .progress-title .progress2 {
   width: 100px;
@@ -781,7 +782,6 @@ img.ara {
   border-radius: 3px;
 }
 .motion-car .sag .progress-title .progress2 .cubuk {
-  width: 30%;
   z-index: 100;
   height: 6px;
   border-radius: 3px;
@@ -888,6 +888,11 @@ tr {
 .table-header-buttons button:hover {
   background: #888c9f34;
   color: #555;
+}
+
+.row-status-parked {
+  background-color: #FFA80033;
+  color: #FFA800;
 }
 
 .row-status-running {

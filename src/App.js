@@ -57,7 +57,7 @@ function App() {
 
   return (
     <Router>
-      <div className="container-fluid emir-container   p-0">
+      <div className="container-fluid  p-0">
         <Sidebar />
 
         <Provider>
@@ -65,10 +65,10 @@ function App() {
           <MobileHeader />
           <Switch>
             <Route exact path="/">
-              {isMobile ? <Redirect to="/mobile/add" /> : <Index />}
+             <Index />
             </Route>
             <Route exact path="/add-new-car">
-              {isMobile ? <Redirect to="/mobile/add" /> : <AddNewCar />}
+             <AddNewCar />
             </Route>
             <Route exact path="/dealership-list">
               <DealerList />
@@ -89,10 +89,10 @@ function App() {
               <LotInfo />
             </Route>
             <Route exact path="/vehicle-details/:id">
-              {isMobile ? <Redirect to="/mobile/add" /> : <VehicleDetails />}
+             <VehicleDetails />
             </Route>
             <Route exact path="/car-list">
-              {isMobile ? <Redirect to="/mobile/add" /> : <CarList />}
+               <CarList />
             </Route>
             <Route exact path="/mobile">
               <Redirect to="/mobile/adad" />

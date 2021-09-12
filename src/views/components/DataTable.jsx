@@ -64,7 +64,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
           col10: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4) ,
           col11: "",
           col12: val.connection_type || "",
-          col13: val.status || "Running",
+          col13: val.status || "Parked",
           id: val.id,
         });
       });
@@ -243,7 +243,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
         width: 90,
         status: "running",
         Cell: ({ cell }) => (
-          <span className={"row-status row-status-running"}>
+          <span className={"row-status row-status-parked"}>
             {cell.row.values.col13}
           </span>
         ),

@@ -167,44 +167,44 @@ export default class Index extends Component {
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"
+                  caption="Low Tire Pressure"
                   key={1}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"key={2}
+                  caption="Engine Oil Change"key={2}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"key={3}
+                  caption="Low Fluid Level"key={3}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"key={4}
+                  caption="Low TRANSMISSION FLUID"key={4}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"key={5}
+                  caption="Brakes & brake pads replacement"key={5}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"key={6}
+                  caption="Low Battery"key={6}
                 />
 
                 <BA
                   src="icons/service-yellow.svg"
                   sayi="24"
-                  caption="Low Gas"key={7}
+                  caption="Air Filter Replace"key={7}
                 />
               </div>
             </div>
@@ -216,53 +216,41 @@ export default class Index extends Component {
           <div className="motion-container pb-3">
             <MotionCars
               src={[
-                "url(https://imgd.aeplcdn.com/0x0/n/cw/ec/27032/s60-exterior-right-front-three-quarter-3.jpeg)",
-                "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg)",
+                "url(https://cdn.motor1.com/images/mgl/2bqMx/s1/2019-subaru-ascent-review.jpg)",
+                "url(https://www.cnet.com/a/img/numGAUYySR62imJg9QFWR2o9Qhs=/2018/07/13/b8f7a40b-82c7-4c34-8bb9-d18b064db4a5/ogi1-001-2019-subaru-ascent-review.jpg)",
+                
               ]}
-              marka={"Toyota"}
-              model="Corolla"
-              since="1:32"
+              marka={"Subaru"}
+              model="Ascent"
+              since="5:29"
               key={0}
+              deger={[20,10,91,29]}
             />
 
+            
             <MotionCars
               src={[
-                "url(https://imgd.aeplcdn.com/0x0/n/cw/ec/27032/s60-exterior-right-front-three-quarter-3.jpeg)",
-                "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg)",
+                "url(https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg_hero_large/v1/editorial/2019-Honda-CR-V-vti-e7-1001x565p.JPG)",
+                "url(https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_cg__marking_background__sm_/v1/editorial/2019-Honda-CR-V-vti-e7-1200x800p%20%281%29.JPG)",
               ]}
-              marka={"Toyota"}
-              model="Corolla"
-              since="1:32"key={1}
+              marka={"Honda"}
+              model="CR-V"
+              since="2:19"key={2}
+              deger={[15,20,100,40]}
+
             />
 
+          
             <MotionCars
               src={[
-                "url(https://imgd.aeplcdn.com/0x0/n/cw/ec/27032/s60-exterior-right-front-three-quarter-3.jpeg)",
-                "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg)",
+                "url(https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1562246208/autoexpress/2018/04/dsc_3132_1.jpg)",
+                "url(https://media.wired.com/photos/59af3206fb5fbc7d7601e7a4/master/w_2560%2Cc_limit/nissanleaf-TA.jpg)",
               ]}
-              marka={"Toyota"}
-              model="Corolla"
-              since="1:32"key={2}
-            />
+              marka={"Nissan"}
+              model="Leaf"
+              since="8:19"key={4}
+              deger={[30,60,10,70]}
 
-            <MotionCars
-              src={[
-                "url(https://imgd.aeplcdn.com/0x0/n/cw/ec/27032/s60-exterior-right-front-three-quarter-3.jpeg)",
-                "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg)",
-              ]}
-              marka={"Toyota"}
-              model="Corolla"
-              since="1:32"key={3}
-            />
-
-            <MotionCars
-              src={[
-                "url(https://imgd.aeplcdn.com/0x0/n/cw/ec/27032/s60-exterior-right-front-three-quarter-3.jpeg)",
-                "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg)",
-              ]}
-              marka={"Toyota"}
-              model="Corolla"
-              since="1:32"key={4}
             />
 
             <MotionCars
@@ -273,17 +261,24 @@ export default class Index extends Component {
               marka={"Toyota"}
               model="Corolla"
               since="1:32"key={5}
+              deger={[15,90,30,44]}
+
             />
 
-            <MotionCars
+
+<MotionCars
               src={[
-                "url(https://imgd.aeplcdn.com/0x0/n/cw/ec/27032/s60-exterior-right-front-three-quarter-3.jpeg)",
-                "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/new-ghost-white-fr-3-4-1-1598911711.jpg)",
+                "url(https://cdn.motor1.com/images/mgl/jvjqN/s1/mercedes-e-klasse-2020.jpg)",
+                "url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2021-mercedes-benz-e-class-102-1583172962.jpg?crop=0.897xw:0.673xh;0.0865xw,0.216xh&resize=1200:*)",
               ]}
-              marka={"Toyota"}
-              model="Corolla"
-              since="1:32"key={6}
+              marka={"MERCEDES-BENZ"}
+              model="E-Class"
+              since="7:18"key={1}
+              deger={[45,70,50,100]}
             />
+
+
+        
           </div>
         </div>
               <iframe title="print frame" className="d-none"></iframe>

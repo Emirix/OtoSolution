@@ -1,6 +1,6 @@
 import React from 'react'
 
-function MotionCars({src,marka,model,since}) {
+function MotionCars({src,marka,model,since,deger}) {
     function changePhoto(e){
         const parent = e.target.parentElement.parentElement
         parent.style.backgroundImage = src[e.target.dataset.index]
@@ -37,39 +37,34 @@ function MotionCars({src,marka,model,since}) {
                 <div className="progress-title ">
                     <div className="title">Gas</div>
                     <div className="progress2 pro-sari">
-                        <div className="cubuk"></div>
+                        <div className="cubuk" style={{width:deger[0]+"%"}}></div>
                     </div>
                 </div>
 
                 <div className="progress-title ">
-                    <div className="title">Gas</div>
+                    <div className="title">Battery</div>
                     <div className="progress2 pro-yesil">
-                        <div className="cubuk"></div>
+                        <div className="cubuk" style={{width:deger[1]+"%"}}></div>
                     </div>
                 </div>
 
 
                 <div className="progress-title ">
-                    <div className="title">Gas</div>
+                    <div className="title">Speed</div>
                     <div className="progress2 pro-sari">
-                        <div className="cubuk"></div>
+                        <div className="cubuk" style={{width:deger[2]+"%"}}></div>
                     </div>
                 </div>
 
                 <div className="progress-title ">
-                    <div className="title">Gas</div>
+                    <div className="title">Distance</div>
                     <div className="progress2 pro-sari">
-                        <div className="cubuk"></div>
+                        <div className="cubuk"  style={{width:deger[3]+"%"}} ></div>
                     </div>
                 </div>
 
 
-                <div className="progress-title ">
-                    <div className="title">Gas</div>
-                    <div className="progress2 pro-sari">
-                        <div className="cubuk"></div>
-                    </div>
-                </div>
+                
 
                 <div className="outline-button w-50 ms-auto mt-2">Details</div>
 
