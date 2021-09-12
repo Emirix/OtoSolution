@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="47" height="44" viewBox="0 0 47 44">
-  <g id="Group_439" data-name="Group 439" transform="translate(-199 -609)" opacity="0.996">
-    <g id="Rectangle_819" data-name="Rectangle 819" transform="translate(199 609)" fill="none" stroke="#d91e27" stroke-width="1">
-      <rect width="47" height="44" rx="8" stroke="none"/>
-      <rect x="0.5" y="0.5" width="46" height="43" rx="7.5" fill="none"/>
-    </g>
-    <path id="trash-solid" d="M17.008.26H12.284l-.37-.736A.945.945,0,0,0,11.067-1h-4.5a.934.934,0,0,0-.843.524L5.354.26H.63A.63.63,0,0,0,0,.89v1.26a.63.63,0,0,0,.63.63H17.008a.63.63,0,0,0,.63-.63V.89A.63.63,0,0,0,17.008.26ZM2.095,18.386A1.89,1.89,0,0,0,3.98,20.158h9.677a1.89,1.89,0,0,0,1.886-1.771l.835-13.347H1.26Z" transform="translate(213.691 621.246)" fill="#d91e27"/>
-  </g>
-</svg>
