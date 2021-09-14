@@ -18,7 +18,14 @@ export default class Index extends Component {
       parkingLots:[],
       dealers:[],
       lotFiltre:null,
-      dealerFiltre:null
+      dealerFiltre:null,
+      // Switchs
+      switchAllDoors:false,
+      switchAllTrunk:false,
+      switchCarEngine:false,
+      switchAllWindows:false,
+      switchAllSunroof:false,
+      switchCarImmobilize:false,
       
     }
   }
@@ -63,46 +70,70 @@ export default class Index extends Component {
                 }}>Get Premium</button>
               </div>
               <QA
-                src="icons/low-gas-red.svg"
+                src={this.state.switchAllDoors ? "icons/doors-closed.svg" : "icons/doors-open.svg"}
                 title="All Doors"
-                status="Lock"
-                color="#F64E60"
+                status={this.state.switchAllDoors ? "Unlock" : "Lock"}
+                color={this.state.switchAllDoors ? "#F64E60" : "#3DCC7A"}
                 key={0}
+                val={this.state.switchAllDoors}
+                valChange={()=>this.setState({switchAllDoors:!this.state.switchAllDoors})}
               />
 
               <QA
-                src="icons/service-green.svg"
+                src={this.state.switchAllWindows ? "icons/windows-closed.svg" : "icons/windows-open.svg"}
                 title="All Windows"
-                status="Roll Down"
-                color="#3DCC7A"key={1}
+                status={this.state.switchAllWindows ? "Roll Down" : "Roll Up"}
+
+                color={this.state.switchAllWindows ? "#F64E60" : "#3DCC7A"}
+
+                key={1}
+                val={this.state.switchAllWindows}
+                valChange={()=>this.setState({switchAllWindows:!this.state.switchAllWindows})}
               />
 
               <QA
-                src="icons/battery-green.svg"
+                src={this.state.switchAllTrunk ? "icons/trunk-closed.svg" : "icons/trunk-open.svg"}
+
                 title="All Trunk"
-                status="Open"
-                color="#F64E60"key={2}
+                status={this.state.switchAllTrunk ? "Close" : "Open"}
+                color={this.state.switchAllTrunk ? "#F64E60" : "#3DCC7A"}
+                key={2}
+                val={this.state.switchAllTrunk}
+                valChange={()=>this.setState({switchAllTrunk:!this.state.switchAllTrunk})}
               />
 
               <QA
-                src="icons/service-red.svg"
+                src={this.state.switchAllSunroof ? "icons/sunroof-closed.svg" : "icons/sunroof-open.svg"}
                 title="All Sunroof"
-                status="Close"
-                color="#F64E60"key={3}
+                color={this.state.switchAllSunroof ? "#F64E60" : "#3DCC7A"}
+                key={3}
+                status={this.state.switchAllSunroof ? "Close" : "Open"}
+
+                val={this.state.switchAllSunroof}
+                valChange={()=>this.setState({switchAllSunroof:!this.state.switchAllSunroof})}
               />
 
               <QA
-                src="icons/low-gas-green.svg"
+                src={this.state.switchCarEngine ? "icons/engine-closed.svg" : "icons/engine-open.svg"}
                 title="Car Engine"
-                status="Start"
-                color="#F64E60"key={4}
+                status={this.state.switchCarEngine ? "Stop" : "Start"}
+                color={this.state.switchCarEngine ? "#F64E60" : "#3DCC7A"}
+
+                key={4}
+                val={this.state.switchCarEngine}
+                valChange={()=>this.setState({switchCarEngine:!this.state.switchCarEngine})}
               />
 
               <QA
-                src="icons/low-gas-red.svg"
+                src={this.state.switchCarImmobilize ? "icons/im-closed.svg" : "icons/im-open.svg"}
                 title="Car Immobilize"
                 status=""
-                color="#F64E60"key={5}
+                color={this.state.switchCarImmobilize ? "#F64E60" : "#3DCC7A"}
+
+                key={5}
+                val={this.state.switchCarImmobilize}
+                valChange={()=>this.setState({switchCarImmobilize:!this.state.switchCarImmobilize})}
+               
               />
             </div>
           </div>
@@ -158,52 +189,52 @@ export default class Index extends Component {
                 </div> </div>
               <div className="col d-flex flex-wrap ps-3 jspr ">
                 <BA
-                  src="icons/service-yellow.svg"
-                  sayi="24"
+                  src="icons/gas.svg"
+                  sayi="38"
                   caption="Low Gas"
                   key={0}
                 />
 
                 <BA
-                  src="icons/service-yellow.svg"
-                  sayi="24"
+                  src="icons/tire.svg"
+                  sayi="63"
                   caption="Low Tire Pressure"
                   key={1}
                 />
 
                 <BA
-                  src="icons/service-yellow.svg"
-                  sayi="24"
+                  src="icons/engine-oil.svg"
+                  sayi="49"
                   caption="Engine Oil Change"key={2}
                 />
 
                 <BA
-                  src="icons/service-yellow.svg"
-                  sayi="24"
+                  src="icons/low-fluid.svg"
+                  sayi="21"
                   caption="Low Fluid Level"key={3}
                 />
 
                 <BA
-                  src="icons/service-yellow.svg"
-                  sayi="24"
-                  caption="Low TRANSMISSION FLUID"key={4}
+                  src="icons/trans.svg"
+                  sayi="12"
+                  caption="Low Transmission Fluid"key={4}
                 />
 
                 <BA
-                  src="icons/service-yellow.svg"
-                  sayi="24"
-                  caption="Brakes & brake pads replacement"key={5}
+                  src="icons/brakes.svg"
+                  sayi="48"
+                  caption="Brakes & Brake Pads Replacement"key={5}
                 />
 
                 <BA
-                  src="icons/service-yellow.svg"
-                  sayi="24"
+                  src="icons/battery.svg"
+                  sayi="81"
                   caption="Low Battery"key={6}
                 />
 
                 <BA
-                  src="icons/service-yellow.svg"
-                  sayi="24"
+                  src="icons/air-filter.svg"
+                  sayi="64"
                   caption="Air Filter Replace"key={7}
                 />
               </div>

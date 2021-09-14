@@ -607,12 +607,16 @@ img.ara {
 .qa__title {
   color: #888C9F;
 }
+.qa__status {
+  transition: 0.2s;
+}
 .qa img {
   width: 62px;
   height: 62px;
 }
 .qa .react-switch {
-  margin-left: 1rem;
+  margin-left: auto;
+  margin-right: 1rem;
 }
 
 .semi-bar {

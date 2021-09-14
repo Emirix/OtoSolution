@@ -326,7 +326,7 @@ height: 266px;
         color: #888C9F;
     }
     &__status{
-        
+        transition: .2s;
     }
     img{
         width: 62px;
@@ -334,7 +334,8 @@ height: 266px;
     }
 
     .react-switch{
-        margin-left: 1rem;
+        margin-left: auto;
+        margin-right: 1rem;
     }
 }
 

@@ -1,8 +1,7 @@
 import React,{useState} from "react";
 import Switch from "react-switch";
 
-function QA({ src,title,status,color}) {
-  const [checked,setChecked] = useState(false)
+function QA({ src,title,status,color,val,valChange}) {
   return (
     <div className="qa">
       <img src={src} alt="" />
@@ -11,8 +10,8 @@ function QA({ src,title,status,color}) {
         <div className="qa__status" style={{color:color}}>{status}</div>
       </div>
       <Switch
-            checked={checked}
-            onChange={()=>{setChecked(!checked)}}
+            checked={val}
+            onChange={()=>{valChange()}}
             onColor="#3ECD7B"
             onHandleColor="#fff"
             handleDiameter={17}
