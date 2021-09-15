@@ -72,7 +72,7 @@ export default class Index extends Component {
               <QA
                 src={this.state.switchAllDoors ? "icons/doors-closed.svg" : "icons/doors-open.svg"}
                 title="All Doors"
-                status={this.state.switchAllDoors ? "Unlock" : "Lock"}
+                status={this.state.switchAllDoors ? "Unlocked" : "Locked"}
                 color={this.state.switchAllDoors ? "#F64E60" : "#3DCC7A"}
                 key={0}
                 val={this.state.switchAllDoors}
@@ -82,7 +82,7 @@ export default class Index extends Component {
               <QA
                 src={this.state.switchAllWindows ? "icons/windows-closed.svg" : "icons/windows-open.svg"}
                 title="All Windows"
-                status={this.state.switchAllWindows ? "Roll Down" : "Roll Up"}
+                status={this.state.switchAllWindows ? "Open" : "Closed"}
 
                 color={this.state.switchAllWindows ? "#F64E60" : "#3DCC7A"}
 
@@ -94,8 +94,8 @@ export default class Index extends Component {
               <QA
                 src={this.state.switchAllTrunk ? "icons/trunk-closed.svg" : "icons/trunk-open.svg"}
 
-                title="All Trunk"
-                status={this.state.switchAllTrunk ? "Close" : "Open"}
+                title="All Trunks"
+                status={this.state.switchAllTrunk ? "Open" : "Closed"}
                 color={this.state.switchAllTrunk ? "#F64E60" : "#3DCC7A"}
                 key={2}
                 val={this.state.switchAllTrunk}
@@ -107,7 +107,7 @@ export default class Index extends Component {
                 title="All Sunroof"
                 color={this.state.switchAllSunroof ? "#F64E60" : "#3DCC7A"}
                 key={3}
-                status={this.state.switchAllSunroof ? "Close" : "Open"}
+                status={this.state.switchAllSunroof ? "Open" : "Closed"}
 
                 val={this.state.switchAllSunroof}
                 valChange={()=>this.setState({switchAllSunroof:!this.state.switchAllSunroof})}
@@ -116,7 +116,7 @@ export default class Index extends Component {
               <QA
                 src={this.state.switchCarEngine ? "icons/engine-closed.svg" : "icons/engine-open.svg"}
                 title="Car Engine"
-                status={this.state.switchCarEngine ? "Stop" : "Start"}
+                status={this.state.switchCarEngine ? "On" : "Off"}
                 color={this.state.switchCarEngine ? "#F64E60" : "#3DCC7A"}
 
                 key={4}
@@ -127,7 +127,7 @@ export default class Index extends Component {
               <QA
                 src={this.state.switchCarImmobilize ? "icons/im-closed.svg" : "icons/im-open.svg"}
                 title="Car Immobilize"
-                status=""
+                status={this.state.switchCarImmobilize ? "On" : "Off"}
                 color={this.state.switchCarImmobilize ? "#F64E60" : "#3DCC7A"}
 
                 key={5}
