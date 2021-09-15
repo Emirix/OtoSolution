@@ -192,6 +192,7 @@ function VehicleDetails() {
                 </div>
 
                 <div className="data-progress-container">
+                  {car != null && car.status >= 3 ? <>
                   <div className="data-progress">
                     <div className="title">Speed</div>
                     {car ? (
@@ -213,6 +214,7 @@ function VehicleDetails() {
                       <div className="skeleton-text-kucuk"></div>
                     )}
                   </div>
+                  </> : "" }
 
                   <div className="data-progress">
                     <div className="title">Battery</div>
@@ -284,7 +286,7 @@ function VehicleDetails() {
               <List2 val={car} title="Vehicle Information" />
             </div>
             <div className="col">
-              <RecentActivities />
+              <RecentActivities data={car} />
               {car && car.device ? <CardInfo data={car} /> : ""}
 
               <SI data={car} title="Dealer Information" />
