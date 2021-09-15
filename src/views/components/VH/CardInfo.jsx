@@ -1,10 +1,23 @@
 import React from "react";
 
 function CardInfo({ data }) {
-  
+  const months = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec",
+  };
   return (
     <div className="c-a mt-3 p-0">
-      <div className="c-title p-2">Card Info</div>
+      <div className="c-title p-2">Card Status</div>
       <ul className="c-list p-2">
         <li>
           <div className="title">Serial ID</div>
@@ -64,27 +77,23 @@ function CardInfo({ data }) {
 
       <div className="c-a-bottom p-2">
         <div className="c-a-bottom__header d-flex align-items-center justify-content-between ">
-          <div className="c-title">Card List</div>
+          <div className="c-title">Card Status</div>
           <div className="c-title">Last Connected</div>
         </div>
         <ul className="c-list">
           <li>
-            <div className="title">23456234</div>
-            <div className="durum durum-yesil">Online</div>
-            <div className="data">23456234</div>
+            <div className="title">{data.device.id}</div>
+            {data.connection_type == 1 ? <div className="durum durum-yesil">Wired</div> : ""}
+            {data.connection_type == 2 ? <div className="durum durum-yesil">Wireless</div> : ""}
+            {data.connection_type == null ? <div className="durum durum-gri">Disconnected</div> : ""}
+           
+            <div className="data">{}
+            
+            {months[data.last_connection_time.substring(5, 7)] + " " + data.last_connection_time.substring(8, 10) + " " +  data.last_connection_time.substring(0, 4) + " " + data.last_connection_time.substring(11,16) }</div>
           </li>
 
-          <li>
-            <div className="title">23456234</div>
-            <div className="durum durum-gri">Removed</div>
-            <div className="data">23456234</div>
-          </li>
 
-          <li>
-            <div className="title">23456234</div>
-            <div className="durum durum-gri">23456234</div>
-            <div className="data">23456234</div>
-          </li>
+          
         </ul>
       </div>
     </div>
