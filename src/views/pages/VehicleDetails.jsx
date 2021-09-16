@@ -64,22 +64,7 @@ function VehicleDetails() {
   useEffect(() => {
 
     const interval = setInterval(()=>{
-      axios.get("/api/dealer/vehicles/" + id).then((res) => {
-        setCar(res.data);
-
-        setMap({
-          center: {
-            lat: res.data.lat,
-            lng: res.data.lon,
-          },
-          zoom: 80,
-          radius: res.data.desired_lot.radius,
-          parkingLot: {
-            lat: res.data.desired_lot.p1_lat,
-            lng: res.data.desired_lot.p1_lon,
-          },
-        });
-      });
+     
     },1000)
 
 
