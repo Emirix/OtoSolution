@@ -1239,6 +1239,9 @@ tr {
 .time .yuvarlak-yesil {
   border: 3px solid #1BC5BD;
 }
+.time .yuvarlak-sari {
+  border: 3px solid #f8e006;
+}
 .time .yuvarlak-red {
   border: 3px solid #F64E60;
 }

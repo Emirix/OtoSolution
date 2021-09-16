@@ -4,11 +4,11 @@ import Spinner from "../../components/Spinner/Spinner"
 function RecentActivities({data}) {
     const [status,setStatus] = useState(null);
     const [color,setColor] = useState(null)
+    const [s0,setS0] = useState(null)
     useEffect(()=>{
         if(data == null){
             return
         }
-        console.log("Effect");
         console.log(data)
         const _status = data.status;
         const _rpm = data.rpm
@@ -17,7 +17,48 @@ function RecentActivities({data}) {
         const _connection = data.connection_type
         const _voltage = data.battery
         
-        // STATUS 0
+ 
+        
+
+      
+
+
+         // STATUS 5
+        // Tüm Değerler Var İse
+        if(
+            _connection != null &&
+            _gps != null &&
+            _speed != null &&
+            _rpm  != null  &&
+            _voltage != null
+        ){
+            setStatus(5);
+            if(5 == _status){
+                setColor("yuvarlak-yesil")
+            }else{
+                setColor("yuvarlak-sari")
+            }
+        }
+
+
+          // STATUS 4
+        // Connection, Voltage, GPS, boş/null değilse, RPM 0'dan büyük ve Speed 0 ise :
+        if(
+            _connection != null &&
+            _gps != null &&
+            _speed == 0 &&
+            _rpm > 0  &&
+            _voltage != null
+        ){
+            setStatus(4);
+            if(4 == _status){
+                setColor("yuvarlak-yesil")
+            }else{
+                setColor("yuvarlak-sari")
+            }
+        }
+
+               // STATUS 0
         // Hepsi Null İse
         if(
             _connection == null &&
@@ -43,8 +84,8 @@ function RecentActivities({data}) {
             _rpm == null  &&
             _voltage == null
         ){
-            setStatus(2);
-            if(2 == _status){
+            setStatus(1);
+            if(1 == _status){
                 setColor("yuvarlak-yesil")
             }else{
                 setColor("yuvarlak-sari")
@@ -85,42 +126,6 @@ function RecentActivities({data}) {
             }
         }
 
-        
-
-        // STATUS 4
-        // Connection, Voltage, GPS, boş/null değilse, RPM 0'dan büyük ve Speed 0 ise :
-        if(
-            _connection != null &&
-            _gps != null &&
-            _speed == 0 &&
-            _rpm > 0  &&
-            _voltage != null
-        ){
-            setStatus(4);
-            if(4 == _status){
-                setColor("yuvarlak-yesil")
-            }else{
-                setColor("yuvarlak-sari")
-            }
-        }
-
-
-         // STATUS 5
-        // Tüm Değerler Var İse
-        if(
-            _connection != null &&
-            _gps != null &&
-            _speed != null &&
-            _rpm  != null  &&
-            _voltage != null
-        ){
-            setStatus(5);
-            if(5 == _status){
-                setColor("yuvarlak-yesil")
-            }else{
-                setColor("yuvarlak-sari")
-            }
-        }
 
     },[data])
     return (
@@ -136,12 +141,12 @@ function RecentActivities({data}) {
                 </div> : ""}
 
                 {status == 1 ? <div className="time">
-                    <div className="yuvarlak yuvarlak-koyu"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Oto Link On (Not Connected to OBD)</div>
                 </div> : ""}
 
                 {status ==2 ? <> <div className="time">
-                    <div className="yuvarlak yuvarlak-koyu"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Oto Link On</div>
                 </div>
                 <div className="time-cubuk"></div>
@@ -154,7 +159,7 @@ function RecentActivities({data}) {
                 </>: ""}
 
                 {status == 3 ? <> <div className="time">
-                    <div className="yuvarlak yuvarlak-koyu"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Oto Link On (Connected to OBD)</div>
                 </div>
                 <div className="time-cubuk"></div>
@@ -175,7 +180,7 @@ function RecentActivities({data}) {
 
                 {status == 4 ? <> 
                 <div className="time">
-                    <div className="yuvarlak yuvarlak-yesil"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Engine On</div>
                 </div>
 
@@ -190,7 +195,7 @@ function RecentActivities({data}) {
 
                 {status == 5 ? <> 
                 <div className="time">
-                    <div className="yuvarlak yuvarlak-yesil"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Engine On</div>
                 </div>
 
