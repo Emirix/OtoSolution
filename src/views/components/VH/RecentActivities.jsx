@@ -3,7 +3,7 @@ import Spinner from "../../components/Spinner/Spinner"
 
 function RecentActivities({data}) {
     const [status,setStatus] = useState(null);
-    const [color,setColor] = useState(null)
+    const [color,setColor] = useState("yuvarlak-yesil")
     const [s0,setS0] = useState(null)
     useEffect(()=>{
         if(data == null){
@@ -135,7 +135,7 @@ function RecentActivities({data}) {
             {data != null ? 
             <div className="timelist">
 
-{status == 0 || data.status == null ? <div className="time">
+{status == 0 || status == null ? <div className="time">
                     <div className={"yuvarlak " + color}></div>
                     <div className="durum">Oto Link Power Off</div>
                 </div> : ""}
