@@ -62,6 +62,27 @@ function VehicleDetails() {
   const { id } = useParams();
   const [map, setMap] = useState(null);
   useEffect(() => {
+
+    const interval = setInterval(()=>{
+      axios.get("/api/dealer/vehicles/" + id).then((res) => {
+        setCar(res.data);
+
+        setMap({
+          center: {
+            lat: res.data.lat,
+            lng: res.data.lon,
+          },
+          zoom: 80,
+          radius: res.data.desired_lot.radius,
+          parkingLot: {
+            lat: res.data.desired_lot.p1_lat,
+            lng: res.data.desired_lot.p1_lon,
+          },
+        });
+      });
+    },1000)
+
+
     axios.get("/api/dealer/vehicles/" + id).then((res) => {
       console.log(res.data);
       setCar(res.data);
@@ -79,6 +100,9 @@ function VehicleDetails() {
         },
       });
     });
+    return ()=>{
+      clearInterval(interval)
+    }
   }, []);
   if (!localStorage.getItem("key")) {
     return <Redirect to="/login" />;

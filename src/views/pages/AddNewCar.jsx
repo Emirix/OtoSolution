@@ -624,7 +624,7 @@ function AddNewCar({ bg, title }) {
 
               <div className="as">
                 <div className="mini-title"></div>
-                <CardInfo />
+               {/* <CardInfo /> */ }
               </div>
             </div>
             <div className="col-lg-6 col-md-12">
