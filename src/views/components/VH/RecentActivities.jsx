@@ -28,7 +28,7 @@ function RecentActivities({data,updateStatus}) {
             _voltage != null
         ){
             setStatus(5);
-            updateStatus(2)
+            updateStatus(5)
             if(5 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -49,7 +49,7 @@ function RecentActivities({data,updateStatus}) {
             _voltage != null
         ){
             setStatus(4);
-            updateStatus(2)
+            updateStatus(4)
 
             if(4 == _status){
                 setColor("yuvarlak-yesil")
@@ -68,7 +68,7 @@ function RecentActivities({data,updateStatus}) {
             _voltage == null
         ){
             setStatus(0);
-            updateStatus(2)
+            updateStatus(0)
             if(0 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -86,7 +86,7 @@ function RecentActivities({data,updateStatus}) {
             _voltage == null
         ){
             setStatus(1);
-            updateStatus(2)
+            updateStatus(1)
             if(1 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -118,11 +118,12 @@ function RecentActivities({data,updateStatus}) {
             _connection != null &&
             _gps != null &&
             _speed == 0 &&
+            _speed == null ||
             _rpm == 0  &&
             _voltage != null
         ){
             setStatus(3);
-            updateStatus(2)
+            updateStatus(3)
             if(3 == _status){
                 setColor("yuvarlak-yesil")
             }else{
