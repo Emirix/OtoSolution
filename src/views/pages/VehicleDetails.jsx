@@ -29,6 +29,7 @@ const MyMapComponent = withScriptjs(
     const [lng, setLng] = useState(props.p2);
     const [parkingLot, setParkingLot] = useState(props.parkingLot);
 
+
     return (
       <GoogleMap defaultZoom={14} defaultCenter={{ lat: lat, lng: lng }}>
         {props.isMarkerShown && <Marker position={{ lat: lat, lng: lng }} />}
@@ -61,6 +62,7 @@ function VehicleDetails() {
   const [car, setCar] = useState(null);
   const { id } = useParams();
   const [map, setMap] = useState(null);
+  const [status, setStatus] = useState(null)
   useEffect(() => {
 
     const interval = setInterval(()=>{
@@ -71,6 +73,7 @@ function VehicleDetails() {
     axios.get("/api/dealer/vehicles/" + id).then((res) => {
       console.log(res.data);
       setCar(res.data);
+      setStatus(res.data.status)
 
       setMap({
         center: {
@@ -201,7 +204,7 @@ function VehicleDetails() {
                 </div>
 
                 <div className="data-progress-container">
-                  {car != null && car.status >= 3 ? <>
+                  {car != null && status >= 3 ? <>
                   <div className="data-progress">
                     <div className="title">Speed</div>
                     {car ? (
@@ -295,7 +298,11 @@ function VehicleDetails() {
               <List2 val={car} title="Vehicle Information" />
             </div>
             <div className="col">
-              <RecentActivities data={car} />
+              <RecentActivities data={car} updateStatus={e=>{
+                console.log("SA")
+                console.log(e)
+                setStatus(e)
+              }}/>
               {car && car.device ? <CardInfo data={car} /> : ""}
 
               <SI data={car} title="Dealer Information" />

@@ -1,11 +1,12 @@
 import React,{useEffect,useState} from 'react'
 import Spinner from "../../components/Spinner/Spinner"
 
-function RecentActivities({data}) {
+function RecentActivities({data,updateStatus}) {
     const [status,setStatus] = useState(null);
     const [color,setColor] = useState("yuvarlak-yesil")
     const [s0,setS0] = useState(null)
     useEffect(()=>{
+        
         if(data == null){
             return
         }
@@ -16,12 +17,6 @@ function RecentActivities({data}) {
         const _gps = data.lat
         const _connection = data.connection_type
         const _voltage = data.battery
-        
- 
-        
-
-      
-
 
          // STATUS 5
         // Tüm Değerler Var İse
@@ -33,6 +28,7 @@ function RecentActivities({data}) {
             _voltage != null
         ){
             setStatus(5);
+            updateStatus(2)
             if(5 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -46,11 +42,15 @@ function RecentActivities({data}) {
         if(
             _connection != null &&
             _gps != null &&
+            _speed == null ||
             _speed == 0 &&
+           
             _rpm > 0  &&
             _voltage != null
         ){
             setStatus(4);
+            updateStatus(2)
+
             if(4 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -68,6 +68,7 @@ function RecentActivities({data}) {
             _voltage == null
         ){
             setStatus(0);
+            updateStatus(2)
             if(0 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -85,6 +86,7 @@ function RecentActivities({data}) {
             _voltage == null
         ){
             setStatus(1);
+            updateStatus(2)
             if(1 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -102,6 +104,7 @@ function RecentActivities({data}) {
             _voltage != null
         ){
             setStatus(2);
+            updateStatus(2)
             if(2 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -119,6 +122,7 @@ function RecentActivities({data}) {
             _voltage != null
         ){
             setStatus(3);
+            updateStatus(2)
             if(3 == _status){
                 setColor("yuvarlak-yesil")
             }else{
@@ -152,7 +156,7 @@ function RecentActivities({data}) {
                 <div className="time-cubuk"></div>
 
                 <div className="time">
-                    <div className="yuvarlak yuvarlak-yesil"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Oto Link Connected to OBD</div>
                 </div>
 
@@ -165,14 +169,14 @@ function RecentActivities({data}) {
                 <div className="time-cubuk"></div>
 
                 <div className="time">
-                    <div className="yuvarlak yuvarlak-yesil"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Ignition On</div>
                 </div>
 
                 <div className="time-cubuk"></div>
 
                 <div className="time">
-                    <div className="yuvarlak yuvarlak-red"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Engine Off</div>
                 </div>
 
@@ -187,7 +191,7 @@ function RecentActivities({data}) {
                 <div className="time-cubuk"></div>
 
                 <div className="time">
-                    <div className="yuvarlak yuvarlak-red"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Car Stationary</div>
                 </div>
 
@@ -202,7 +206,7 @@ function RecentActivities({data}) {
                 <div className="time-cubuk"></div>
 
                 <div className="time">
-                    <div className="yuvarlak yuvarlak-red"></div>
+                    <div className={"yuvarlak " + color}></div>
                     <div className="durum">Car Moving</div>
                 </div>
 
