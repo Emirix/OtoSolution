@@ -13,6 +13,7 @@ import CardInfo from "../components/VH/CardInfo";
 import { useParams, Redirect } from "react-router-dom";
 import Page from "./Page";
 import axios from "axios";
+
 import {
   GoogleMap,
   withScriptjs,
@@ -92,6 +93,43 @@ function VehicleDetails() {
       clearInterval(interval)
     }
   }, []);
+  var months = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "Jul",
+    "08": "Aug",
+    "09": "Sep",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec",
+  };
+
+
+  function timeAgo(input) {
+    const date = (input instanceof Date) ? input : new Date(input);
+    const formatter = new Intl.RelativeTimeFormat('en');
+    const ranges = {
+      years: 3600 * 24 * 365,
+      months: 3600 * 24 * 30,
+      weeks: 3600 * 24 * 7,
+      days: 3600 * 24,
+      hours: 3600,
+      minutes: 60,
+      seconds: 1
+    };
+    const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+    for (let key in ranges) {
+      if (ranges[key] < Math.abs(secondsElapsed)) {
+        const delta = secondsElapsed / ranges[key];
+        return formatter.format(Math.round(delta), key);
+      }
+    }
+}
+  
   if (!localStorage.getItem("key")) {
     return <Redirect to="/login" />;
   } else {
@@ -112,6 +150,7 @@ function VehicleDetails() {
           <div className="row m-0">
             <div className="mini-title mt-3">Vehicle Details</div>
             <div className="br-12 col-lg-6 vd h-266 m-0 position-relative ">
+           
               <VH
                 src={[car1, car2]}
                 marka={car ? car.vin.brand_name : ""}
@@ -150,8 +189,14 @@ function VehicleDetails() {
                 title="Click for refresh data"
                 className="refresh-data position-absolute"
               ></div>
-              <div>
+              <div className=" position-relative">
+              <div className="premium-container br-12 d-none p-3">
+                <button className=" mor-button text-center" ><strong>Connection Lost</strong> <br/> 
+                Last Updated: {car != null ? months[car.last_connection_time.substring(5, 7)] + " " + car.last_connection_time.substring(8, 10) + " " +  car.last_connection_time.substring(0, 4) + " " + car.last_connection_time.substring(11,16) + " ("+timeAgo(car.last_connection_time) +")  " : "No Data"}
+                </button>
+              </div>
                 <div className="data-title-container">
+                
                   <DataInfo
                     data={
                       car ? (
@@ -189,7 +234,7 @@ function VehicleDetails() {
                         ? car.device.id
                         : "No Device"
                     }
-                    title="Device ID"
+                    title="Serial ID"
                   />
                   <DataInfo
                     data={

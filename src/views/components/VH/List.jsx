@@ -30,7 +30,11 @@ function List({ val, title }) {
 
         <li>
           <div className="title">Serial ID</div>
-          <div className="data truncate">123123</div>
+          <div className="data truncate">{
+                      val != null && val.device != null
+                        ? val.device.id
+                        : "No Device"
+                    }</div>
         </li>
 
         <li>
@@ -59,7 +63,9 @@ function List({ val, title }) {
         <li>
           <div className="title">Inventory Type</div>
           <div className="data truncate">
-            {val ? val.inventory_type || "Null" : ""}
+            {val ? 
+            val.inventory_type == 1 ? "New" : val.inventory_type == 2 ? "Used" : ""
+            || "Null" : ""}
           </div>
         </li>
 
