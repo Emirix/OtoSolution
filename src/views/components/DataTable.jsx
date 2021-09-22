@@ -63,8 +63,8 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
           col9: "",
           col10: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4) ,
           col11: "",
-          col12: val.connection_type || "",
-          col13: val.status || "Parked",
+          col12:"",
+          col13:  "Parked",
           id: val.id,
         });
       });

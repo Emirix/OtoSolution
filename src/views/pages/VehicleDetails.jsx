@@ -105,6 +105,7 @@ function VehicleDetails() {
       setCar(res.data);
       setStatus(res.data.status);
 
+      
       var now = new Date();
       var bDay = new Date(res.data.last_connection_time);
       var elapsedT = now - bDay;
@@ -276,7 +277,7 @@ function VehicleDetails() {
                         " " +
                         car.last_connection_time.substring(0, 4) +
                         " " +
-                        car.last_connection_time.substring(11, 16) +
+                        new Date(car.last_connection_time).toString().substring(15,21) +
                         " (" +
                         timeAgo(car.last_connection_time) +
                         ")  "
