@@ -133,18 +133,37 @@ function VehicleDetails() {
         setLastVoltage(res.data.battery);
       }
 
-      setMap({
-        center: {
-          lat: res.data.lat,
-          lng: res.data.lon,
-        },
-        zoom: 80,
-        radius: res.data.desired_lot.radius,
-        parkingLot: {
-          lat: res.data.desired_lot.p1_lat,
-          lng: res.data.desired_lot.p1_lon,
-        },
-      });
+      if(res.data.desired_lot == null ){
+        setMap({
+          center: {
+            lat: res.data.lat,
+            lng: res.data.lon,
+          },
+          zoom: 80,
+          radius: 0 ,
+          parkingLot: {
+            lat: 5 ,
+            lng: 5
+          },
+        });
+      }else{
+        setMap({
+          center: {
+            lat: res.data.lat,
+            lng: res.data.lon,
+          },
+          zoom: 80,
+          radius: res.data.desired_lot.radius ,
+          parkingLot: {
+            lat: res.data.desired_lot.p1_lat ,
+            lng: res.data.desired_lot.p1_lon 
+          },
+        });
+      }
+        
+     
+
+      
     });
     return () => {
       clearInterval(interval);
@@ -536,7 +555,10 @@ function VehicleDetails() {
               {car && car.device ? <CardInfo data={car} /> : ""}
 
               <SI data={car} title="Dealer Information" />
-              <SI2 data={car} title="Parking Lot Information" />
+              {car != null && car.desired_lot != null ? 
+               <SI2 data={car} title="Parking Lot Information" />
+                : "No Desiret Lot"
+            }
             </div>
           </div>
         </div>
