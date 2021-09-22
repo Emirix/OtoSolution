@@ -45,7 +45,7 @@ function RecentActivities({status,data,perde}) {
     return (
         <div className="r-a ">
             <div className="c-title">Status Information</div>
-            <div className="r-a__caption">Last Connected: {data != null ? months[data.last_connection_time.substring(5, 7)] + " " + data.last_connection_time.substring(8, 10) + " " +  data.last_connection_time.substring(0, 4) + " " + data.last_connection_time.substring(11,16) + " ("+timeAgo(data.last_connection_time) +")  " : "No Data"}</div>
+            <div className="r-a__caption">Last Connected: {data != null && data.last_connection_time != null ? months[data.last_connection_time.substring(5, 7)] + " " + data.last_connection_time.substring(8, 10) + " " +  data.last_connection_time.substring(0, 4) + " " + data.last_connection_time.substring(11,16) + " ("+timeAgo(data.last_connection_time) +")  " : "No Data"}</div>
             {data != null ? 
             <div className="timelist">
 

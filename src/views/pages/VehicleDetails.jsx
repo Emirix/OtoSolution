@@ -250,7 +250,7 @@ function VehicleDetails() {
                   <button className=" mor-button text-center">
                     <strong>Connection Lost</strong> <br />
                     Last Updated:
-                    {car != null
+                    {car != null && car.last_connection_time != null
                       ? months[car.last_connection_time.substring(5, 7)] +
                         " " +
                         car.last_connection_time.substring(8, 10) +

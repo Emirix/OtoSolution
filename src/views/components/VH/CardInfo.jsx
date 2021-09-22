@@ -87,9 +87,9 @@ function CardInfo({ data }) {
             {data.connection_type == 2 ? <div className="durum durum-yesil">Wireless</div> : ""}
             {data.connection_type == null ? <div className="durum durum-gri">Disconnected</div> : ""}
            
-            <div className="data">{}
+            <div className="data">
             
-            {months[data.last_connection_time.substring(5, 7)] + " " + data.last_connection_time.substring(8, 10) + " " +  data.last_connection_time.substring(0, 4) + " " + data.last_connection_time.substring(11,16) }</div>
+            {data != null && data.last_connection_time != null ? months[data.last_connection_time.substring(5, 7)] + " " + data.last_connection_time.substring(8, 10) + " " +  data.last_connection_time.substring(0, 4) + " " + data.last_connection_time.substring(11,16) : " No Data"}</div>
           </li>
 
 
