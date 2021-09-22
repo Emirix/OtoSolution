@@ -30,7 +30,6 @@ const MyMapComponent = withScriptjs(
     const [lng, setLng] = useState(props.p2);
     const [parkingLot, setParkingLot] = useState(props.parkingLot);
 
-
     return (
       <GoogleMap defaultZoom={14} defaultCenter={{ lat: lat, lng: lng }}>
         {props.isMarkerShown && <Marker position={{ lat: lat, lng: lng }} />}
@@ -39,7 +38,7 @@ const MyMapComponent = withScriptjs(
             { lat: 37.772, lng: -122.214 },
             { lat: 21.291, lng: -157.821 },
             { lat: -18.142, lng: 178.431 },
-            { lat: -27.467, lng: 153.027 }
+            { lat: -27.467, lng: 153.027 },
           ]}
         />
         {props.isRadius ? (
@@ -63,18 +62,76 @@ function VehicleDetails() {
   const [car, setCar] = useState(null);
   const { id } = useParams();
   const [map, setMap] = useState(null);
-  const [status, setStatus] = useState(null)
-  useEffect(() => {
+  const [status, setStatus] = useState(null);
 
-    const interval = setInterval(()=>{
-     
-    },1000)
+  const [lastSpeed, setLastSpeed] = useState(0);
+  const [lastRpm, setLastRpm] = useState(0);
+  const [lastVoltage, setLastVoltage] = useState(0);
+  const [perde, setPerde] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {}, 1000);
+
+    document.addEventListener("keydown", e=>{
+
+      if(e.keyCode == 67){
+        setPerde(false)
+      }
+      
+      if(e.keyCode == 49){
+        setStatus(1)
+      }
+
+      if(e.keyCode == 50){
+        setStatus(2)
+      }
+
+      if(e.keyCode == 51){
+        setStatus(3)
+      }
+
+      if(e.keyCode == 52){
+        setStatus(4)
+      }
+
+      if(e.keyCode == 53){
+        setStatus(5)
+      }
+    });
 
 
     axios.get("/api/dealer/vehicles/" + id).then((res) => {
       console.log(res.data);
       setCar(res.data);
-      setStatus(res.data.status)
+      setStatus(res.data.status);
+
+      var now = new Date();
+      var bDay = new Date(res.data.last_connection_time);
+      var elapsedT = now - bDay;
+      console.log(elapsedT);
+      if (elapsedT >= 150000) {
+        setPerde(true);
+      } else {
+        setPerde(false);
+      }
+
+      var dakika = 60;
+      var saat = dakika * 60;
+      var gun = saat * 24;
+      var ay = gun * 30;
+      var yil = ay * 12 + 60 * 60 * 6;
+
+      if (res.data.speed != 0) {
+        setLastSpeed(res.data.speed);
+      }
+
+      if (res.data.rpm != 0) {
+        setLastRpm(res.data.rpm);
+      }
+
+      if (res.data.battery != 0) {
+        setLastVoltage(res.data.battery);
+      }
 
       setMap({
         center: {
@@ -89,9 +146,9 @@ function VehicleDetails() {
         },
       });
     });
-    return ()=>{
-      clearInterval(interval)
-    }
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
   var months = {
     "01": "Jan",
@@ -103,15 +160,14 @@ function VehicleDetails() {
     "07": "Jul",
     "08": "Aug",
     "09": "Sep",
-    "10": "Oct",
-    "11": "Nov",
-    "12": "Dec",
+    10: "Oct",
+    11: "Nov",
+    12: "Dec",
   };
 
-
   function timeAgo(input) {
-    const date = (input instanceof Date) ? input : new Date(input);
-    const formatter = new Intl.RelativeTimeFormat('en');
+    const date = input instanceof Date ? input : new Date(input);
+    const formatter = new Intl.RelativeTimeFormat("en");
     const ranges = {
       years: 3600 * 24 * 365,
       months: 3600 * 24 * 30,
@@ -119,7 +175,7 @@ function VehicleDetails() {
       days: 3600 * 24,
       hours: 3600,
       minutes: 60,
-      seconds: 1
+      seconds: 1,
     };
     const secondsElapsed = (date.getTime() - Date.now()) / 1000;
     for (let key in ranges) {
@@ -128,8 +184,8 @@ function VehicleDetails() {
         return formatter.format(Math.round(delta), key);
       }
     }
-}
-  
+  }
+
   if (!localStorage.getItem("key")) {
     return <Redirect to="/login" />;
   } else {
@@ -150,7 +206,6 @@ function VehicleDetails() {
           <div className="row m-0">
             <div className="mini-title mt-3">Vehicle Details</div>
             <div className="br-12 col-lg-6 vd h-266 m-0 position-relative ">
-           
               <VH
                 src={[car1, car2]}
                 marka={car ? car.vin.brand_name : ""}
@@ -190,13 +245,28 @@ function VehicleDetails() {
                 className="refresh-data position-absolute"
               ></div>
               <div className=" position-relative">
-              <div className="premium-container br-12 d-none p-3">
-                <button className=" mor-button text-center" ><strong>Connection Lost</strong> <br/> 
-                Last Updated: {car != null ? months[car.last_connection_time.substring(5, 7)] + " " + car.last_connection_time.substring(8, 10) + " " +  car.last_connection_time.substring(0, 4) + " " + car.last_connection_time.substring(11,16) + " ("+timeAgo(car.last_connection_time) +")  " : "No Data"}
-                </button>
-              </div>
+                {
+                  perde ?   <div className="premium-container br-12  p-3">
+                  <button className=" mor-button text-center">
+                    <strong>Connection Lost</strong> <br />
+                    Last Updated:
+                    {car != null
+                      ? months[car.last_connection_time.substring(5, 7)] +
+                        " " +
+                        car.last_connection_time.substring(8, 10) +
+                        " " +
+                        car.last_connection_time.substring(0, 4) +
+                        " " +
+                        car.last_connection_time.substring(11, 16) +
+                        " (" +
+                        timeAgo(car.last_connection_time) +
+                        ")  "
+                      : "No Data"}
+                  </button>
+                </div> : ""
+                }
+               
                 <div className="data-title-container">
-                
                   <DataInfo
                     data={
                       car ? (
@@ -249,40 +319,150 @@ function VehicleDetails() {
                 </div>
 
                 <div className="data-progress-container">
-                  {car != null && status >= 3 ? <>
-                  <div className="data-progress">
-                    <div className="title">Speed</div>
-                    {car ? (
-                      <div className="data-progress-text">
-                        {car.speed ? car.speed + " MPH" : "0 MPH"}
+                  {status == null ? "No Device" : ""}
+                  {status == 0 || status == 1 ? (
+                    <>
+                      <div className="data-progress">
+                        <div className="title">Speed</div>
+                        {car ? (
+                          <div className="data-progress-text">0 MPH</div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
                       </div>
-                    ) : (
-                      <div className="skeleton-text-kucuk"></div>
-                    )}
-                  </div>
 
-                  <div className="data-progress">
-                    <div className="title">RPM</div>
-                    {car ? (
-                      <div className="data-progress-text">
-                        {car.rpm ? car.rpm : "0"}
+                      <div className="data-progress">
+                        <div className="title">RPM</div>
+                        {car ? (
+                          <div className="data-progress-text">0</div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
                       </div>
-                    ) : (
-                      <div className="skeleton-text-kucuk"></div>
-                    )}
-                  </div>
-                  </> : "" }
 
-                  <div className="data-progress">
-                    <div className="title">Battery</div>
-                    {car ? (
-                      <div className="data-progress-text">
-                        {car.battery ? car.battery : "No Data"}
+                      <div className="data-progress">
+                        <div className="title">Battery</div>
+                        {car ? (
+                          <div className="data-progress-text">0</div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
                       </div>
-                    ) : (
-                      <div className="skeleton-text-kucuk"></div>
-                    )}
-                  </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+
+                  {status == 3 || status == 2 ? (
+                    <>
+                      <div className="data-progress">
+                        <div className="title">Speed</div>
+                        {car ? (
+                          <div className="data-progress-text">0 MPH</div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+
+                      <div className="data-progress">
+                        <div className="title">RPM</div>
+                        {car ? (
+                          <div className="data-progress-text">0 </div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+
+                      <div className="data-progress">
+                        <div className="title">Battery</div>
+                        {car ? (
+                          <div className="data-progress-text">
+                            {car.battery == 0 ? lastVoltage : car.battery}
+                          </div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+
+                  {status == 4 ? (
+                    <>
+                      <div className="data-progress">
+                        <div className="title">Speed</div>
+                        {car ? (
+                          <div className="data-progress-text">0 MPH</div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+
+                      <div className="data-progress">
+                        <div className="title">RPM</div>
+                        {car ? (
+                          <div className="data-progress-text">
+                            {car.rpm == 0 ? lastRpm : car.rpm}
+                          </div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+
+                      <div className="data-progress">
+                        <div className="title">Battery</div>
+                        {car ? (
+                          <div className="data-progress-text">
+                            {car.battery == 0 ? lastVoltage : car.battery}
+                          </div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
+
+                  {status == 5 ? (
+                    <>
+                      <div className="data-progress">
+                        <div className="title">Speed</div>
+                        {car ? (
+                          <div className="data-progress-text">
+                            {car.speed == 0 ? lastSpeed : car.speed} MPH
+                          </div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+
+                      <div className="data-progress">
+                        <div className="title">RPM</div>
+                        {car ? (
+                          <div className="data-progress-text">
+                            {car.rpm == 0 ? lastRpm : car.rpm}
+                          </div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+
+                      <div className="data-progress">
+                        <div className="title">Battery</div>
+                        {car ? (
+                          <div className="data-progress-text">
+                            {car.battery == 0 ? lastVoltage : car.battery}
+                          </div>
+                        ) : (
+                          <div className="skeleton-text-kucuk"></div>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    ""
+                  )}
 
                   <div className="data-progress">
                     <div className="title">Temperature</div>
@@ -343,11 +523,16 @@ function VehicleDetails() {
               <List2 val={car} title="Vehicle Information" />
             </div>
             <div className="col">
-              <RecentActivities data={car} updateStatus={e=>{
-                console.log("SA")
-                console.log(e)
-                setStatus(e)
-              }}/>
+              <RecentActivities
+              perde={perde}
+                status={status}
+                data={car}
+                updateStatus={(e) => {
+                  console.log("SA");
+                  console.log(e);
+                  setStatus(e);
+                }}
+              />
               {car && car.device ? <CardInfo data={car} /> : ""}
 
               <SI data={car} title="Dealer Information" />

@@ -1,0 +1,33 @@
+<div className="data-progress">
+<div className="title">Speed</div>
+{car ? (
+  <div className="data-progress-text">
+    {car.speed ? car.speed + " MPH" : "0 MPH"}
+  </div>
+) : (
+  <div className="skeleton-text-kucuk"></div>
+)}
+</div>
+
+<div className="data-progress">
+<div className="title">RPM</div>
+{car ? (
+  <div className="data-progress-text">
+    {car.rpm ? car.rpm : "0"}
+  </div>
+) : (
+  <div className="skeleton-text-kucuk"></div>
+)}
+</div>
+  
+
+<div className="data-progress">
+<div className="title">Battery</div>
+{car ? (
+  <div className="data-progress-text">
+    {car.battery ? car.battery : "No Data"}
+  </div>
+) : (
+  <div className="skeleton-text-kucuk"></div>
+)}
+</div>

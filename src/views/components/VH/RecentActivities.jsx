@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from 'react'
 import Spinner from "../../components/Spinner/Spinner"
 
-function RecentActivities({data,updateStatus}) {
-    const [status,setStatus] = useState(null);
-    const [color,setColor] = useState("yuvarlak-yesil")
+function RecentActivities({status,data,perde}) {
+    const [status2,setStatus] = useState(null);
+    const [color,setColor] = useState(!perde ? "yuvarlak-sari" : "yuvarlak-yesil")
     const [s0,setS0] = useState(null)
 
     function timeAgo(input) {
@@ -27,135 +27,6 @@ function RecentActivities({data,updateStatus}) {
         }
     }
 
-
-    useEffect(()=>{
-        
-        if(data == null){
-            return
-        }
-        console.log(data)
-        const _status = data.status;
-        const _rpm = data.rpm
-        const _speed = data.speed
-        const _gps = data.lat
-        const _connection = data.connection_type
-        const _voltage = data.battery
-
-         // STATUS 5
-        // Tüm Değerler Var İse
-        if(
-            _connection != null &&
-            _gps != null &&
-            _speed != null &&
-            _rpm  != null  &&
-            _voltage != null
-        ){
-            setStatus(5);
-            updateStatus(5)
-            if(5 == _status){
-                setColor("yuvarlak-yesil")
-            }else{
-                setColor("yuvarlak-sari")
-            }
-        }
-
-
-          // STATUS 4
-        // Connection, Voltage, GPS, boş/null değilse, RPM 0'dan büyük ve Speed 0 ise :
-        if(
-            _connection != null &&
-            _gps != null &&
-            _speed == null ||
-            _speed == 0 &&
-           
-            _rpm > 0  &&
-            _voltage != null
-        ){
-            setStatus(4);
-            updateStatus(4)
-
-            if(4 == _status){
-                setColor("yuvarlak-yesil")
-            }else{
-                setColor("yuvarlak-sari")
-            }
-        }
-
-               // STATUS 0
-        // Hepsi Null İse
-        if(
-            _connection == null &&
-            _gps == null &&
-            _speed == null &&
-            _rpm == null  &&
-            _voltage == null
-        ){
-            setStatus(0);
-            updateStatus(0)
-            if(0 == _status){
-                setColor("yuvarlak-yesil")
-            }else{
-                setColor("yuvarlak-sari")
-            }
-        }
-
-          // STATUS 1
-        // Hepsi Null, GPS null değil ise
-        if(
-            _connection == null &&
-            _gps != null &&
-            _speed == null &&
-            _rpm == null  &&
-            _voltage == null
-        ){
-            setStatus(1);
-            updateStatus(1)
-            if(1 == _status){
-                setColor("yuvarlak-yesil")
-            }else{
-                setColor("yuvarlak-sari")
-            }
-        }
-
-      // STATUS 2
-        // Connection, Voltage, GPS boş değil, speed ve rpm null ise
-        if(
-            _connection != null &&
-            _gps != null &&
-            _speed == null &&
-            _rpm == null  &&
-            _voltage != null
-        ){
-            setStatus(2);
-            updateStatus(2)
-            if(2 == _status){
-                setColor("yuvarlak-yesil")
-            }else{
-                setColor("yuvarlak-sari")
-            }
-        }
-
-         // STATUS 3
-        // Connection, Voltage, GPS, boş/null değilse, RPM ve Speed 0 ise :
-        if(
-            _connection != null &&
-            _gps != null &&
-            _speed == 0 &&
-            _speed == null ||
-            _rpm == 0  &&
-            _voltage != null
-        ){
-            setStatus(3);
-            updateStatus(3)
-            if(3 == _status){
-                setColor("yuvarlak-yesil")
-            }else{
-                setColor("yuvarlak-sari")
-            }
-        }
-
-
-    },[data])
 
     var months = {
         "01": "Jan",
