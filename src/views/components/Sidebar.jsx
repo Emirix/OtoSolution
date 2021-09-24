@@ -111,10 +111,10 @@ function Sidebar() {
             <div className="side-dropdown">
               <ul>
                 <li>
-                  <Link to="/oto-link">Link</Link>
+                  <a href="/oto-link">Link</a>
                 </li>
                 <li>
-                  <Link to="/unlink">Unlink</Link>
+                  <a href="/unlink">Unlink</a>
                 </li>
                
               </ul>

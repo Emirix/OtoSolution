@@ -3,20 +3,67 @@ import Page from "./Page";
 import LinkedAutosList from "../components/LinkedAutosList";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 function OtoLink() {
   const location = useLocation()
-  const [odb, setOdb] = useState("");
-  const [status, setStatus] = useState(null);
   const url = new URLSearchParams(window.location.search);
-
-  const [model, setModel] = useState("");
-  const [version, setVersion] = useState("");
-  const [mDate, setMDate] = useState("");
-
   const [step, setStep] = useState(1);
-
   const popup = useRef()
+
+  const [vinStock, setVinStock] = useState("");
+  const [serialID, setSerialID] = useState("");
+  const [err, setErr] = useState(false)
+  function pair(){
+    if(vinStock.length > 15){
+      // VIN
+      axios.post("/api/dealer/vehicles/pair-device/",{
+        device_serial_no:Number(serialID),
+        stock_no:null,
+        vin:vinStock
+      },
+      {
+        headers:{
+          "Authorization" : `Token ${localStorage.getItem("key")}`
+        }
+      }).then(res=>{
+        console.log("VIN PAIRED")
+        setErr(false)
+        setStep(3)
+        console.log(res)
+      }).catch(err=>{
+        setErr(true)
+        setStep(3)
+
+      })
+    }else if(vinStock.length == 0){
+      alert("VIN/STOCK can not be empty.")
+    }else{
+      axios.post("/api/dealer/vehicles/pair-device/",{
+        device_serial_no:Number(serialID),
+        stock_no:vinStock,
+        vin:null
+      },
+      {
+        headers:{
+          "Authorization" : `Token ${localStorage.getItem("key")}`
+        }
+      }).then(res=>{
+        setStep(3)
+        console.log("STOCK NO PAIRED")
+        console.log(res)
+        setErr(false)
+      }).catch(err=>{
+        setErr(true)
+        setStep(3)
+
+      })
+    }
+  }
 
   function close(){
     popup.current.classList.add("d-none")
@@ -34,10 +81,10 @@ function OtoLink() {
           {!location.pathname.includes("unlink") ? 
           <div className="popup bg-white br-12 p-3 d-flex flex-column align-items-center">
             <div className="mini-title">
-              {step == 3 ? "You are about to pair" : "Link New Device"}
+              {step == 3 ? err ? "Pair failed" :"You are about to pair" : "Link New Device"}
             </div>
             <img
-              src={step == 3 ? "/icons/qr-valid.svg" : "/icons/qr-code.svg"}
+              src={step == 3 ? err ? "/icons/qr-invalid.svg" : "/icons/qr-valid.svg" : "/icons/qr-code.svg"}
               width="130"
               height="130"
               className="mt-3 mb-5"
@@ -58,6 +105,8 @@ function OtoLink() {
                   className="form-control"
                   id="floatingInput"
                   placeholder="Enter VIN Number"
+                  value={vinStock}
+                  onChange={e=>setVinStock(e.target.value)}
                 />
                 <label htmlFor="floatingInput">Enter VIN Number</label>
               </div></>
@@ -79,6 +128,8 @@ OTO-Link serial number
                   className="form-control"
                   id="floatingInput"
                   placeholder="Enter Device Serial ID"
+                  value={serialID}
+                  onChange={e=>setSerialID(e.target.value)}
                 />
                 <label htmlFor="floatingInput">Enter Device Serial ID</label>
               </div> </>
@@ -87,6 +138,10 @@ OTO-Link serial number
             )}
 
             {step == 3 ? (
+              err ? <div className="hata-linkleme w-75">
+                  <p className="text-center">Pair Failed</p>
+                </div>
+              :
               <div className="basarili-linkleme w-75">
                 <ul className="c-list ">
                   <li>
@@ -111,9 +166,10 @@ OTO-Link serial number
               <div className="step-container">
                 <div className="d-flex">
                   <div
+                  onClick={()=>setStep(1)}
                     className={step == 1 ? "step me-2 active" : "step me-2"}
                   ></div>
-                  <div className={step == 2 ? "step active" : "step"}></div>
+                  <div onClick={()=>setStep(2)} className={step == 2 ? "step active" : "step"}></div>
                   <div
                     className={step == 3 ? "step ms-2 active" : "step ms-2"}
                   ></div>
@@ -123,17 +179,22 @@ OTO-Link serial number
               <button
                 className="btn bg-primary text-white py-2 px-5"
                 onClick={() => {
+                  if(step == 2){
+                    pair()
+                  }
                   if(step == 3) {
+                    
                     close()
+
                   }else{
-                    if (step < 3) {
+                    if (step < 2) {
                       setStep(step + 1);
                     }
                   }
                  
                 }}
               >
-                {step == 3 ? "Submit" : "Next"}
+                {step == 3 ? "Okey" : "Next"}
               </button>
             </div>
           </div>
@@ -230,7 +291,7 @@ Stock number, VIN or OTO-Link serial number
         <div className="row  mt-3 m-0">
           <div className="mini-title mb-3">Recently Added</div>
           <div className="tb-container">
-            <LinkedAutosList />
+          <LinkedAutosList />
           </div>
         </div>
       </div>

@@ -38,6 +38,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
     setCarList([]);
 
     axios.get(url).then((res) => {
+      
       setPaginationCount(Math.ceil(Number(res.data.count) / 10));
       if (res.data.next != null || res.data.next != undefined) {
         setNext(res.data.next.replace("http", "https"));
@@ -50,15 +51,16 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
       } else {
         setPrev("");
       }
+      console.log(res.data)
       res.data.results.map((val, i) => {
         newCarList.push({
           col1: val.stock_no,
           col2: val.vin.vin,
-          col3: "",
+          col3: val.device != null ? val.device.serial_no : "No Device",
           col4: val.vin.brand_name,
           col5: val.vin.model_name,
           col6: val.year,
-          col7: c[val.color].name,
+          col7: val.color != null ? c[val.color].name : "Unspecified",
           col8: "",
           col9: "",
           col10: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4) ,
