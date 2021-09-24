@@ -25,7 +25,7 @@ function List({ val, title }) {
 
         <li>
           <div className="title">VIN</div>
-          <div className="data truncate">{val ? val.vin.vin : ""}</div>
+          <div title={val ? val.vin.vin : ""} className="data truncate">{val ? val.vin.vin : ""}</div>
         </li>
 
         <li>

@@ -104,11 +104,11 @@ function OtoLink() {
                   type="text"
                   className="form-control"
                   id="floatingInput"
-                  placeholder="Enter VIN Number"
+                  placeholder="Enter VIN Number or Stock No"
                   value={vinStock}
                   onChange={e=>setVinStock(e.target.value)}
                 />
-                <label htmlFor="floatingInput">Enter VIN Number</label>
+                <label htmlFor="floatingInput">Enter VIN Number or Stock No</label>
               </div></>
             ) : (
               ""

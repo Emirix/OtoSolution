@@ -63,49 +63,99 @@ function VehicleDetails() {
   const { id } = useParams();
   const [map, setMap] = useState(null);
   const [status, setStatus] = useState(null);
-
+  const [data, setData] = useState(null);
   const [lastSpeed, setLastSpeed] = useState(0);
   const [lastRpm, setLastRpm] = useState(0);
   const [lastVoltage, setLastVoltage] = useState(0);
   const [perde, setPerde] = useState(false);
 
+  const [speed, setSpeed] = useState(null);
+  const [rpm, setRpm] = useState(null);
+  const [battery, setBattery] = useState(null);
+  const [lon, setLon] = useState(null);
+  const [lat, setLat] = useState(null);
+  const [connectionType, setConnectionType] = useState(null);
+  const [gpsStatus, setGpsStatus] = useState(null);
+
   useEffect(() => {
     const interval = setInterval(() => {}, 1000);
 
-    document.addEventListener("keydown", e=>{
-
-      if(e.keyCode == 67){
-        setPerde(false)
-      }
-      
-      if(e.keyCode == 49){
-        setStatus(1)
+    document.addEventListener("keydown", (e) => {
+      if (e.keyCode == 67) {
+        setPerde(false);
       }
 
-      if(e.keyCode == 50){
-        setStatus(2)
+      if (e.keyCode == 49) {
+        setStatus(1);
       }
 
-      if(e.keyCode == 51){
-        setStatus(3)
+      if (e.keyCode == 50) {
+        setStatus(2);
       }
 
-      if(e.keyCode == 52){
-        setStatus(4)
+      if (e.keyCode == 51) {
+        setStatus(3);
       }
 
-      if(e.keyCode == 53){
-        setStatus(5)
+      if (e.keyCode == 52) {
+        setStatus(4);
+      }
+
+      if (e.keyCode == 53) {
+        setStatus(5);
       }
     });
 
+    axios.get("/api/dealer/vehicles/" + id + "/latest-states/").then((res) => {
+      console.log(res);
+      setData(res.data);
+
+      for (var i = 0; i < res.data.length; i++) {
+     
+        if (res.data[i].name == "Speed (MPH)") {
+          console.log("speed: " + res.data[i].data_value);
+          setSpeed(res.data[i].data_value);
+        }
+
+        if (res.data[i].name == "Engine (RPM)") {
+          console.log("rpm: " + res.data[i].data_value);
+          setRpm(res.data[i].data_value);
+        }
+
+        if (res.data[i].name == "Battery Volt (V)") {
+          console.log("battery: " + res.data[i].data_value);
+          setBattery(res.data[i].data_value);
+        }
+
+        if (res.data[i].name == "GPS Longitude") {
+          console.log("lon: " + res.data[i].data_value);
+          setLon(res.data[i].data_value);
+        }
+
+        if (res.data[i].name == "GPS Latitude") {
+          console.log("lat: " + res.data[i].data_value);
+          setLat(res.data[i].data_value);
+        }
+
+        if (res.data[i].name == "Connection Type") {
+          console.log("connection type: " + res.data[i].data_value);
+          setConnectionType(res.data[i].data_value);
+        }
+
+        if (res.data[i].name == "GPS Connection Status") {
+          console.log("gps status: " + res.data[i].data_value);
+          setGpsStatus(res.data[i].data_value);
+        }
+      }
+
+      
+    });
 
     axios.get("/api/dealer/vehicles/" + id).then((res) => {
       console.log(res.data);
       setCar(res.data);
       setStatus(res.data.status);
 
-      
       var now = new Date();
       var bDay = new Date(res.data.last_connection_time);
       var elapsedT = now - bDay;
@@ -116,11 +166,7 @@ function VehicleDetails() {
         setPerde(false);
       }
 
-      var dakika = 60;
-      var saat = dakika * 60;
-      var gun = saat * 24;
-      var ay = gun * 30;
-      var yil = ay * 12 + 60 * 60 * 6;
+    
 
       if (res.data.speed != 0) {
         setLastSpeed(res.data.speed);
@@ -134,37 +180,33 @@ function VehicleDetails() {
         setLastVoltage(res.data.battery);
       }
 
-      if(res.data.desired_lot == null ){
+      if (res.data.desired_lot == null) {
         setMap({
           center: {
             lat: res.data.lat,
             lng: res.data.lon,
           },
           zoom: 80,
-          radius: 0 ,
+          radius: 0,
           parkingLot: {
-            lat: 5 ,
-            lng: 5
+            lat: 5,
+            lng: 5,
           },
         });
-      }else{
+      } else {
         setMap({
           center: {
             lat: res.data.lat,
             lng: res.data.lon,
           },
           zoom: 80,
-          radius: res.data.desired_lot.radius ,
+          radius: res.data.desired_lot.radius,
           parkingLot: {
-            lat: res.data.desired_lot.p1_lat ,
-            lng: res.data.desired_lot.p1_lon 
+            lat: res.data.desired_lot.p1_lat,
+            lng: res.data.desired_lot.p1_lon,
           },
         });
       }
-        
-     
-
-      
     });
     return () => {
       clearInterval(interval);
@@ -242,50 +284,77 @@ function VehicleDetails() {
               />
               <div
                 onClick={() => {
-                  setCar(null);
-                  axios.get("/api/dealer/vehicles/" + id).then((res) => {
-                    console.log(res.data);
-                    setCar(res.data);
-
-                    setMap({
-                      center: {
-                        lat: res.data.lat,
-                        lng: res.data.lon,
-                      },
-                      zoom: 80,
-                      radius: res.data.desired_lot.radius,
-                      parkingLot: {
-                        lat: res.data.desired_lot.p1_lat,
-                        lng: res.data.desired_lot.p1_lon,
-                      },
-                    });
+                  axios.get("/api/dealer/vehicles/" + id + "/latest-states/").then((res) => {
+                    console.log(res);
+                    setData(res.data);
+              
+                    for (var i = 0; i < res.data.length; i++) {
+                      if (res.data[i].name == "Speed (MPH)") {
+                        console.log("speed: " + res.data[i].data_value);
+                        setSpeed(res.data[i].data_value);
+                      }
+              
+                      if (res.data[i].name == "Engine (RPM)") {
+                        console.log("rpm: " + res.data[i].data_value);
+                        setRpm(res.data[i].data_value);
+                      }
+              
+                      if (res.data[i].name == "Battery Volt (V)") {
+                        console.log("battery: " + res.data[i].data_value);
+                        setBattery(res.data[i].data_value);
+                      }
+              
+                      if (res.data[i].name == "GPS Longitude") {
+                        console.log("lon: " + res.data[i].data_value);
+                        setLon(res.data[i].data_value);
+                      }
+              
+                      if (res.data[i].name == "GPS Latitude") {
+                        console.log("lat: " + res.data[i].data_value);
+                        setLat(res.data[i].data_value);
+                      }
+              
+                      if (res.data[i].name == "Connection Type") {
+                        console.log("connection type: " + res.data[i].data_value);
+                        setConnectionType(res.data[i].data_value);
+                      }
+              
+                      if (res.data[i].name == "GPS Connection Status") {
+                        console.log("gps status: " + res.data[i].data_value);
+                        setGpsStatus(res.data[i].data_value);
+                      }
+                    }
                   });
                 }}
                 title="Click for refresh data"
                 className="refresh-data position-absolute"
               ></div>
               <div className=" position-relative">
-                {
-                  perde ?   <div className="premium-container br-12  p-3">
-                  <button className=" mor-button text-center">
-                    <strong>Connection Lost</strong> <br />
-                    Last Updated:
-                    {car != null && car.last_connection_time != null
-                      ? months[car.last_connection_time.substring(5, 7)] +
-                        " " +
-                        car.last_connection_time.substring(8, 10) +
-                        " " +
-                        car.last_connection_time.substring(0, 4) +
-                        " " +
-                        new Date(car.last_connection_time).toString().substring(15,21) +
-                        " (" +
-                        timeAgo(car.last_connection_time) +
-                        ")  "
-                      : "No Data"}
-                  </button>
-                </div> : ""
-                }
-               
+                {perde ? (
+                  <div className="premium-container br-12  p-3">
+                    <button className=" mor-button text-center">
+                      <strong>Connection Lost</strong> <br />
+                      Last Updated: 
+                      {car != null && car.last_connection_time != null
+                        ? months[car.last_connection_time.substring(5, 7)] +
+                          " " +
+                          car.last_connection_time.substring(8, 10) +
+                          " " +
+                          car.last_connection_time.substring(0, 4) +
+                          " " +
+                          new Date(car.last_connection_time)
+                            .toString()
+                            .substring(15, 21) +
+                          " (" +
+                          timeAgo(car.last_connection_time) +
+                          ")  "
+                        : "No Data"}
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
+
                 <div className="data-title-container">
                   <DataInfo
                     data={
@@ -397,7 +466,7 @@ function VehicleDetails() {
                         <div className="title">Battery</div>
                         {car ? (
                           <div className="data-progress-text">
-                            {car.battery == 0 ? lastVoltage : car.battery}
+                            {car.battery == 0 ? lastVoltage : battery}
                           </div>
                         ) : (
                           <div className="skeleton-text-kucuk"></div>
@@ -423,7 +492,7 @@ function VehicleDetails() {
                         <div className="title">RPM</div>
                         {car ? (
                           <div className="data-progress-text">
-                            {car.rpm == 0 ? lastRpm : car.rpm}
+                            {car.rpm == 0 ? lastRpm : rpm}
                           </div>
                         ) : (
                           <div className="skeleton-text-kucuk"></div>
@@ -434,7 +503,7 @@ function VehicleDetails() {
                         <div className="title">Battery</div>
                         {car ? (
                           <div className="data-progress-text">
-                            {car.battery == 0 ? lastVoltage : car.battery}
+                            {car.battery == 0 ? lastVoltage : battery}
                           </div>
                         ) : (
                           <div className="skeleton-text-kucuk"></div>
@@ -451,7 +520,7 @@ function VehicleDetails() {
                         <div className="title">Speed</div>
                         {car ? (
                           <div className="data-progress-text">
-                            {car.speed == 0 ? lastSpeed : car.speed} MPH
+                            {car.speed == 0 ? lastSpeed : speed} MPH
                           </div>
                         ) : (
                           <div className="skeleton-text-kucuk"></div>
@@ -462,7 +531,7 @@ function VehicleDetails() {
                         <div className="title">RPM</div>
                         {car ? (
                           <div className="data-progress-text">
-                            {car.rpm == 0 ? lastRpm : car.rpm}
+                            {car.rpm == 0 ? lastRpm : rpm}
                           </div>
                         ) : (
                           <div className="skeleton-text-kucuk"></div>
@@ -473,7 +542,7 @@ function VehicleDetails() {
                         <div className="title">Battery</div>
                         {car ? (
                           <div className="data-progress-text">
-                            {car.battery == 0 ? lastVoltage : car.battery}
+                            {car.battery == 0 ? lastVoltage : battery}
                           </div>
                         ) : (
                           <div className="skeleton-text-kucuk"></div>
@@ -544,7 +613,7 @@ function VehicleDetails() {
             </div>
             <div className="col">
               <RecentActivities
-              perde={perde}
+                perde={perde}
                 status={status}
                 data={car}
                 updateStatus={(e) => {
@@ -556,10 +625,11 @@ function VehicleDetails() {
               {car && car.device ? <CardInfo data={car} /> : ""}
 
               <SI data={car} title="Dealer Information" />
-              {car != null && car.desired_lot != null ? 
-               <SI2 data={car} title="Parking Lot Information" />
-                : "No Desiret Lot"
-            }
+              {car != null && car.desired_lot != null ? (
+                <SI2 data={car} title="Parking Lot Information" />
+              ) : (
+                "No Desiret Lot"
+              )}
             </div>
           </div>
         </div>

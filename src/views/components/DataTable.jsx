@@ -56,17 +56,17 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
         newCarList.push({
           col1: val.stock_no,
           col2: val.vin.vin,
-          col3: val.device != null ? val.device.serial_no : "No Device",
+          col3: val.device != null ? val.device.id : "No Device",
           col4: val.vin.brand_name,
           col5: val.vin.model_name,
           col6: val.year,
           col7: val.color != null ? c[val.color].name : "Unspecified",
-          col8: "",
-          col9: "",
+          col8: val.inventory_type == 1 ? "New" : val.inventory_type == 2 ? "Used" : "No Data",
+          col9: val.dealer != null ? val.dealer.name :"No Dealer",
           col10: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4) ,
           col11: "",
-          col12:"",
-          col13:  "Parked",
+          col12: val.connection_type == 1 ? "Wired" : val.connection_type == 2 ? "Wireless" : "Null",
+          col13:  val.status,
           id: val.id,
         });
       });
@@ -76,65 +76,10 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
       setOrj(newCarList);
       setCarList(newCarList);
 
-      /*if(lotFiltre != null || dealerFiltre != null){
-
-        var arr2 = [];
-        var arr3 = []
-        if(lotFiltre != null){
-          arr2 = orj.filter(val=>val.lot_id == lotFiltre)
-        }
   
-        if(dealerFiltre != null){
-          arr3 = orj.filter(val=>val.dealer_id == dealerFiltre)
-        }
-  
-        var final = [...new Set(arr2.concat(arr3))]
-  
-        
-         
-        
-        if(final.length == 0){
-          setIsEmpty(true)
-        }else{
-          setIsEmpty(false)
-        }
-  
-        setCarList(final)
-      }else{
-        
-      }*/
     });
   }
 
-  useEffect(() => {
-    /*if(lotFiltre != null || dealerFiltre != null){
-
-      var arr2 = [];
-      var arr3 = []
-      if(lotFiltre != null){
-        arr2 = orj.filter(val=>val.lot_id == lotFiltre)
-      }
-
-      if(dealerFiltre != null){
-        arr3 = orj.filter(val=>val.dealer_id == dealerFiltre)
-      }
-
-      var final = [...new Set(arr2.concat(arr3))]
-
-      
-       
-      
-      if(final.length == 0){
-        setIsEmpty(true)
-      }else{
-        setIsEmpty(false)
-      }
-
-      setCarList(final)
-    }else{
-      setCarList(newCarList)
-    }*/
-  }, [lotFiltre, dealerFiltre]);
 
   useEffect(() => {
     axios
@@ -151,6 +96,44 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
   }, []);
 
   const data = carList;
+
+  const statusler = [
+    {
+      status:0,
+      title:"Power Off",
+      renk:"status-poweroff",
+      aciklama:"Oto-link power off"
+    },
+    {
+      status:1,
+      title:"Not Connected",
+      renk:"status-not-connected",
+      aciklama:"Oto-Link on but not connected"
+    },
+    {
+      status:2,
+      title:"Connected",
+      renk:"status-connected",
+      aciklama:"Oto-Link Present and connected to OBD"
+    },
+    {
+      status:3,
+      title:"ACC On",
+      renk:"status-acc-on",
+      aciklama:"Ignition on, engine off"
+    },
+    {
+      status:4,
+      title:"Engine On",
+      renk:"status-engine-on",
+      aciklama:"Engine running, car stationary"
+    },
+    {
+      status:5,
+      title:"Moving",
+      renk:"status-moving"
+    }
+  ]
 
   const columns = React.useMemo(
     () => [
@@ -214,7 +197,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
         Header: "Dealer",
         Filter: ColumnFilter,
         accessor: "col9",
-        width: 80,
+        width: 120,
       },
 
       {
@@ -242,11 +225,15 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
         Header: "Status",
         Filter: ColumnFilter,
         accessor: "col13",
-        width: 90,
+        width: 140,
         status: "running",
         Cell: ({ cell }) => (
-          <span className={"row-status row-status-parked"}>
-            {cell.row.values.col13}
+          <span title={cell.row.values.col13 != null ? statusler[Number(cell.row.values.col13)].aciklama : "No Data"} className={cell.row.values.col13 != null ? statusler[Number(cell.row.values.col13)].renk + " row-status" : "row-status"}>
+            {
+            
+            cell.row.values.col13 != null ? statusler[Number(cell.row.values.col13)].title : "No Data" 
+            
+            }
           </span>
         ),
       },

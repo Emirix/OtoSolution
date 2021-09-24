@@ -1774,3 +1774,30 @@ user-select: none !important;
         opacity:0
     }
 }
+.status-connected{
+    background-color: #3498db7c;
+    color: #2980b9;
+}
+.status-not-connected{
+    background-color: #c0392b7c;
+    color: #c0392b;
+}
+.status-moving{
+    background-color: #2ecc707c;
+    color:#27ae60;
+}
+
+.status-engine-on{
+    background-color: #f1c40f7c;
+    color: #f39c12;
+}
+
+.status-poweroff{
+    background-color: #e74c3c7c;
+    color: #c0392b;
+}
+
+.status-acc-on{
+    background-color: #1abc9c7c;
+    color: #16a085;
+}
