@@ -228,7 +228,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
         width: 140,
         status: "running",
         Cell: ({ cell }) => (
-          <span title={cell.row.values.col13 != null ? statusler[Number(cell.row.values.col13)].aciklama : "No Data"} className={cell.row.values.col13 != null ? statusler[Number(cell.row.values.col13)].renk + " row-status" : "row-status"}>
+          <span title={cell.row.values.col13 != null ? statusler[Number(cell.row.values.col13)].aciklama : "No Data"} className={cell.row.values.col13 != null ? statusler[Number(cell.row.values.col13)].renk + " row-status d-block w-100 text-center" : "row-status d-block w-100 text-center"}>
             {
             
             cell.row.values.col13 != null ? statusler[Number(cell.row.values.col13)].title : "No Data" 
