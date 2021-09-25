@@ -82,7 +82,7 @@ function CardInfo({ data }) {
         </div>
         <ul className="c-list">
           <li>
-            <div className="title">{data.device.id}</div>
+            <div className="title">{data.device.serial_no}</div>
             {data.connection_type == 1 ? <div className="durum durum-yesil">Wired</div> : ""}
             {data.connection_type == 2 ? <div className="durum durum-yesil">Wireless</div> : ""}
             {data.connection_type == null ? <div className="durum durum-gri">Disconnected</div> : ""}

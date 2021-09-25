@@ -56,7 +56,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
         newCarList.push({
           col1: val.stock_no,
           col2: val.vin.vin,
-          col3: val.device != null ? val.device.id : "No Device",
+          col3: val.device != null ? val.device.serial_no : "No Device",
           col4: val.vin.brand_name,
           col5: val.vin.model_name,
           col6: val.year,

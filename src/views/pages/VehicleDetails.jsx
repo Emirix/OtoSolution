@@ -390,7 +390,7 @@ function VehicleDetails() {
                   <DataInfo
                     data={
                       car != null && car.device != null
-                        ? car.device.id
+                        ? car.device.serial_no
                         : "No Device"
                     }
                     title="Serial ID"
