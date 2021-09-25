@@ -724,36 +724,12 @@ function AddNewCar({ bg, title }) {
                 </div>
 
 
-
-<div className="emir-selectbox">
-                  <div
-                    className="emir-selectbox__header"
-                    onClick={(e) => {
-                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
-
-                      e.currentTarget.parentNode
-                        .querySelector(".emir-dropdown")
-                        .classList.toggle("emir-dropdown-acik");
-                    }}
-                  >
-                    *Year<span id="span-year"></span>
-                  </div>
-                  <Dropdown
-                   
-
-                    onSelect={(id,val)=>{
-                        
-                        setYear(id)
-                        document.querySelector("#span-year").innerText = " : "+val
-                    }}
-                    title="Year"
-                    data={Yil}
-                    object="yil"
-                    index="id"
-                    hideSearch
-                  />
-                </div>
-
+                <input
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                  type="text"
+                  placeholder="*Year"
+                />
 
 
 

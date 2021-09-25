@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Spinner from "../../components/Spinner/Spinner";
 
 function RecentActivities({ status, data, perde }) {
-  const [status2, setStatus] = useState(null);
   const [color, setColor] = useState(
     !perde ? "yuvarlak-sari" : "yuvarlak-yesil"
   );

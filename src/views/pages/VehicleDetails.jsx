@@ -109,8 +109,15 @@ function VehicleDetails() {
     axios.get("/api/dealer/vehicles/" + id + "/latest-states/").then((res) => {
       console.log(res);
       setData(res.data);
+      var latx = 0;
+      var lotx = 0;
 
       for (var i = 0; i < res.data.length; i++) {
+
+        if (res.data[i].name == "Vehicle Status") {
+          console.log("status: " + res.data[i].data_value);
+         setStatus(Number(res.data[i].data_value));
+        }
      
         if (res.data[i].name == "Speed (MPH)") {
           console.log("speed: " + res.data[i].data_value);
@@ -130,11 +137,16 @@ function VehicleDetails() {
         if (res.data[i].name == "GPS Longitude") {
           console.log("lon: " + res.data[i].data_value);
           setLon(res.data[i].data_value);
+          lotx = res.data[i].data_value
         }
 
         if (res.data[i].name == "GPS Latitude") {
           console.log("lat: " + res.data[i].data_value);
           setLat(res.data[i].data_value);
+          latx = res.data[i].data_value
+
+
+          
         }
 
         if (res.data[i].name == "Connection Type") {
@@ -148,13 +160,33 @@ function VehicleDetails() {
         }
       }
 
+
+      setMap({
+        center: {
+          lat: Number(latx),
+          lng: Number(lotx),
+        },
+        zoom: 80,
+        radius: 1000,
+        parkingLot: {
+          lat: Number(latx),
+          lng: Number(lotx),
+        },
+      });
+
+      console.log({
+        lat: parseFloat(latx),
+        lng: parseFloat(lotx),
+      })
+      
+
       
     });
 
     axios.get("/api/dealer/vehicles/" + id).then((res) => {
       console.log(res.data);
       setCar(res.data);
-      setStatus(res.data.status);
+      //setStatus(res.data.status);
 
       var now = new Date();
       var bDay = new Date(res.data.last_connection_time);
@@ -181,7 +213,7 @@ function VehicleDetails() {
       }
 
       if (res.data.desired_lot == null) {
-        setMap({
+       /* setMap({
           center: {
             lat: res.data.lat,
             lng: res.data.lon,
@@ -192,9 +224,9 @@ function VehicleDetails() {
             lat: 5,
             lng: 5,
           },
-        });
+        });*/
       } else {
-        setMap({
+        /*setMap({
           center: {
             lat: res.data.lat,
             lng: res.data.lon,
@@ -205,7 +237,7 @@ function VehicleDetails() {
             lat: res.data.desired_lot.p1_lat,
             lng: res.data.desired_lot.p1_lon,
           },
-        });
+        });*/
       }
     });
     return () => {
@@ -284,11 +316,18 @@ function VehicleDetails() {
               />
               <div
                 onClick={() => {
+                  
                   axios.get("/api/dealer/vehicles/" + id + "/latest-states/").then((res) => {
                     console.log(res);
                     setData(res.data);
               
                     for (var i = 0; i < res.data.length; i++) {
+              
+                      if (res.data[i].name == "Vehicle Status") {
+                        console.log("status: " + res.data[i].data_value);
+                       setStatus(Number(res.data[i].data_value));
+                      }
+                   
                       if (res.data[i].name == "Speed (MPH)") {
                         console.log("speed: " + res.data[i].data_value);
                         setSpeed(res.data[i].data_value);
@@ -324,7 +363,10 @@ function VehicleDetails() {
                         setGpsStatus(res.data[i].data_value);
                       }
                     }
-                  });
+              
+                    
+                  });  
+              
                 }}
                 title="Click for refresh data"
                 className="refresh-data position-absolute"
@@ -408,7 +450,7 @@ function VehicleDetails() {
                 </div>
 
                 <div className="data-progress-container">
-                  {status == null ? "No Device" : ""}
+                  {status == null ? "" : ""}
                   {status == 0 || status == 1 ? (
                     <>
                       <div className="data-progress">
@@ -617,9 +659,9 @@ function VehicleDetails() {
                 status={status}
                 data={car}
                 updateStatus={(e) => {
-                  console.log("SA");
+                  /*console.log("SA");
                   console.log(e);
-                  setStatus(e);
+                  setStatus(e);*/
                 }}
               />
               {car && car.device ? <CardInfo data={car} /> : ""}

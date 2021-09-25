@@ -43,7 +43,7 @@ function Dropdown({title,data,object,index,onChange,onSelect,addNull,hideSearch}
                 {addNull ?  <div onClick={(e,r)=>{
                             onSelect(null,null)
                             e.currentTarget.parentNode.parentNode.classList.remove("emir-dropdown-acik")
-                        }} data-val={null} className="emir-dropdown__select">Null</div>
+                        }} data-val={null} className="emir-dropdown__select">Nothing</div>
                  : ""}
                 {data.length == 0 ? "There is no "+title:""}
                 {data.map((val,i)=>{
