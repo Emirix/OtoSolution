@@ -8,6 +8,7 @@ function ColumnFilter({ column }) {
       <input
         value={filterValue || ""}
         onChange={(e) => setFilter(e.target.value)}
+        onFocus={(e) => setFilter(e.target.value)}
       />
     </div>
   );

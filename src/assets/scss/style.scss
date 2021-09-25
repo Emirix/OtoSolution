@@ -1618,7 +1618,6 @@ height: 44px !important;
 }
 
 .table-header-buttons{
-  
     width: 100%;
 }
 
@@ -1800,4 +1799,22 @@ user-select: none !important;
 .status-acc-on{
     background-color: #1abc9c7c;
     color: #16a085;
+}
+
+.hide-table-item{
+    padding: 0 !important;
+    max-width: 0px !important;
+    overflow: hidden;
+    min-width: 0px !important;
+    width: 0px !important;
+    display: flex;
+}
+
+#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13){
+    padding: 0 !important;
+    max-width: 0px !important;
+    overflow: hidden;
+    min-width: 0px !important;
+    width: 0px !important;
+    display: flex;
 }

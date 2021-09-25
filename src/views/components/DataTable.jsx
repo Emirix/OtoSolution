@@ -64,10 +64,11 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
           col8: val.inventory_type == 1 ? "New" : val.inventory_type == 2 ? "Used" : "No Data",
           col9: val.dealer != null ? val.dealer.name :"No Dealer",
           col10: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4) ,
-          col11: "",
+          col11: val.on_site ? "Yes" : "No",
           col12: val.connection_type == 1 ? "Wired" : val.connection_type == 2 ? "Wireless" : "Null",
           col13:  val.status,
           id: val.id,
+          lot: val.desired_lot != null ? val.desired_lot.name : "" 
         });
       });
 
@@ -208,7 +209,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
       },
 
       {
-        Header: "Updated",
+        Header: "On Site",
         Filter: ColumnFilter,
         accessor: "col11",
         width: 100,
@@ -219,6 +220,19 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
         Filter: ColumnFilter,
         accessor: "col12",
         width: 100,
+      },
+
+      {
+        Header: "Lot ID",
+        Filter: ColumnFilter,
+        accessor: "lot",
+        width: 100,
+        Cell: ({cell})=>{
+         return(
+          <span className="hide-table-item">{cell.row.values.lot}</span>
+         )
+        }
+        
       },
 
       {
@@ -305,6 +319,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   className="datatable-th"
                   style={{ width: column.width, maxWidth: column.width }}
+                  
                 >
                   {column.render("Header")}
                   {column.isSorted ? (

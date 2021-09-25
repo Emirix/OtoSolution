@@ -387,7 +387,12 @@ export default class Index extends Component {
             <button className="active" onClick={e=>{
                     document.querySelectorAll(".lot-buttons button").forEach(e=>e.classList.remove("active"))
                     e.currentTarget.classList.add("active")
-                    this.setState({lotFiltre:null})
+                              
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13) > div > div > input").value= ""
+                    var event = new Event('input', { bubbles: true });
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13) > div > div > input").dispatchEvent(event);
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13) > div > div > input").focus()
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13) > div > div > input").blur()
                   }}>All</button>
             {
               this.state.parkingLots.length != 0 ?
@@ -396,7 +401,12 @@ export default class Index extends Component {
                   <button onClick={e=>{
                     document.querySelectorAll(".lot-buttons button").forEach(e=>e.classList.remove("active"))
                     e.currentTarget.classList.add("active")
-                    this.setState({lotFiltre:e.currentTarget.dataset.id})
+          
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13) > div > div > input").value= e.currentTarget.innerText
+                    var event = new Event('input', { bubbles: true });
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13) > div > div > input").dispatchEvent(event);
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13) > div > div > input").focus()
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(13) > div > div > input").blur()
                   }} data-id={val.id} title={val.address} key={i}>{val.name}</button>
                 )
               }) : <div className="d-flex">
