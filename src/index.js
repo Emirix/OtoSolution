@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios"
 import App from './App';
-//axios.defaults.baseURL = 'http://34.67.64.2/';
-axios.defaults.baseURL = 'https://api2.managedautos.com';
 
+const urls = [
+  "http://34.67.64.2/",
+  "https://api2.managedautos.com"
+]
 
+axios.defaults.baseURL = urls[1];
 
 ReactDOM.render(
- 
-    <App />,
+  <App />,
   document.getElementById('root')
 );
-
