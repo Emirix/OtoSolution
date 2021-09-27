@@ -63,7 +63,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
           col7: val.color != null ? c[val.color].name : "Unspecified",
           col8: val.inventory_type == 1 ? "New" : val.inventory_type == 2 ? "Used" : "No Data",
           col9: val.dealer != null ? val.dealer.name :"No Dealer",
-          col10: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4) ,
+          col10: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + ", " +  val.created_at.substring(0, 4) ,
           col11: val.on_site ? "Yes" : "No",
           col12: val.connection_type == 1 ? "Wired" : val.connection_type == 2 ? "Wireless" : "Null",
           col13:  val.status,
@@ -827,7 +827,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
         ""
       )}
 
-      <div className="emir-pagination">
+      <div className="datatable-pagination">
         {prev == "" ? (
           ""
         ) : (

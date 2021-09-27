@@ -11,8 +11,7 @@ function Page(props) {
     },[])
     return (
         <div>
-                        {props.children}
-
+            {props.children}
         </div>
     )
 }

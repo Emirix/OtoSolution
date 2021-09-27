@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 function ParkingLotList() {
     return (
        <Page>
-           <div className="sayfa">
+           <div className="page-wrapper">
            <div className="row mt-3 m-0">
           <div className="d-flex align-items-center mb-3">
             <div className="mini-title">Parking Lot List</div>

@@ -46,7 +46,7 @@ function OtoLink() {
 
   return (
     <Page>
-      <div className="sayfa">
+      <div className="page-wrapper">
         <div className="row m-0">
           <div className="mini-title text-center">Add New Oto-link Device</div>
 

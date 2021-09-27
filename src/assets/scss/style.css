@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-.emir-pagination {
+.datatable-pagination {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -254,7 +254,7 @@ html {
     padding-left: 0 !important;
   }
 
-  .sayfa {
+  .page-wrapper {
     padding-left: 0rem !important;
   }
 }
@@ -448,7 +448,7 @@ a {
   margin-right: 5px;
 }
 
-.search-acik {
+.search-on {
   width: 250px !important;
 }
 
@@ -582,7 +582,7 @@ img.ara {
   height: 266px;
 }
 
-.sayfa {
+.page-wrapper {
   background-color: white;
   box-sizing: border-box;
   min-height: calc(86vh);
@@ -767,62 +767,63 @@ img.ara {
   padding-bottom: 0.5rem;
   border-radius: 12px;
 }
-.motion-car .sag {
+.motion-car .right-en {
   width: 60%;
   padding: 0.4rem 0.5rem;
 }
-.motion-car .sag .progress-title {
+.motion-car .right-en .progress-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.motion-car .sag .progress-title .title {
+.motion-car .right-en .progress-title .title {
   color: #888C9F;
   font-size: 14px;
 }
-.motion-car .sag .progress-title .progress2 {
+.motion-car .right-en .progress-title .progress2 {
   width: 100px;
   height: 6px;
   border-radius: 3px;
 }
-.motion-car .sag .progress-title .progress2 .cubuk {
+.motion-car .right-en .progress-title .progress2 .cubuk {
   z-index: 100;
   height: 6px;
   border-radius: 3px;
 }
-.motion-car .sol {
+.motion-car .left-en {
   width: 40%;
 }
-.motion-car .sol .car-info {
+.motion-car .left-en .car-info {
   padding-left: 0.4rem;
   color: #888C9F;
   font-size: 16px;
 }
-.motion-car .sol .car-info .model {
+.motion-car .left-en .car-info .model {
   font-size: 12px;
 }
-.motion-car .sol .car-info .since {
+.motion-car .left-en .car-info .since {
   color: #0BB783;
   font-size: 12px;
   font-weight: 500;
 }
-.motion-car .sol .motion-car__slider {
+.motion-car .left-en .motion-car__slider {
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   width: 100%;
+  background-position: center center;
   height: 100px;
   border-radius: 12px;
   border: 0.1px solid #707070;
   position: relative;
 }
-.motion-car .sol .motion-car__slider .slider {
+.motion-car .left-en .motion-car__slider .slider {
   display: flex;
   flex-direction: column;
   position: absolute;
   right: 5px;
   top: 5px;
 }
-.motion-car .sol .motion-car__slider .slider .slide {
+.motion-car .left-en .motion-car__slider .slider .slide {
   width: 8px;
   height: 8px;
   background: #D5D5D5;
@@ -830,7 +831,7 @@ img.ara {
   margin-bottom: 0.2rem;
   cursor: pointer;
 }
-.motion-car .sol .motion-car__slider .slider .active {
+.motion-car .left-en .motion-car__slider .slider .active {
   border: 0.5px solid #707070;
   background: transparent;
 }
@@ -1316,14 +1317,14 @@ tr {
   box-shadow: inset -2px -1px 20px #D1D9E665;
   border-radius: 12px;
 }
-#upload .sag {
+#upload .right-en {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   width: 50%;
 }
-#upload .sol {
+#upload .left-en {
   width: 50%;
   background-color: #E5E5E5;
   border-radius: 12px;
@@ -1492,7 +1493,7 @@ tr {
   box-sizing: border-box;
   margin-right: 0 !important;
 }
-.bildirim .orta, .bildirim .sag {
+.bildirim .orta, .bildirim .right-en {
   margin: 0 auto;
 }
 .bildirim svg:hover {
@@ -1794,7 +1795,7 @@ tr {
   font-size: 12px;
 }
 
-.carpi {
+.close-en {
   width: 20px;
   height: 20px;
   top: 5px;
@@ -1894,7 +1895,7 @@ tr {
   background-color: #7075F6 !important;
 }
 
-.tit-falan {
+.popup-title-component {
   font-size: 12px;
   text-align: center;
   margin-top: 5px;
@@ -1976,6 +1977,10 @@ tr {
   min-width: 0px !important;
   width: 0px !important;
   display: flex;
+}
+
+.fs-75rem {
+  font-size: 0.75rem;
 }
 
 /*# sourceMappingURL=style.css.map */

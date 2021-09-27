@@ -172,7 +172,7 @@ function AddDealer() {
 
   return (
     <Page>
-      <div className="sayfa">
+      <div className="page-wrapper">
       <NotificationContainer/>
 
         <div className="row m-0">

@@ -59,13 +59,13 @@ export default class Index extends Component {
     }else{
     return (
       <Page>
-      <div className="sayfa">
+      <div className="page-wrapper">
         <div className="row m-0">
           <div className="col-xl-6 col-md-12">
             <div className="mini-title mb-3">Quick Actions</div>
             <div className="mini-container position-relative">
               <div className="premium-container br-12">
-                <button className="mor-button" onClick={()=>{
+                <button className="purple-button" onClick={()=>{
                   document.querySelector(".premium-container").classList.add("premium-kapali")
                 }}>Get Premium</button>
               </div>
@@ -325,7 +325,7 @@ export default class Index extends Component {
               <img src="icons/print.svg" alt="" onClick={()=>{
                 var content = document.querySelector(".tb-container");
                 var pri = document.querySelector("iframe").contentWindow;
-                document.querySelector(".emir-pagination").style.display = "none"
+                document.querySelector(".datatable-pagination").style.display = "none"
                 for(var i=0;i < document.querySelectorAll(".row-search").length; i++){
                   document.querySelectorAll(".row-search")[i].style.display="none"
                 }
@@ -335,7 +335,7 @@ export default class Index extends Component {
                 pri.document.close();
                 pri.focus();
                 pri.print();
-                document.querySelector(".emir-pagination").style.display = "flex"
+                document.querySelector(".datatable-pagination").style.display = "flex"
                 for(var i=0;i < document.querySelectorAll(".row-search").length; i++){
                   document.querySelectorAll(".row-search")[i].style.display="block"
                 }

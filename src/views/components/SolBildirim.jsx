@@ -28,11 +28,11 @@ function SolBildirim({img,title,caption,show,onKapat}) {
         return(
             <div ref={bil} className="sol-bildirim" style={kapat  ? {animation:"bildirim-kapat .5s"} : {}}>
             <div className="sol-bildirim__flex">
-                <div className="carpi" onClick={(e)=>{
+                <div className="close-en" onClick={(e)=>{
                     onKapat(e)
                 }}></div>
             <img src={"/icons/"+img+".svg"} alt="" />
-            <div className="sag">
+            <div className="right-en">
                 <div className="title">{title}</div>
                 <div className="caption">{caption}</div>
             </div>

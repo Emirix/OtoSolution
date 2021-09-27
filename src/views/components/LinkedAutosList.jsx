@@ -44,12 +44,12 @@ import { useHistory } from 'react-router-dom'
         
         newCarList.push({
             
-            col1:val.manufacture_date ? months[val.manufacture_date.substring(5, 7)] + " " + val.manufacture_date.substring(8, 10) + " " +  val.manufacture_date.substring(0, 4) : "",
+            col1:val.manufacture_date ? months[val.manufacture_date.substring(5, 7)] + " " + val.manufacture_date.substring(8, 10) + ", " +  val.manufacture_date.substring(0, 4) : "",
             col2:val.serial_no,
             col3:val.version,
             col4:val.model,
-            col5:months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4)   ,
-            col6:months[val.updated_at.substring(5, 7)] + " " + val.updated_at.substring(8, 10) + " " +  val.updated_at.substring(0, 4) ,
+            col5:months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + ", " +  val.created_at.substring(0, 4)   ,
+            col6:months[val.updated_at.substring(5, 7)] + " " + val.updated_at.substring(8, 10) + ", " +  val.updated_at.substring(0, 4) ,
             id:val.id
             })
         })

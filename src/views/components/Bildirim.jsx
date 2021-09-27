@@ -3,7 +3,7 @@ import React from 'react'
 function Bildirim({name,vkn,status,location,minute}) {
     return (
         <div className="bildirim">
-            <div className="sol">
+            <div className="left-en">
                 <div className="name">{name}</div>
                 <div className="vkn">{vkn}</div>
                 <div className="location">{location}</div>
@@ -11,7 +11,7 @@ function Bildirim({name,vkn,status,location,minute}) {
             <div className="orta">
                 <div className={"status status-"+status}>{status}</div>
             </div>
-            <div className="sag">
+            <div className="right-en">
                 <div className="minute">{minute}m</div>
             </div>
             <div className="en-sag">

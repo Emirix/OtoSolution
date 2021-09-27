@@ -600,7 +600,7 @@ function AddNewCar({ bg, title }) {
   } else {
     return (
       <Page>
-        <div className="sayfa">
+        <div className="page-wrapper">
           <NotificationContainer />
 
           <div className="row m-0">
@@ -609,10 +609,10 @@ function AddNewCar({ bg, title }) {
               <div className="add-car-image">
                 <div className="mini-title">{url.get("edit") ? "Edit Existing Car" : "Add New Car"}</div>
                 <label htmlFor="upload" id="upload">
-                  <div className="sol">
+                  <div className="left-en">
                     <img src="icons/camera-solid.svg" alt="" />
                   </div>
-                  <div className="sag">
+                  <div className="right-en">
                     upload images
                     <br />
                     or

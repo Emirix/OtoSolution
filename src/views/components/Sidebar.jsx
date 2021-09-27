@@ -17,7 +17,7 @@ function Sidebar() {
         document.querySelectorAll("li.active")[i].classList.remove("active")
     }
 
-    if(e.currentTarget.dataset.dropdown == "kapali"){
+    if(e.currentTarget.dataset.dropdown == "off"){
        //document.querySelectorAll(".side-dropdown").forEach(e=>{e.style.maxHeight="0px"})
        //document.querySelectorAll(".sidebar li").forEach(e=>{e.style.backgroundColor = "transparent"})
 
@@ -27,7 +27,7 @@ function Sidebar() {
         e.currentTarget.querySelector(".side-dropdown").style.maxHeight = "300px";
         e.currentTarget.querySelector("img").src = acikImg
         e.currentTarget.style.backgroundColor = "white"
-        e.currentTarget.dataset.dropdown = "acik"
+        e.currentTarget.dataset.dropdown = "on"
 
       
     }else{
@@ -35,7 +35,7 @@ function Sidebar() {
         e.currentTarget.style.backgroundColor = "transparent"
         e.currentTarget.querySelector("img").src = kapaliImg
 
-        e.currentTarget.dataset.dropdown = "kapali"
+        e.currentTarget.dataset.dropdown = "off"
 
     }
   }
@@ -46,8 +46,8 @@ function Sidebar() {
       <Link to="/" className="logo">
         <img src={Logo} alt="" />
       </Link>
-      <div onClick={()=>{ document.querySelector(".sidebar").style.left="-280px"}} className="carpi d-lg-none position-absolute"></div>
-      <div className="d-lg-none search m-0 mt-5 search-acik w-215">
+      <div onClick={()=>{ document.querySelector(".sidebar").style.left="-280px"}} className="close-en d-lg-none position-absolute"></div>
+      <div className="d-lg-none search m-0 mt-5 search-on w-215">
                     <input type="text" placeholder="Search Car" />
                     
             </div>
@@ -69,7 +69,7 @@ function Sidebar() {
               dropdown(e,"/icons/car-settings-active.svg","/icons/car-settings-inactive.svg");
             }}
 
-            data-dropdown="kapali"
+            data-dropdown="off"
           >
             <a href="#">
               <img src="/icons/car-settings-inactive.svg" alt="" />
@@ -98,7 +98,7 @@ function Sidebar() {
               dropdown(e,"/icons/oto-link-active.svg","/icons/oto-link-inactive.svg");
             }}
 
-            data-dropdown="kapali"
+            data-dropdown="off"
           >
             <a href="#">
               <img src="/icons/oto-link-inactive.svg" alt="" />
@@ -127,7 +127,7 @@ function Sidebar() {
               dropdown(e,"/icons/settings-active.svg","/icons/settings-inactive.svg");
             }}
 
-            data-dropdown="kapali"
+            data-dropdown="off"
           >
             <a href="#">
             <img src="/icons/settings-inactive.svg" alt="" />

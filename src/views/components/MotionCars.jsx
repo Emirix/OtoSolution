@@ -14,7 +14,7 @@ function MotionCars({src,marka,model,since,deger}) {
     }
     return (
         <div className="motion-car">
-            <div className="sol">
+            <div className="left-en">
                 <div style={{backgroundImage:src[0]}}  className="motion-car__slider">
                     <div className="slider">
                         
@@ -33,7 +33,7 @@ function MotionCars({src,marka,model,since,deger}) {
                     <div className="since">Since {since}PM</div>
                 </div>
             </div>
-            <div className="sag">
+            <div className="right-en">
                 <div className="progress-title ">
                     <div className="title">Gas</div>
                     <div className="progress2 pro-sari">

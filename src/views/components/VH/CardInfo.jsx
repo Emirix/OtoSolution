@@ -89,7 +89,7 @@ function CardInfo({ data }) {
            
             <div className="data">
             
-            {data != null && data.last_connection_time != null ? months[data.last_connection_time.substring(5, 7)] + " " + data.last_connection_time.substring(8, 10) + " " +  data.last_connection_time.substring(0, 4) + " " + new Date(data.last_connection_time).toString().substring(15,21) : " No Data"}</div>
+            {data != null && data.last_connection_time != null ? months[data.last_connection_time.substring(5, 7)] + " " + data.last_connection_time.substring(8, 10) + ", " +  data.last_connection_time.substring(0, 4) + " " + new Date(data.last_connection_time).toString().substring(15,21) : " No Data"}</div>
           </li>
 
 

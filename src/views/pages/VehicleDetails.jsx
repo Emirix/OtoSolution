@@ -285,7 +285,7 @@ function VehicleDetails() {
   } else {
     return (
       <Page>
-        <div className="sayfa">
+        <div className="page-wrapper">
           <div className="vehicle-details-header">
             <img src="/icons/mark-as-sold.svg" className="add-car-button" />
             <Link
@@ -374,23 +374,32 @@ function VehicleDetails() {
               <div className=" position-relative">
                 {perde ? (
                   <div className="premium-container br-12  p-3">
-                    <button className=" mor-button text-center">
+                    <button className="fs-75rem purple-button text-center">
                       <strong>Connection Lost</strong> <br />
-                      Last Updated: 
+                      Last Updated:{" "}
                       {car != null && car.last_connection_time != null
-                        ? months[car.last_connection_time.substring(5, 7)] +
-                          " " +
-                          car.last_connection_time.substring(8, 10) +
-                          " " +
-                          car.last_connection_time.substring(0, 4) +
-                          " " +
-                          new Date(car.last_connection_time)
-                            .toString()
-                            .substring(15, 21) +
-                          " (" +
-                          timeAgo(car.last_connection_time) +
-                          ")  "
-                        : "No Data"}
+                        ? <span>
+                          {
+                            months[car.last_connection_time.substring(5, 7)] +
+                            " " +
+                            car.last_connection_time.substring(8, 10) +
+                            ", " +
+                            car.last_connection_time.substring(0, 4) +
+                            " " +
+                            new Date(car.last_connection_time)
+                              .toString()
+                              .substring(15, 21) 
+                          }
+                            <br/>
+                            {
+                            " (" +
+                            timeAgo(car.last_connection_time) +
+                            ")"  
+                            }
+                          
+                        </span>
+                      : "No Data"
+                          }
                     </button>
                   </div>
                 ) : (

@@ -62,8 +62,8 @@ import { useHistory } from 'react-router-dom'
           col2:val.address,
           col3:"9",
           col4: "7",
-          col5: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + " " +  val.created_at.substring(0, 4)  ,
-          col6:months[val.updated_at.substring(5, 7)] + " " + val.updated_at.substring(8, 10) + " " +  val.updated_at.substring(0, 4)  ,
+          col5: months[val.created_at.substring(5, 7)] + " " + val.created_at.substring(8, 10) + ", " +  val.created_at.substring(0, 4)  ,
+          col6:months[val.updated_at.substring(5, 7)] + " " + val.updated_at.substring(8, 10) + ", " +  val.updated_at.substring(0, 4)  ,
           id:val.id
           
         })
@@ -319,7 +319,7 @@ import { useHistory } from 'react-router-dom'
        
        </tbody>
      </table>
-        <div className="emir-pagination">
+        <div className="datatable-pagination">
     
         <button className="pagi-out" onClick={() => getList(prev)} disabled={prev == "" ? true : false}>
           Previous
