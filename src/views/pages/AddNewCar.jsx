@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import CardInfo from "../components/VH/CardInfo";
+//import CardInfo from "../components/VH/CardInfo";
 import Page from "./Page";
 import { Redirect } from "react-router-dom";
 import {
@@ -9,6 +9,8 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import Dropdown from "../components/Dropdown";
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 
 function AddNewCar({ bg, title }) {
@@ -31,6 +33,26 @@ function AddNewCar({ bg, title }) {
   const [desiretLot, setDesiretLot] = useState("");
   const url = new URLSearchParams(window.location.search);
 
+
+  const [selectedFile,setSelectedFile] = useState(null)
+
+  function fileChange(e){
+    setSelectedFile(e.target.files[0])
+  }
+
+  function fileUpload(){
+      const formData = new FormData();
+    
+      formData.append(
+        "photo",
+        selectedFile,
+        selectedFile.name
+      );
+
+      axios.post("/api/dealer/vehicles/"+url.get("id")+"/photos/",formData).then(res=>{
+        console.log(res)
+      })
+  }
 
   const Yil =
 [{
@@ -604,7 +626,7 @@ function AddNewCar({ bg, title }) {
           <NotificationContainer />
 
           <div className="row m-0">
-            <input type="file" name="upload" id="upload" className="d-none" />
+            <input onChange={e=>fileChange(e)} accept="image/png, image/jpeg" type="file" name="upload" id="upload" className="d-none" />
             <div className="col-lg-6 col-md-12">
               <div className="add-car-image">
                 <div className="mini-title">{url.get("edit") ? "Edit Existing Car" : "Add New Car"}</div>
@@ -613,7 +635,7 @@ function AddNewCar({ bg, title }) {
                     <img src="icons/camera-solid.svg" alt="" />
                   </div>
                   <div className="right-en">
-                    upload images
+                    upload image
                     <br />
                     or
                     <br />
@@ -621,6 +643,7 @@ function AddNewCar({ bg, title }) {
                   </div>
                 </label>
               </div>
+              <button className="h-44 mt-2 btn btn-primary" onClick={e=>{fileUpload()}}>Upload</button>
 
               <div className="as">
                 <div className="mini-title"></div>

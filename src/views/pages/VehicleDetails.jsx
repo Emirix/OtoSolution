@@ -77,6 +77,8 @@ function VehicleDetails() {
   const [connectionType, setConnectionType] = useState(null);
   const [gpsStatus, setGpsStatus] = useState(null);
 
+  const [images,setImages] = useState([])
+
   useEffect(() => {
     const interval = setInterval(() => {}, 1000);
 
@@ -240,6 +242,15 @@ function VehicleDetails() {
         });*/
       }
     });
+
+    axios.get("/api/dealer/vehicles/"+id+"/photos").then(res=>{
+      console.log(res)
+      const arr = [];
+      for(var i = 0; i < res.data.length;i++){
+        arr.push(res.data[i].photo)
+      }
+      setImages(arr)
+    })
     return () => {
       clearInterval(interval);
     };
@@ -301,7 +312,7 @@ function VehicleDetails() {
             <div className="mini-title mt-3">Vehicle Details</div>
             <div className="br-12 col-lg-6 vd h-266 m-0 position-relative ">
               <VH
-                src={[car1, car2]}
+                src={images.length != 0 ? images : [car1,car2]}
                 marka={car ? car.vin.brand_name : ""}
                 model={car ? car.vin.model_name : ""}
                 fiyat={
@@ -371,7 +382,7 @@ function VehicleDetails() {
                 title="Click for refresh data"
                 className="refresh-data position-absolute"
               ></div>
-              <div className=" position-relative">
+              <div className=" position-relative w-50">
                 {perde ? (
                   <div className="premium-container br-12  p-3">
                     <button className="fs-75rem purple-button text-center">
