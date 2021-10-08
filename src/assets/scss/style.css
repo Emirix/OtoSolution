@@ -1983,4 +1983,51 @@ tr {
   font-size: 0.75rem;
 }
 
+.crop-fixed {
+  top: 0;
+  left: 0;
+  z-index: 999999999;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.upload-btn {
+  bottom: 30px;
+  right: 30px;
+  position: absolute;
+  z-index: 1000;
+}
+
+.car-images-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 200px;
+  grid-gap: 1rem;
+}
+.car-images-grid .car-image .hover {
+  transition: 0.2s;
+  border-radius: 8px;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+}
+.car-images-grid .car-image .hover span {
+  color: white;
+  opacity: 0;
+  transition: 0.2s;
+}
+.car-images-grid .car-image .hover:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+.car-images-grid .car-image .hover:hover span {
+  opacity: 1;
+}
+.car-images-grid .car-image img {
+  border-radius: 8px;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
 /*# sourceMappingURL=style.css.map */

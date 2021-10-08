@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 //import CardInfo from "../components/VH/CardInfo";
 import Page from "./Page";
 import { Redirect } from "react-router-dom";
@@ -9,9 +9,8 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import Dropdown from "../components/Dropdown";
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
-
+import Cropper from "react-easy-crop";
+import getCroppedImg from "../components/cropImage";
 
 function AddNewCar({ bg, title }) {
   const [brand, setBrand] = useState([]);
@@ -19,7 +18,7 @@ function AddNewCar({ bg, title }) {
   const [colors, setColors] = useState([]);
   const [dealers, setDealers] = useState([]);
   const [lots, setLots] = useState([]);
-  const [devices, setDevices] = useState([])
+  const [devices, setDevices] = useState([]);
   const [stk, setStk] = useState("");
   const [vin, setVin] = useState("");
   const [serialId, setserialId] = useState("");
@@ -29,384 +28,173 @@ function AddNewCar({ bg, title }) {
   const [color, setColor] = useState("");
   const [dealer, setDealer] = useState("");
   const [iv, setIV] = useState("");
-  const [device, setDevice] = useState("")
+  const [device, setDevice] = useState("");
   const [desiretLot, setDesiretLot] = useState("");
   const url = new URLSearchParams(window.location.search);
+  const [uploading, setUploading] = useState(false)
+  const [carImages, setCarImages] = useState(null);
 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [imageSrc, setImageSrc] = useState(null);
 
-  const [selectedFile,setSelectedFile] = useState(null)
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedImage, setCroppedImage] = useState(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
-  function fileChange(e){
-    setSelectedFile(e.target.files[0])
+  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
+  function readFile(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.addEventListener("load", () => resolve(reader.result), false);
+      reader.readAsDataURL(file);
+    });
   }
 
-  function fileUpload(){
+  function blobToFile(theBlob, fileName) {
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    theBlob.lastModifiedDate = new Date();
+    theBlob.name = fileName;
+    return theBlob;
+  }
+
+  const showCroppedImage = useCallback(async () => {
+    try {
+      const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels, 0);
+      console.log("donee", croppedImage);
+      setCroppedImage(croppedImage);
+
       const formData = new FormData();
-    
-      formData.append(
-        "photo",
-        selectedFile,
-        selectedFile.name
-      );
 
-      axios.post("/api/dealer/vehicles/"+url.get("id")+"/photos/",formData).then(res=>{
-        console.log(res)
-      })
+      var xhr = new XMLHttpRequest();
+      var myBlob = null;
+      xhr.open('GET', croppedImage, true);
+xhr.responseType = 'blob';
+xhr.onload = function(e) {
+  if (this.status == 200) {
+    myBlob = this.response;
+    console.log(myBlob)
+    const filex = new File([myBlob], `IMAGE_S.jpg`, { type: myBlob.type })
+    console.log("dosya")
+    console.log(filex)
+    myBlob = filex;
+
+    // myBlob is now the blob that the object URL pointed to.
+    formData.append("photo", filex);
+    setUploading(true)
+    axios
+    .post("/api/dealer/vehicles/"+url.get("id")+"/photos/", formData, {
+    })
+    .then((res) => {
+      console.log("Uploaded");
+      console.log(res);
+      setUploading(false)
+      window.location.reload()
+    });
   }
+};
+xhr.send();
 
-  const Yil =
-[{
-    id:1980,
-    yil:1980
-},
 
 
 
-{
-    id:1981,
-    yil:1981
-},
-
-
-
-{
-    id:1982,
-    yil:1982
-},
-
-
-
-{
-    id:1983,
-    yil:1983
-},
-
-
-
-{
-    id:1984,
-    yil:1984
-},
-
-
-
-{
-    id:1985,
-    yil:1985
-},
-
-
-
-{
-    id:1986,
-    yil:1986
-},
-
-
-
-{
-    id:1987,
-    yil:1987
-},
-
-
-
-{
-    id:1988,
-    yil:1988
-},
-
-
-
-{
-    id:1989,
-    yil:1989
-},
-
-
-
-{
-    id:1990,
-    yil:1990
-},
-
-
-
-{
-    id:1991,
-    yil:1991
-},
-
-
-
-{
-    id:1992,
-    yil:1992
-},
-
-
-
-{
-    id:1993,
-    yil:1993
-},
-
-
-
-{
-    id:1994,
-    yil:1994
-},
-
-
-
-{
-    id:1995,
-    yil:1995
-},
-
-
-
-{
-    id:1996,
-    yil:1996
-},
-
-
-
-{
-    id:1997,
-    yil:1997
-},
-
-
-
-{
-    id:1998,
-    yil:1998
-},
-
-
-
-{
-    id:1999,
-    yil:1999
-},
-
-
-
-{
-    id:2000,
-    yil:2000
-},
-
-
-
-{
-    id:2001,
-    yil:2001
-},
-
-
-
-{
-    id:2002,
-    yil:2002
-},
-
-
-
-{
-    id:2003,
-    yil:2003
-},
-
-
-
-{
-    id:2004,
-    yil:2004
-},
-
-
-
-{
-    id:2005,
-    yil:2005
-},
-
-
-
-{
-    id:2006,
-    yil:2006
-},
-
-
-
-{
-    id:2007,
-    yil:2007
-},
-
-
-
-{
-    id:2008,
-    yil:2008
-},
-
-
-
-{
-    id:2009,
-    yil:2009
-},
-
-
-
-{
-    id:2010,
-    yil:2010
-},
-
-
-
-{
-    id:2011,
-    yil:2011
-},
-
-
-
-{
-    id:2012,
-    yil:2012
-},
-
-
-
-{
-    id:2013,
-    yil:2013
-},
-
-
-
-{
-    id:2014,
-    yil:2014
-},
-
-
-
-{
-    id:2015,
-    yil:2015
-},
-
-
-
-{
-    id:2016,
-    yil:2016
-},
-
-
-
-{
-    id:2017,
-    yil:2017
-},
-
-
-
-{
-    id:2018,
-    yil:2018
-},
-
-
-
-{
-    id:2019,
-    yil:2019},
-
-
-
-{
-    id:2020,
-    yil:2020
-},
-
-
-
-{
-    id:2021,
-    yil:2021
-}] 
-
-
-  function editCar(){
-     const data = {
-      color:color || null,
-      inventory_type:iv || null,
-      year:Number(year) || null,
-      brand:Number(make) || null,
-      model:Number(model) || null,
-      desired_lot:Number(desiretLot),
-      device:Number(device) || null
-     }
      
-     axios.put(`/api/dealer/vehicles/${url.get("id")}/`,data,{
-       headers:{
-        "Authorization" : `Token ${localStorage.getItem("key")}`
-       }
-     }).then(res=>{
-       console.log(res)
-       
-     })
-     
-     alert("MESAJ: CONSOLE'U KONTROL EDİN")
-     console.clear()
-     console.log("%cPUT ISTEKLERINDE BİR CORS HATASI ALIYORUM, POSTMANDE DENEDİĞİMDE HİÇBİR SIKINTI YOK ÇOK UĞRAŞTIM ÇÖZEMEDİM BUNA NE YAPABİLİRİZ ","background-color:#d35400")
-     console.log(`Put İsteğinin gitti yer: /api/dealer/vehicles/${url.get("id")}/`)
-     console.log("Giden veri:")
-     console.log(data)
+    } catch (e) {
+      console.error(e);
+    }
+  }, [croppedAreaPixels]);
+
+  const fileChange = async (e) => {
+    setSelectedFile(e.target.files[0]);
+    console.log(e.target.files[0]);
+
+    const file = e.target.files[0];
+    let imageDataUrl = await readFile(file);
+    setImageSrc(imageDataUrl);
+    console.log("IMAGE : " + imageDataUrl);
+    console.log(e.target.files[0]);
+  };
+
+
+  function editCar() {
+    const data = {
+      color: color || null,
+      inventory_type: iv || null,
+      year: Number(year) || null,
+      brand: Number(make) || null,
+      model: Number(model) || null,
+      desired_lot: Number(desiretLot),
+      device: Number(device) || null,
+    };
+
+    axios
+      .put(`/api/dealer/vehicles/${url.get("id")}/`, data, {
+        headers: {
+          Authorization: `Token ${localStorage.getItem("key")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+
+    alert("MESAJ: CONSOLE'U KONTROL EDİN");
+    console.clear();
+    console.log(
+      "%cPUT ISTEKLERINDE BİR CORS HATASI ALIYORUM, POSTMANDE DENEDİĞİMDE HİÇBİR SIKINTI YOK ÇOK UĞRAŞTIM ÇÖZEMEDİM BUNA NE YAPABİLİRİZ ",
+      "background-color:#d35400"
+    );
+    console.log(
+      `Put İsteğinin gitti yer: /api/dealer/vehicles/${url.get("id")}/`
+    );
+    console.log("Giden veri:");
+    console.log(data);
   }
 
   useEffect(() => {
     var brand_name = "";
     var brand_id = 0;
     var model_name = "";
-    if(url.get("edit")){
+    if (url.get("edit")) {
+      axios
+        .get("/api/dealer/vehicles/" + url.get("id") + "/photos")
+        .then((res) => {
+          console.log(res);
+          setCarImages(res.data);
+        });
 
-        axios.get("/api/dealer/vehicles/"+url.get("id"),{
-            headers:{
-              "Authorization" : `Token ${localStorage.getItem("key")}`
-            }
-          }).then(res=>{            
-            setStk(res.data.stock_no)
-            setVin(res.data.vin.vin)
-            setserialId(res.data.device_serial_no)            
-            
-            setYear(res.data.year)
-            setColor(res.data.color)            
-           setDesiretLot(res.data.desired_lot.id)
-           setIV(res.data.inventory_type)
-           setDealer(res.data.dealer.id)   
+      axios
+        .get("/api/dealer/vehicles/" + url.get("id"), {
+          headers: {
+            Authorization: `Token ${localStorage.getItem("key")}`,
+          },
+        })
+        .then((res) => {
+          setStk(res.data.stock_no);
+          setVin(res.data.vin.vin);
+          setserialId(res.data.device_serial_no);
 
-           brand_name =res.data.brand_name
-           model_name=res.data.model_name
-           
+          setYear(res.data.year);
+          setColor(res.data.color);
+          setDesiretLot(res.data.desired_lot.id);
+          setIV(res.data.inventory_type);
+          setDealer(res.data.dealer.id);
 
-           //document.querySelector("#span-dealer").innerText = " : " + res.data.dealer.name
-           document.querySelector("#span-make").innerText = " : " + res.data.brand_name
+          brand_name = res.data.brand_name;
+          model_name = res.data.model_name;
+
+          //document.querySelector("#span-dealer").innerText = " : " + res.data.dealer.name
+          document.querySelector("#span-make").innerText =
+            " : " + res.data.brand_name;
           // document.querySelector("#span-model").innerText = " : " + res.data.model_name
-           document.querySelector("#span-color").innerText = " : " + res.data.color_name
-           document.querySelector("#span-lot").innerText = " : " + res.data.desired_lot.name
-          }).then(f=>{
-            axios
+          document.querySelector("#span-color").innerText =
+            " : " + res.data.color_name;
+          document.querySelector("#span-lot").innerText =
+            " : " + res.data.desired_lot.name;
+        })
+        .then((f) => {
+          axios
             .get("/api/catalog/brandnames/", {
               headers: {
                 Authorization: `Token ${localStorage.getItem("key")}`,
@@ -414,14 +202,14 @@ function AddNewCar({ bg, title }) {
             })
             .then((res) => {
               setBrand(res.data);
-              if(url.get("edit")){
-                res.data.map(val=>{
-                  if(val.name == brand_name){
-                    setMake(val.id)
-                    brand_id = val.id
-                    brandChange({target:{value:val.id}})
+              if (url.get("edit")) {
+                res.data.map((val) => {
+                  if (val.name == brand_name) {
+                    setMake(val.id);
+                    brand_id = val.id;
+                    brandChange({ target: { value: val.id } });
                   }
-                })
+                });
               }
               axios
                 .get("/api/utils/color/names", {
@@ -432,9 +220,8 @@ function AddNewCar({ bg, title }) {
                 .then((res) => {
                   setColors(res.data);
                 });
-            })
-      
-          })
+            });
+        });
     }
 
     axios
@@ -445,11 +232,11 @@ function AddNewCar({ bg, title }) {
       })
       .then((res) => {
         setBrand(res.data);
-        if(url.get("edit")){
-          res.data.map(val=>{
-            if(val.name == brand_name){
+        if (url.get("edit")) {
+          res.data.map((val) => {
+            if (val.name == brand_name) {
             }
-          })
+          });
         }
         axios
           .get("/api/utils/color/names", {
@@ -462,15 +249,15 @@ function AddNewCar({ bg, title }) {
           });
       });
 
-
-    axios.get("/api/devices/oto-link-devices/",{
+    axios
+      .get("/api/devices/oto-link-devices/", {
         headers: {
-            Authorization: `Token ${localStorage.getItem("key")}`,
-          }
-    }).then(res=>{
-        
-        setDevices(res.data)
-    })
+          Authorization: `Token ${localStorage.getItem("key")}`,
+        },
+      })
+      .then((res) => {
+        setDevices(res.data);
+      });
 
     axios
       .get("/admin/api/dealers/", {
@@ -479,10 +266,8 @@ function AddNewCar({ bg, title }) {
         },
       })
       .then((res) => {
-        
-
         let array = [];
-     
+
         array.push(...res.data.results);
         for (let i = 0; i <= Math.ceil(res.data.count / 10); i++) {
           axios
@@ -508,7 +293,6 @@ function AddNewCar({ bg, title }) {
       .then((res) => {
         let array = [];
         for (let i = 1; i <= Math.ceil(res.data.count / 10); i++) {
-          
           axios
             .get("/api/dealer/lots/?page=" + i, {
               headers: {
@@ -520,13 +304,8 @@ function AddNewCar({ bg, title }) {
               array.push(...res.data.results);
               setLots(array);
             });
-
         }
-        
-
-      })
-
-
+      });
   }, []);
 
   function brandChange(e) {
@@ -543,93 +322,137 @@ function AddNewCar({ bg, title }) {
       });
   }
 
-  function checkInputs(){
-    if(stk == "" || vin == "" || make == "" ||model == "" || year == "" ||color == "" ||device == "" ||dealer == "" ||desiretLot == "" ||iv == ""){
-      return false
-    }else{
-      return true
+  function checkInputs() {
+    if (
+      stk == "" ||
+      vin == "" ||
+      make == "" ||
+      model == "" ||
+      year == "" ||
+      color == "" ||
+      device == "" ||
+      dealer == "" ||
+      desiretLot == "" ||
+      iv == ""
+    ) {
+      return false;
+    } else {
+      return true;
     }
   }
   function addCar() {
-    if(checkInputs() == true){
-
-   
-    axios
-      .post(
-        "/api/dealer/vehicles/",
-        {
-          stock_no: stk,
-          dealer: Number(dealer) || null,
-          vin: vin.trim(),
-          color: Number(color) || null,
-          year: Number(year) || null,
-          brand: Number(make) || null,
-          model: Number(model) || null,
-          device: Number(device) || null,
-          desired_lot: Number(desiretLot) || null,
-          inventory_type: Number(iv) || null,
-        },
-        {
-          headers: {
-            Authorization: `Token ${localStorage.getItem("key")}`,
+    if (checkInputs() == true) {
+      axios
+        .post(
+          "/api/dealer/vehicles/",
+          {
+            stock_no: stk,
+            dealer: Number(dealer) || null,
+            vin: vin.trim(),
+            color: Number(color) || null,
+            year: Number(year) || null,
+            brand: Number(make) || null,
+            model: Number(model) || null,
+            device: Number(device) || null,
+            desired_lot: Number(desiretLot) || null,
+            inventory_type: Number(iv) || null,
           },
-        }
-      )
-      .then((res) => {
-        
-        if (res.statusText == "Created" || res.status == 200 || res.status == 201) {
-      
-          NotificationManager.success(
-            "Car successfully added.",
-            "You can find it in the car list",
+          {
+            headers: {
+              Authorization: `Token ${localStorage.getItem("key")}`,
+            },
+          }
+        )
+        .then((res) => {
+          if (
+            res.statusText == "Created" ||
+            res.status == 200 ||
+            res.status == 201
+          ) {
+            NotificationManager.success(
+              "Car successfully added.",
+              "You can find it in the car list",
+              2000
+            );
+
+            setVin("");
+            setStk("");
+            setYear("");
+            setserialId("");
+            setMake("");
+            setModel("");
+            setColor("");
+            document.querySelector("#span-device").innerText = "";
+            document.querySelector("#span-dealer").innerText = "";
+            document.querySelector("#span-lot").innerText = "";
+            document.querySelector("#span-dealer").innerText = "";
+            document.querySelector("#span-make").innerText = "";
+            document.querySelector("#span-model").innerText = "";
+            document.querySelector("#span-color").innerText = "";
+          }
+        })
+        .catch((err) => {
+          NotificationManager.error(
+            "Could not add car",
+            "Check the information",
             2000
           );
 
-          setVin("");
-          setStk("");
-          setYear("");
-          setserialId("");
-          setMake("");
-          setModel("");
-          setColor("");
-          document.querySelector("#span-device").innerText = ""
-          document.querySelector("#span-dealer").innerText = ""
-          document.querySelector("#span-lot").innerText = ""
-          document.querySelector("#span-dealer").innerText =""
-          document.querySelector("#span-make").innerText = ""
-          document.querySelector("#span-model").innerText = ""
-          document.querySelector("#span-color").innerText = ""
-          
-        }
-      })
-      .catch((err) => {
-        NotificationManager.error(
-          "Could not add car",
-          "Check the information",
-          2000
-        );
-
-        console.log(err.response)
-      });
-    }else{
-      alert("Fill in the mandatory fields")
+          console.log(err.response);
+        });
+    } else {
+      alert("Fill in the mandatory fields");
     }
-  
-}
+  }
 
   if (!localStorage.getItem("key")) {
     return <Redirect to="/login" />;
   } else {
     return (
       <Page>
+        {" "}
+        {selectedFile != null ? (
+          <div className="crop-fixed position-fixed w-100 h-100">
+            <button
+            disabled={uploading}
+              className="upload-btn primary-btn btn h-44"
+              onClick={() => {
+                showCroppedImage();
+              }}
+            >
+              {uploading ?  <><i class="fa fa-spinner fa-pulse me-3"></i>Uploading</> : "Upload"}
+             
+            </button>
+            <Cropper
+              image={imageSrc}
+              crop={crop}
+              zoom={zoom}
+              aspect={16 / 9}
+              onCropChange={setCrop}
+              onCropComplete={onCropComplete}
+              onZoomChange={setZoom}
+            />
+          </div>
+        ) : (
+          ""
+        )}
         <div className="page-wrapper">
           <NotificationContainer />
 
           <div className="row m-0">
-            <input onChange={e=>fileChange(e)} accept="image/png, image/jpeg" type="file" name="upload" id="upload" className="d-none" />
+            <input
+              onChange={(e) => fileChange(e)}
+              accept="image/png, image/jpeg"
+              type="file"
+              name="upload"
+              id="upload"
+              className="d-none"
+            />
             <div className="col-lg-6 col-md-12">
               <div className="add-car-image">
-                <div className="mini-title">{url.get("edit") ? "Edit Existing Car" : "Add New Car"}</div>
+                <div className="mini-title">
+                  {url.get("edit") ? "Edit Existing Car" : "Add New Car"}
+                </div>
                 <label htmlFor="upload" id="upload">
                   <div className="left-en">
                     <img src="icons/camera-solid.svg" alt="" />
@@ -639,113 +462,147 @@ function AddNewCar({ bg, title }) {
                     <br />
                     or
                     <br />
-                    drag&drop here
+                    drag{"&"}drop here
                   </div>
                 </label>
               </div>
-              <button className="h-44 mt-2 btn btn-primary" onClick={e=>{fileUpload()}}>Upload</button>
-
+              {url.get("edit") ?
+              <div className="car-images mt-5">
+               
+                <div className="mini-title">Images for this car</div>
+                <div className="car-images-grid">
+                  {carImages != null
+                    ? carImages.map((val) => {
+                        return (
+                          <div
+                            onClick={(e) => {
+                                axios
+                                .delete(
+                                  "/api/dealer/vehicle-photos/" +val.id.toString() +"/")
+                                .then((res) => {
+                                  console.log("silindi");
+                                  console.log(res);
+                                });
+                            }}
+                            className="car-image position-relative"
+                            key={val.id}
+                          >
+                            <div className="hover position-absolute w-100 h-100 d-flex flex-row">
+                              <span>Click for remove</span>
+                            </div>
+                            <img src={val.photo} alt="" />
+                          </div>
+                        );
+                      })
+                    : ""}
+                </div>
+              </div>
+: ""}
               <div className="as">
                 <div className="mini-title"></div>
-               {/* <CardInfo /> */ }
+                {/* <CardInfo /> */}
               </div>
             </div>
             <div className="col-lg-6 col-md-12">
-              <div className="mini-title">{url.get("edit") ? "Edit " : ""}Vehicle Information</div>
+              <div className="mini-title">
+                {url.get("edit") ? "Edit " : ""}Vehicle Information
+              </div>
               <div className="info-form">
-                {!url.get("edit") ?  <input
-                  value={stk}
-                  onChange={(e) => setStk(e.target.value)}
-                  type="text"
-                  placeholder="*STK"
-                /> : "" }
-               {!url.get("edit") ?
-                <input
-                  value={vin}
-                  onChange={(e) => setVin(e.target.value)}
-                  type="text"
-                  placeholder="*VIN"
-                /> : "" }
-
-
-
-             
+                {!url.get("edit") ? (
+                  <input
+                    value={stk}
+                    onChange={(e) => setStk(e.target.value)}
+                    type="text"
+                    placeholder="*STK"
+                  />
+                ) : (
+                  ""
+                )}
+                {!url.get("edit") ? (
+                  <input
+                    value={vin}
+                    onChange={(e) => setVin(e.target.value)}
+                    type="text"
+                    placeholder="*VIN"
+                  />
+                ) : (
+                  ""
+                )}
 
                 <div className="emir-selectbox">
                   <div
                     className="emir-selectbox__header"
                     onClick={(e) => {
-                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
+                      document
+                        .querySelectorAll(".emir-dropdown")
+                        .forEach((e) =>
+                          e.classList.remove("emir-dropdown-acik")
+                        );
                       e.currentTarget.parentNode
                         .querySelector(".emir-dropdown")
                         .classList.toggle("emir-dropdown-acik");
                     }}
                   >
-                   *Make<span id="span-make"></span>
+                    *Make<span id="span-make"></span>
                   </div>
                   <Dropdown
-                    onChange={(val) => {
-                      
-                    }}
-
-                    onSelect={(id,val)=>{
+                    onChange={(val) => {}}
+                    onSelect={(id, val) => {
                       setMake(id);
                       setModels([]);
-                      setModel("")
-                      document.querySelector("#span-model").innerText = ""
+                      setModel("");
+                      document.querySelector("#span-model").innerText = "";
                       axios
                         .get("/api/catalog/brandnames/" + id + "/models/", {
                           headers: {
-                            Authorization: `Token ${localStorage.getItem("key")}`,
+                            Authorization: `Token ${localStorage.getItem(
+                              "key"
+                            )}`,
                           },
                         })
                         .then((res) => {
                           setModels(res.data);
                         });
-                        document.querySelector("#span-make").innerText = " : "+val
+                      document.querySelector("#span-make").innerText =
+                        " : " + val;
                     }}
                     title="Make"
-                    data={brand
-                      .sort((a, b) => a.name.localeCompare(b.name))}
+                    data={brand.sort((a, b) => a.name.localeCompare(b.name))}
                     object="name"
                     index="id"
                   />
                 </div>
 
-
-
-               
-
                 <div className="emir-selectbox">
                   <div
                     className="emir-selectbox__header"
                     onClick={(e) => {
-                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
+                      document
+                        .querySelectorAll(".emir-dropdown")
+                        .forEach((e) =>
+                          e.classList.remove("emir-dropdown-acik")
+                        );
 
                       e.currentTarget.parentNode
                         .querySelector(".emir-dropdown")
                         .classList.toggle("emir-dropdown-acik");
                     }}
                   >
-                   *Model<span id="span-model"></span>
+                    *Model<span id="span-model"></span>
                   </div>
                   <Dropdown
-                    onChange={(val) => {
-                      
-                    }}
-
-                    onSelect={(id,val)=>{
-                      setModel(id)
-                      document.querySelector("#span-model").innerText = " : "+val
-
+                    onChange={(val) => {}}
+                    onSelect={(id, val) => {
+                      setModel(id);
+                      document.querySelector("#span-model").innerText =
+                        " : " + val;
                     }}
                     title="Model"
-                    data={ models.sort((a, b) => a.name.localeCompare(b.name)) }
+                    data={models.sort((a, b) => a.name.localeCompare(b.name))}
                     object="name"
                     index="id"
                   />
                 </div>
-
 
                 <input
                   value={year}
@@ -754,14 +611,15 @@ function AddNewCar({ bg, title }) {
                   placeholder="*Year"
                 />
 
-
-
-              
                 <div className="emir-selectbox">
                   <div
                     className="emir-selectbox__header"
                     onClick={(e) => {
-                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
+                      document
+                        .querySelectorAll(".emir-dropdown")
+                        .forEach((e) =>
+                          e.classList.remove("emir-dropdown-acik")
+                        );
 
                       e.currentTarget.parentNode
                         .querySelector(".emir-dropdown")
@@ -771,14 +629,11 @@ function AddNewCar({ bg, title }) {
                     *Color<span id="span-color"></span>
                   </div>
                   <Dropdown
-                    onChange={(val) => {
-                      
-                    }}
-
-                    onSelect={(id,val)=>{
-                        
-                        setColor(id)
-                        document.querySelector("#span-color").innerText = " : "+val
+                    onChange={(val) => {}}
+                    onSelect={(id, val) => {
+                      setColor(id);
+                      document.querySelector("#span-color").innerText =
+                        " : " + val;
                     }}
                     title="Color"
                     data={colors}
@@ -787,14 +642,15 @@ function AddNewCar({ bg, title }) {
                   />
                 </div>
 
-
-
-
                 <div className="emir-selectbox">
                   <div
                     className="emir-selectbox__header"
                     onClick={(e) => {
-                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
+                      document
+                        .querySelectorAll(".emir-dropdown")
+                        .forEach((e) =>
+                          e.classList.remove("emir-dropdown-acik")
+                        );
 
                       e.currentTarget.parentNode
                         .querySelector(".emir-dropdown")
@@ -804,14 +660,11 @@ function AddNewCar({ bg, title }) {
                     Device <span id="span-device"></span>
                   </div>
                   <Dropdown
-                    onChange={(val) => {
-                      
-                    }}
-
-                    onSelect={(id,val)=>{
-                        
-                        setDevice(id)
-                        document.querySelector("#span-device").innerText = " : "+val
+                    onChange={(val) => {}}
+                    onSelect={(id, val) => {
+                      setDevice(id);
+                      document.querySelector("#span-device").innerText =
+                        " : " + val;
                     }}
                     title="Device"
                     data={devices}
@@ -821,43 +674,50 @@ function AddNewCar({ bg, title }) {
                   />
                 </div>
 
-                    {!url.get("edit") ? 
+                {!url.get("edit") ? (
+                  <div className="emir-selectbox">
+                    <div
+                      className="emir-selectbox__header"
+                      onClick={(e) => {
+                        document
+                          .querySelectorAll(".emir-dropdown")
+                          .forEach((e) =>
+                            e.classList.remove("emir-dropdown-acik")
+                          );
+
+                        e.currentTarget.parentNode
+                          .querySelector(".emir-dropdown")
+                          .classList.toggle("emir-dropdown-acik");
+                      }}
+                    >
+                      *Dealer <span id="span-dealer"></span>
+                    </div>
+                    <Dropdown
+                      onChange={(val) => {}}
+                      onSelect={(id, val) => {
+                        setDealer(id);
+                        document.querySelector("#span-dealer").innerText =
+                          " : " + val;
+                      }}
+                      title="Dealer"
+                      data={dealers}
+                      object="name"
+                      index="id"
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+
                 <div className="emir-selectbox">
                   <div
                     className="emir-selectbox__header"
                     onClick={(e) => {
-                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
-
-                      e.currentTarget.parentNode
-                        .querySelector(".emir-dropdown")
-                        .classList.toggle("emir-dropdown-acik");
-                    }}
-                  >
-                    *Dealer <span id="span-dealer"></span>
-                  </div>
-                  <Dropdown
-                    onChange={(val) => {
-                      
-                    }}
-
-                    onSelect={(id,val)=>{
-                        
-                        setDealer(id)
-                        document.querySelector("#span-dealer").innerText = " : "+val
-                    }}
-                    title="Dealer"
-                    data={dealers}
-                    object="name"
-                    index="id"
-                  />
-                </div>
-: "" }
-              
-
-                <div className="emir-selectbox">
-                  <div
-                    className="emir-selectbox__header"
-                    onClick={(e) => {                      document.querySelectorAll(".emir-dropdown").forEach(e=>e.classList.remove("emir-dropdown-acik"))
+                      document
+                        .querySelectorAll(".emir-dropdown")
+                        .forEach((e) =>
+                          e.classList.remove("emir-dropdown-acik")
+                        );
 
                       e.currentTarget.parentNode
                         .querySelector(".emir-dropdown")
@@ -867,14 +727,11 @@ function AddNewCar({ bg, title }) {
                     *Desired Lot<span id="span-lot"></span>
                   </div>
                   <Dropdown
-                    onChange={(val) => {
-                      
-                    }}
-
-                    onSelect={(id,val)=>{
-                        
-                      setDesiretLot(id)
-                        document.querySelector("#span-lot").innerText = " : "+val
+                    onChange={(val) => {}}
+                    onSelect={(id, val) => {
+                      setDesiretLot(id);
+                      document.querySelector("#span-lot").innerText =
+                        " : " + val;
                     }}
                     title="Desired Lot"
                     data={lots}
@@ -882,11 +739,6 @@ function AddNewCar({ bg, title }) {
                     index="id"
                   />
                 </div>
-
-
-
-
-
 
                 <select value={iv} onChange={(e) => setIV(e.target.value)}>
                   <option value="">*Inventory Type</option>

@@ -85,7 +85,7 @@ function Sidebar() {
                   <Link to="/car-list">Car List</Link>
                 </li>
                 <li>
-                  <Link to="/add-new-car">Add New Car</Link>
+                  <a href="/add-new-car">Add New Car</a>
                 </li>
                
               </ul>
