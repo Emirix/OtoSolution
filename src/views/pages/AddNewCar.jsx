@@ -672,7 +672,7 @@ xhr.send();
                     index="id"
                     addNull={true}
                   />
-                </div>
+                </div> 
 
                 {!url.get("edit") ? (
                   <div className="emir-selectbox">
