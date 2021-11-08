@@ -208,6 +208,7 @@ xhr.send();
                     setMake(val.id);
                     brand_id = val.id;
                     brandChange({ target: { value: val.id } });
+                    
                   }
                 });
               }
