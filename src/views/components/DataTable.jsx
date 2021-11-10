@@ -37,6 +37,8 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
   function getList(url, c) {
     setCarList([]);
 
+ 
+
     axios.get(url).then((res) => {
       
       setPaginationCount(Math.ceil(Number(res.data.count) / 10));
@@ -153,7 +155,7 @@ export default function DataTable({ lotFiltre, dealerFiltre }) {
       },
 
       {
-        Header: "Serial ID",
+        Header: "Device ID",
         Filter: ColumnFilter,
         accessor: "col3",
         width: 80,

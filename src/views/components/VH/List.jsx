@@ -29,7 +29,7 @@ function List({ val, title }) {
         </li>
 
         <li>
-          <div className="title">Serial ID</div>
+          <div className="title">Device ID</div>
           <div className="data truncate">{
                       val != null && val.device != null
                         ? val.device.serial_no

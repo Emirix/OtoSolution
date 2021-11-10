@@ -55,42 +55,20 @@ function Sidebar() {
       
       <nav>
         <ul>
-          <li className={location.pathname == "/" ? "active" : ""}>
-            <Link to="/">
-            {location.pathname == "/" ?               <img src="/icons/dashboard-active.svg" alt="" />
- :               <img src="/icons/dashboard-inactive.svg" alt="" />
+       
+
+
+          <li className={location.pathname == "/car-list" ? "active" : ""}>
+            <Link to="/car-list">
+            {location.pathname == "/car-list" ?               <img src="/icons/car-settings-active.svg" alt="" />
+ :               <img src="/icons/car-settings-inactive.svg" alt="" />
  }
-             <span>Dashboard</span>
+             <span>Vehicles</span>
             </Link>
           </li>
 
-          <li
-            onClick={(e) => {
-              dropdown(e,"/icons/car-settings-active.svg","/icons/car-settings-inactive.svg");
-            }}
 
-            data-dropdown="off"
-          >
-            <a href="#">
-              <img src="/icons/car-settings-inactive.svg" alt="" />
-              <span>Vehicles</span>
-              <div className="arrow">
-                <img src={DownArrow} alt="" />
-              </div>
-            </a>
-
-            <div className="side-dropdown">
-              <ul>
-                <li>
-                  <Link to="/car-list">Car List</Link>
-                </li>
-                <li>
-                  <a href="/add-new-car">Add New Car</a>
-                </li>
-               
-              </ul>
-            </div>
-          </li>
+         
 
       
           <li

@@ -150,7 +150,7 @@ function OtoLink() {
               {step == 2 ? (
                 <>
                   <div className="popup-title-component">
-                    Please scan or enter OTO-Link serial number
+                    Please scan or enter OTO-Link Device ID
                   </div>
                   <div className="form-floating mb-3 next-step">
                     <input
@@ -162,7 +162,7 @@ function OtoLink() {
                       onChange={(e) => setSerialID(e.target.value)}
                     />
                     <label htmlFor="floatingInput">
-                      Enter Device Serial ID
+                      Enter Device Device ID
                     </label>
                   </div>{" "}
                 </>
@@ -222,7 +222,7 @@ function OtoLink() {
                     if (step == 1 && vinStock.trim().length == 0) {
                       alert("VIN/STOCK can not be empty.");
                     } else if (step == 2 && serialID.trim().length == 0) {
-                      alert("Serial ID can not be empty.");
+                      alert("Device ID can not be empty.");
                     } else {
                       if (step < 3) {
                         setStep(step + 1);

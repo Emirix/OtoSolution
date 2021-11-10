@@ -364,7 +364,13 @@ export default class Index extends Component {
                   <button onClick={e=>{
                     document.querySelectorAll(".dealer-buttons button").forEach(e=>e.classList.remove("active"))
                     e.currentTarget.classList.add("active")
-                    this.setState({dealerFiltre:e.currentTarget.dataset.id})
+                    console.log(document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(9) > div > div > input"))
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(9) > div > div > input").value= e.currentTarget.innerText
+                    var event = new Event('input', { bubbles: true });
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(9) > div > div > input").dispatchEvent(event);
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(9) > div > div > input").focus()
+                    document.querySelector("#root > div > div.page > div:nth-child(3) > div > div:nth-child(5) > div > table > thead > tr > th:nth-child(9) > div > div > input").blur()
+                
                   }} data-id={val.id} title={val.address} key={i}>{val.name}</button>
                 )
               }) : <div className="d-flex">

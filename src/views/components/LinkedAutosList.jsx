@@ -90,7 +90,7 @@ import { useHistory } from 'react-router-dom'
         width:140
       },
       {
-        Header: 'Serial No',
+        Header: 'Device No',
         Filter : ColumnFilter,
         accessor: 'col2',
         width:140

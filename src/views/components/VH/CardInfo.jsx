@@ -20,7 +20,7 @@ function CardInfo({ data }) {
       <div className="c-title p-2">Card Status</div>
       <ul className="c-list p-2">
         <li>
-          <div className="title">Serial ID</div>
+          <div className="title">Device ID</div>
           {data != null || data != undefined ? (
             <div className="data">{data.device_serial_no}</div>
           ) : (

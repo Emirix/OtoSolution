@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import VH from "../components/VH/VH";
-import car1 from "../../assets/img/car.jpg";
-import car2 from "../../assets/img/car2.jpg";
+import car1 from "../../assets/img/c-loading.jpg";
 import DataInfo from "../components/VH/DataInfo";
 import DataProgress from "../components/VH/DataProgress";
 import List from "../components/VH/List";
@@ -83,29 +82,7 @@ function VehicleDetails() {
     const interval = setInterval(() => {}, 1000);
 
     document.addEventListener("keydown", (e) => {
-      if (e.keyCode == 67) {
-        setPerde(false);
-      }
-
-      if (e.keyCode == 49) {
-        setStatus(1);
-      }
-
-      if (e.keyCode == 50) {
-        setStatus(2);
-      }
-
-      if (e.keyCode == 51) {
-        setStatus(3);
-      }
-
-      if (e.keyCode == 52) {
-        setStatus(4);
-      }
-
-      if (e.keyCode == 53) {
-        setStatus(5);
-      }
+    
     });
 
     axios.get("/api/dealer/vehicles/" + id + "/latest-states/").then((res) => {
@@ -312,7 +289,7 @@ function VehicleDetails() {
             <div className="mini-title mt-3">Vehicle Details</div>
             <div className="br-12 col-lg-6 vd h-266 m-0 position-relative ">
               <VH
-                src={images.length != 0 ? images : [car1,car2]}
+                src={images.length != 0 ? images : [car1]}
                 marka={car ? car.vin.brand_name : ""}
                 model={car ? car.vin.model_name : ""}
                 fiyat={
@@ -380,9 +357,9 @@ function VehicleDetails() {
               
                 }}
                 title="Click for refresh data"
-                className="refresh-data position-absolute"
+                className="refresh-data position-absolute d-none"
               ></div>
-              <div className=" position-relative w-50">
+              <div className=" position-relative w-50 ">
                 {perde ? (
                   <div className="premium-container br-12  p-3">
                     <button className="fs-75rem purple-button text-center">
@@ -615,7 +592,7 @@ function VehicleDetails() {
                     ""
                   )}
 
-                  <div className="data-progress">
+                  <div className="data-progress d-none">
                     <div className="title">Temperature</div>
                     {car ? (
                       <div className="data-progress-text">No Data</div>
@@ -624,9 +601,9 @@ function VehicleDetails() {
                     )}
                   </div>
 
-                  <DataProgress color="sari" title="Gas" value="90" />
+                  <DataProgress color="sari" title="Gas" value="90" className="d-none"/>
 
-                  <DataProgress color="yesil" title="Battery" value="30" />
+                  <DataProgress color="yesil" title="Battery" value="30" className="d-none"  />
                 </div>
               </div>
             </div>
@@ -644,7 +621,7 @@ function VehicleDetails() {
                       p2={map.center.lng}
                       radius={map.radius}
                       parkingLot={map.parkingLot}
-                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIekKkymRnVUNN800c6_Kd7OfMsTnVFWg&v=3.exp&libraries=geometry,drawing,places"
+                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQCTcVjWj-hwAAmEAq74482WXYKiFG1v8&v=3.exp&libraries=geometry,drawing,places"
                       loadingElement={<div style={{ height: `100%` }} />}
                       containerElement={<div style={{ height: `100%` }} />}
                       mapElement={<div style={{ height: `100%` }} />}

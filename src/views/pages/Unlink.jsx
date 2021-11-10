@@ -103,7 +103,7 @@ function Unlink() {
             {step == 1 ? (
               <>
               <div className="popup-title-component w-50  mt-5">Please scan or enter
-Stock number, VIN or OTO-Link serial number
+Stock number, VIN or OTO-Link Device ID
               </div>
               <div className="form-floating mb-3 next-step">
                 <input
@@ -134,12 +134,12 @@ Stock number, VIN or OTO-Link serial number
                       type="text"
                       className="form-control"
                       id="floatingInput"
-                      placeholder="Enter Device Serial ID"
+                      placeholder="Enter Device Device ID"
                       value={serialID}
                       onChange={(e) => setSerialID(e.target.value)}
                     />
                     <label htmlFor="floatingInput">
-                      Enter Device Serial ID
+                      Enter Device Device ID
                     </label>
                   </div>{" "}
                 </>
@@ -196,7 +196,7 @@ Stock number, VIN or OTO-Link serial number
                   if (step == 1 && vinStock.trim().length == 0) {
                     alert("VIN/STOCK can not be empty.");
                   } else if (step == 2 && serialID.trim().length == 0) {
-                    alert("Serial ID can not be empty.");
+                    alert("Device ID can not be empty.");
                   } else {
                     if (step < 3) {
                       setStep(step + 1);

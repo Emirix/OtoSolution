@@ -27,7 +27,7 @@ function VH({src,marka,model,fiyat}) {
             </div>
             <img src={src[0]} alt="" className="br-12" />
             <div className="vd-status br-12">Available</div>
-            <div className="vd-fiyat">{fiyat}</div>
+            <div className="vd-fiyat d-none">{fiyat}</div>
         </div>
     )
 }

@@ -1139,7 +1139,7 @@ tr {
   padding: 0.5rem;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
   grid-template-rows: 26px 26px 26px;
   flex-wrap: wrap;
