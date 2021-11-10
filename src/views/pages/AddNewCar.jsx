@@ -129,15 +129,51 @@ xhr.send();
       device: Number(device) || null,
     };
 
-    axios
-      .put(`/api/dealer/vehicles/${url.get("id")}/`, data, {
+   /* axios
+      .put(`/api/dealer/vehicles/${url.get("id")}/`, {
+        "color": 34,
+        "inventory_type": 2,
+        "year": 2001,
+        "brand": 2,
+        "model": 3842,
+        "desired_lot": 1,
+        "device": 4
+    }, {
         headers: {
           Authorization: `Token ${localStorage.getItem("key")}`,
         },
       })
       .then((res) => {
         console.log(res);
+      });*/
+
+
+    
+      fetch("https://api2.managedautos.com/api/dealer/vehicles/9/", {
+        "headers": {
+          "accept": "text/html; q=1.0, */*",
+          "accept-language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7",
+          "cache-control": "no-cache",
+          "content-type": "multipart/form-data; boundary=----WebKitFormBoundaryQVfjamNfmdpbjIIh",
+          "pragma": "no-cache",
+          "sec-ch-ua": "\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "same-origin",
+          "x-csrftoken": "qmDEnT7m3rtOutC0nXxY05OvKyefmqQxKokCjRdWpEniAXq9ziL6Aplc65z705ee",
+          "x-requested-with": "XMLHttpRequest"
+        },
+        "referrer": "https://api2.managedautos.com/api/dealer/vehicles/9/",
+        "referrerPolicy": "same-origin",
+        "body": "------WebKitFormBoundaryQVfjamNfmdpbjIIh\r\nContent-Disposition: form-data; name=\"color\"\r\n\r\n17\r\n------WebKitFormBoundaryQVfjamNfmdpbjIIh\r\nContent-Disposition: form-data; name=\"inventory_type\"\r\n\r\n2\r\n------WebKitFormBoundaryQVfjamNfmdpbjIIh\r\nContent-Disposition: form-data; name=\"year\"\r\n\r\n2001\r\n------WebKitFormBoundaryQVfjamNfmdpbjIIh\r\nContent-Disposition: form-data; name=\"brand\"\r\n\r\n2\r\n------WebKitFormBoundaryQVfjamNfmdpbjIIh\r\nContent-Disposition: form-data; name=\"model\"\r\n\r\n3842\r\n------WebKitFormBoundaryQVfjamNfmdpbjIIh\r\nContent-Disposition: form-data; name=\"desired_lot\"\r\n\r\n1\r\n------WebKitFormBoundaryQVfjamNfmdpbjIIh\r\nContent-Disposition: form-data; name=\"device\"\r\n\r\n4\r\n------WebKitFormBoundaryQVfjamNfmdpbjIIh--\r\n",
+        "method": "PUT",
+        "mode": "cors",
+        "credentials": "include"
       });
+     
+    
 
     alert("MESAJ: CONSOLE'U KONTROL EDİN");
     console.clear();

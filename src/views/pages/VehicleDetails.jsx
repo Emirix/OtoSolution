@@ -85,87 +85,9 @@ function VehicleDetails() {
     
     });
 
-    axios.get("/api/dealer/vehicles/" + id + "/latest-states/").then((res) => {
-      console.log(res);
-      setData(res.data);
-      var latx = 0;
-      var lotx = 0;
-
-      for (var i = 0; i < res.data.length; i++) {
-
-        if (res.data[i].name == "Vehicle Status") {
-          console.log("status: " + res.data[i].data_value);
-         setStatus(Number(res.data[i].data_value));
-        }
-     
-        if (res.data[i].name == "Speed (MPH)") {
-          console.log("speed: " + res.data[i].data_value);
-          setSpeed(res.data[i].data_value);
-        }
-
-        if (res.data[i].name == "Engine (RPM)") {
-          console.log("rpm: " + res.data[i].data_value);
-          setRpm(res.data[i].data_value);
-        }
-
-        if (res.data[i].name == "Battery Volt (V)") {
-          console.log("battery: " + res.data[i].data_value);
-          setBattery(res.data[i].data_value);
-        }
-
-        if (res.data[i].name == "GPS Longitude") {
-          console.log("lon: " + res.data[i].data_value);
-          setLon(res.data[i].data_value);
-          lotx = res.data[i].data_value
-        }
-
-        if (res.data[i].name == "GPS Latitude") {
-          console.log("lat: " + res.data[i].data_value);
-          setLat(res.data[i].data_value);
-          latx = res.data[i].data_value
-
-
-          
-        }
-
-        if (res.data[i].name == "Connection Type") {
-          console.log("connection type: " + res.data[i].data_value);
-          setConnectionType(res.data[i].data_value);
-        }
-
-        if (res.data[i].name == "GPS Connection Status") {
-          console.log("gps status: " + res.data[i].data_value);
-          setGpsStatus(res.data[i].data_value);
-        }
-      }
-
-
-      setMap({
-        center: {
-          lat: Number(latx),
-          lng: Number(lotx),
-        },
-        zoom: 80,
-        radius: 1000,
-        parkingLot: {
-          lat: Number(latx),
-          lng: Number(lotx),
-        },
-      });
-
-      console.log({
-        lat: parseFloat(latx),
-        lng: parseFloat(lotx),
-      })
-      
-
-      
-    });
-
     axios.get("/api/dealer/vehicles/" + id).then((res) => {
       console.log(res.data);
       setCar(res.data);
-      //setStatus(res.data.status);
 
       var now = new Date();
       var bDay = new Date(res.data.last_connection_time);
@@ -176,8 +98,6 @@ function VehicleDetails() {
       } else {
         setPerde(false);
       }
-
-    
 
       if (res.data.speed != 0) {
         setLastSpeed(res.data.speed);
@@ -218,7 +138,89 @@ function VehicleDetails() {
           },
         });*/
       }
+    }).then(x=>{
+      axios.get("/api/dealer/vehicles/" + id + "/latest-states/").then((res) => {
+        console.log(res);
+        setData(res.data);
+        var latx = 0;
+        var lotx = 0;
+  
+        for (var i = 0; i < res.data.length; i++) {
+  
+          if (res.data[i].name == "Vehicle Status") {
+            console.log("status: " + res.data[i].data_value);
+           setStatus(Number(res.data[i].data_value));
+          }
+       
+          if (res.data[i].name == "Speed (MPH)") {
+            console.log("speed: " + res.data[i].data_value);
+            setSpeed(res.data[i].data_value);
+          }
+  
+          if (res.data[i].name == "Engine (RPM)") {
+            console.log("rpm: " + res.data[i].data_value);
+            setRpm(res.data[i].data_value);
+          }
+  
+          if (res.data[i].name == "Battery Volt (V)") {
+            console.log("battery: " + res.data[i].data_value);
+            setBattery(res.data[i].data_value);
+          }
+  
+          if (res.data[i].name == "GPS Longitude") {
+            console.log("lon: " + res.data[i].data_value);
+            setLon(res.data[i].data_value);
+            lotx = res.data[i].data_value
+          }
+  
+          if (res.data[i].name == "GPS Latitude") {
+            console.log("lat: " + res.data[i].data_value);
+            setLat(res.data[i].data_value);
+            latx = res.data[i].data_value
+  
+  
+            
+          }
+  
+          if (res.data[i].name == "Connection Type") {
+            console.log("connection type: " + res.data[i].data_value);
+            setConnectionType(res.data[i].data_value);
+          }
+  
+          if (res.data[i].name == "GPS Connection Status") {
+            console.log("gps status: " + res.data[i].data_value);
+            setGpsStatus(res.data[i].data_value);
+          }
+        }
+        console.log("carr");
+        console.log(car)
+
+        axios.get("/api/dealer/vehicles/" + id).then((res31) => {
+          setMap({
+            center: {
+              lat: Number(latx),
+              lng: Number(lotx),
+            },
+            zoom: 80,
+            radius: 1000,
+            parkingLot: {
+              lat: Number(res31.data.desired_lot.p1_lat),
+              lng: Number(res31.data.desired_lot.p1_lon),
+            },
+          });
+        })
+       
+       
+       
+     
+  
+        
+      });
     });
+
+ 
+
+   
 
     axios.get("/api/dealer/vehicles/"+id+"/photos").then(res=>{
       console.log(res)
@@ -621,7 +623,7 @@ function VehicleDetails() {
                       p2={map.center.lng}
                       radius={map.radius}
                       parkingLot={map.parkingLot}
-                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQCTcVjWj-hwAAmEAq74482WXYKiFG1v8&v=3.exp&libraries=geometry,drawing,places"
+                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIekKkymRnVUNN800c6_Kd7OfMsTnVFWg&v=3.exp&libraries=geometry,drawing,places"
                       loadingElement={<div style={{ height: `100%` }} />}
                       containerElement={<div style={{ height: `100%` }} />}
                       mapElement={<div style={{ height: `100%` }} />}
