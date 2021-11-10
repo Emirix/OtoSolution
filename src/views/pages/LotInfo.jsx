@@ -2,22 +2,47 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Page from "./Page";
 import { Link, useParams } from "react-router-dom";
-import { GoogleMap,withScriptjs, Marker,withGoogleMap } from "react-google-maps"
+import {
+  GoogleMap,
+  withScriptjs,
+  Marker,
+  withGoogleMap,
+  Circle,
+  Polyline,
+} from "react-google-maps";
+const MyMapComponent = withScriptjs(
+  withGoogleMap((props) => {
+    const [lat, setLat] = useState(props.p1);
+    const [lng, setLng] = useState(props.p2);
+    const [parkingLot, setParkingLot] = useState(props.parkingLot);
 
-const MyMapComponent = withScriptjs(withGoogleMap((props) => {
-  const [lat,setLat] = useState(-34.397)
-  const [lng,setLng] = useState(150.644)
-
-  return(
-    <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: lat, lng: lng }}
-   
-  >
-    {props.isMarkerShown && <Marker position={{ lat: lat, lng: lng }} />}
-  </GoogleMap>
-  )
-}))
+    return (
+      <GoogleMap defaultZoom={14} defaultCenter={{ lat: lat, lng: lng }}>
+        {props.isMarkerShown && <Marker position={{ lat: lat, lng: lng }} />}
+        <Polyline
+          path={[
+            { lat: 37.772, lng: -122.214 },
+            { lat: 21.291, lng: -157.821 },
+            { lat: -18.142, lng: 178.431 },
+            { lat: -27.467, lng: 153.027 },
+          ]}
+        />
+        {props.isRadius ? (
+          <Circle
+            options={{
+              fillColor: "#7075F6 ",
+              strokeColor: "#7075F6 ",
+            }}
+            center={{ lat: parkingLot.lat, lng: parkingLot.lng }}
+            radius={props.radius}
+          />
+        ) : (
+          ""
+        )}
+      </GoogleMap>
+    );
+  })
+);
 function AddDealer() {
   let {id}= useParams()
   const [info, setInfo] = useState(null)
@@ -29,14 +54,32 @@ function AddDealer() {
         "Authorization" : `Token ${localStorage.getItem("key")}`
       }
     }).then(res=>{
+      console.log("ss")
       console.log(res.data)
       setInfo(res.data)
+      console.log({
+        center: {
+          lat: Number(res.data.p1_lat),
+          lng: Number(res.data.p1_lon),
+        },
+        zoom: 10,
+        radius: res.data.radius,
+        parkingLot: {
+          lat: Number(res.data.p1_lat),
+          lng: Number(res.data.p1_lon),
+        },
+      })
       setMap({
         center: {
-          lat: res.data.p1_lat,
-          lng: res.data.p1_lon
+          lat: Number(res.data.p1_lat),
+          lng: Number(res.data.p1_lon),
         },
-        zoom:50
+        zoom: 80,
+        radius: res.data.radius,
+        parkingLot: {
+          lat: Number(res.data.p1_lat),
+          lng: Number(res.data.p1_lon),
+        },
       })
   
     })
@@ -227,16 +270,30 @@ function AddDealer() {
             <div className="mini-title">Map</div>
 
             <div className="map">
-      {
-        map != null ?     <MyMapComponent
-        
-        isMarkerShown
-        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `100%` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-        />: <div className="vd-list  skeleton-text"></div>
-      }
+            <div style={{ height: "100%", width: "100%" }}>
+                {map != null ?   <MyMapComponent
+                      isMarkerShown
+                      isRadius
+                      isRoad
+                      p1={map.center.lat}
+                      p2={map.center.lng}
+                      radius={map.radius}
+                      parkingLot={map.parkingLot}
+                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQCTcVjWj-hwAAmEAq74482WXYKiFG1v8&v=3.exp&libraries=geometry,drawing,places"
+                      loadingElement={<div style={{ height: `100%` }} />}
+                      containerElement={<div style={{ height: `100%` }} />}
+                      mapElement={<div style={{ height: `100%` }} />}
+                   /> : 
+                    <div className="hata-map">
+                      <img
+                        draggable={false}
+                        src="/icons/map-error.svg"
+                        alt=""
+                      />
+                    </div>
+}
+                
+              </div>
    
        
      
