@@ -202,7 +202,7 @@ function VehicleDetails() {
               lng: Number(lotx),
             },
             zoom: 80,
-            radius: 1000,
+            radius: res31.data.desired_lot.radius,
             parkingLot: {
               lat: Number(res31.data.desired_lot.p1_lat),
               lng: Number(res31.data.desired_lot.p1_lon),
