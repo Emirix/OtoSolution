@@ -175,7 +175,6 @@ xhr.send();
      
     
 
-    alert("MESAJ: CONSOLE'U KONTROL EDİN");
     console.clear();
     console.log(
       "%cPUT ISTEKLERINDE BİR CORS HATASI ALIYORUM, POSTMANDE DENEDİĞİMDE HİÇBİR SIKINTI YOK ÇOK UĞRAŞTIM ÇÖZEMEDİM BUNA NE YAPABİLİRİZ ",
