@@ -623,7 +623,7 @@ function VehicleDetails() {
                       p2={map.center.lng}
                       radius={map.radius}
                       parkingLot={map.parkingLot}
-                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIekKkymRnVUNN800c6_Kd7OfMsTnVFWg&v=3.exp&libraries=geometry,drawing,places"
+                      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQCTcVjWj-hwAAmEAq74482WXYKiFG1v8&v=3.exp&libraries=geometry,drawing,places"
                       loadingElement={<div style={{ height: `100%` }} />}
                       containerElement={<div style={{ height: `100%` }} />}
                       mapElement={<div style={{ height: `100%` }} />}

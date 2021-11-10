@@ -65,7 +65,7 @@ function App() {
           <MobileHeader />
           <Switch>
             <Route exact path="/">
-             <CarList />
+             <Index />
             </Route>
             <Route exact path="/add-new-car">
              <AddNewCar />

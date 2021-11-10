@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import Buyutec from "../../assets/svg/buyutec.svg"
-import PP from "../../assets/img/pp.jpg"
+import PP from "../../assets/img/c-loading.jpg"
 import Bildirimler from './Bildirimler'
 import {Link,useLocation} from "react-router-dom"
 import axios from 'axios'
@@ -72,8 +72,8 @@ function Header() {
                     <img src={PP} alt="" />
                    <div className="">
                    
-                   <div className="kucuk-profil__title">{user.first_name || ""}</div>
-                    <div className="kucuk-profil__bottom">{user.address || ""}</div>
+                   <div className="kucuk-profil__title">{"James Smith"}</div>
+                    <div className="kucuk-profil__bottom">{"San Francisco"}</div>
                    </div>
 
                    <div className="down-icon">
